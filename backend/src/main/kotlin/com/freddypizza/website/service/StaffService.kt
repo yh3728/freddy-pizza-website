@@ -3,16 +3,19 @@ package com.freddypizza.website.service
 import com.freddypizza.website.entity.StaffEntity
 import com.freddypizza.website.repository.StaffRepository
 import org.springframework.data.repository.findByIdOrNull
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
 class StaffService(
     private val staffRepository: StaffRepository,
+    private val encoder: BCryptPasswordEncoder,
 ) {
-    fun addStaff(staffEntity: StaffEntity): StaffEntity {
-        val found = staffRepository.findByUsername(staffEntity.username)
+    fun addStaff(staff: StaffEntity): StaffEntity {
+        val found = staffRepository.findByUsername(staff.username)
         require(found == null)
-        return staffRepository.save(staffEntity)
+        val updated = staff.copy(password = encoder.encode(staff.password))
+        return staffRepository.save(updated)
     }
 
     fun getAllStaff(): List<StaffEntity> = staffRepository.findAll()
