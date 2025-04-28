@@ -1,4 +1,4 @@
-package com.freddypizza.website.service
+package com.freddypizza.website.service.admin
 
 import com.freddypizza.website.detail.CustomStaffUserDetails
 import com.freddypizza.website.repository.StaffRepository

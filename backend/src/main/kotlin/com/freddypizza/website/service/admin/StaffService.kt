@@ -1,4 +1,4 @@
-package com.freddypizza.website.service
+package com.freddypizza.website.service.admin
 
 import com.freddypizza.website.entity.StaffEntity
 import com.freddypizza.website.repository.StaffRepository
@@ -23,4 +23,6 @@ class StaffService(
     fun getStaffById(id: Long): StaffEntity? = staffRepository.findByIdOrNull(id)
 
     fun getStaffByUsername(username: String): StaffEntity? = staffRepository.findByUsername(username)
+
+    fun deleteStaff(id: Long) = staffRepository.deleteById(id)
 }

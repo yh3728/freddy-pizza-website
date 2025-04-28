@@ -1,9 +1,9 @@
-package com.freddypizza.website.controller
+package com.freddypizza.website.controller.auth
 
 import com.freddypizza.website.request.AuthRequest
 import com.freddypizza.website.request.RefreshTokenRequest
 import com.freddypizza.website.response.AuthResponse
-import com.freddypizza.website.service.AuthService
+import com.freddypizza.website.service.auth.AuthService
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -28,7 +28,6 @@ class AuthController(
     @PostMapping("/refresh")
     fun refreshTokens(
         @RequestBody refreshRequest: RefreshTokenRequest,
-        response: HttpServletResponse,
     ): ResponseEntity<AuthResponse> {
         val authResponse = authService.refreshAccessToken(refreshRequest.refreshToken)
         return ResponseEntity.ok(authResponse)

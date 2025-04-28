@@ -1,8 +1,7 @@
-package com.freddypizza.website.service
+package com.freddypizza.website.service.auth
 
 import com.freddypizza.website.config.JwtProperties
 import com.freddypizza.website.detail.CustomStaffUserDetails
-import com.freddypizza.website.exception.ExpiredRefreshTokenException
 import com.freddypizza.website.exception.InvalidRefreshTokenException
 import com.freddypizza.website.request.AuthRequest
 import com.freddypizza.website.response.AuthResponse
@@ -51,7 +50,7 @@ class AuthService(
 
     fun refreshAccessToken(token: String): AuthResponse {
         if (tokenService.isExpired(token)) {
-            throw ExpiredRefreshTokenException()
+            throw InvalidRefreshTokenException()
         }
 
         val extractedUsername = tokenService.extractUsername(token) ?: throw InvalidRefreshTokenException()

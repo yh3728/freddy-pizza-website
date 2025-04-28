@@ -1,7 +1,7 @@
 package com.freddypizza.website.config
 
 import com.freddypizza.website.repository.StaffRepository
-import com.freddypizza.website.service.StaffUserDetailsService
+import com.freddypizza.website.service.admin.StaffUserDetailsService
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

@@ -1,4 +1,4 @@
-package com.freddypizza.website.service
+package com.freddypizza.website.service.auth
 
 import com.freddypizza.website.config.JwtProperties
 import io.jsonwebtoken.Claims

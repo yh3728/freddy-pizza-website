@@ -25,8 +25,10 @@ class SecurityConfiguration(
             .csrf { it.disable() }
             .authorizeHttpRequests {
                 it
-                    .requestMatchers("/admin/auth", "/admin/refresh", "/error")
+                    .requestMatchers("/admin/auth", "/admin/auth/refresh", "/error")
                     .permitAll()
+                    .requestMatchers("/admin/staff/**")
+                    .hasRole("ADMIN")
                     .anyRequest()
                     .fullyAuthenticated()
             }.exceptionHandling {

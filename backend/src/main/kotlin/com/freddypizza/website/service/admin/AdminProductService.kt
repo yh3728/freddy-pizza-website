@@ -1,0 +1,47 @@
+package com.freddypizza.website.service.admin
+
+import com.freddypizza.website.entity.ProductEntity
+import com.freddypizza.website.repository.ProductRepository
+import com.freddypizza.website.request.AdminProductAvailabilityRequest
+import com.freddypizza.website.request.AdminProductUpdateRequest
+import org.springframework.data.repository.findByIdOrNull
+import org.springframework.stereotype.Service
+
+@Service
+class AdminProductService(
+    private val productRepository: ProductRepository,
+) {
+    fun getProductById(id: Long): ProductEntity? = productRepository.findByIdOrNull(id)
+
+    fun getAllProducts(): List<ProductEntity> = productRepository.findAll()
+
+    fun addProduct(productEntity: ProductEntity): ProductEntity = productRepository.save(productEntity)
+
+    fun deleteProduct(id: Long) = productRepository.deleteById(id)
+
+    fun updateProduct(
+        id: Long,
+        productUpdateRequest: AdminProductUpdateRequest,
+    ): ProductEntity {
+        val existingProduct = productRepository.findByIdOrNull(id)
+        checkNotNull(existingProduct)
+        val updatedProduct =
+            existingProduct.copy(
+                name = productUpdateRequest.name ?: existingProduct.name,
+                description = productUpdateRequest.description ?: existingProduct.description,
+                price = productUpdateRequest.price ?: existingProduct.price,
+                isAvailable = productUpdateRequest.isAvailable ?: existingProduct.isAvailable,
+                category = productUpdateRequest.category ?: existingProduct.category,
+            )
+        return productRepository.save(updatedProduct)
+    }
+
+    fun updateAvailability(
+        id: Long,
+        availabilityRequest: AdminProductAvailabilityRequest,
+    ): ProductEntity {
+        val existingProduct = productRepository.findByIdOrNull(id)
+        checkNotNull(existingProduct)
+        return productRepository.save(existingProduct.copy(isAvailable = availabilityRequest.isAvailable))
+    }
+}
