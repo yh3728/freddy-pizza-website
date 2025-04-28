@@ -74,6 +74,10 @@ class AdminMenuControllerTest
             every { productService.deleteProduct(1L) } returns Unit
         }
 
+        /**
+         * Тест для добавления нового продукта в меню.
+         * Ожидается статус 201 (Created) и проверка корректных данных продукта в ответе.
+         */
         @Test
         fun `should add product successfully`() {
             mockMvc
@@ -88,6 +92,10 @@ class AdminMenuControllerTest
             verify { productService.addProduct(any()) }
         }
 
+        /**
+         * Тест для получения списка всех продуктов.
+         * Ожидается статус 200 (OK) и что хотя бы один продукт будет в ответе.
+         */
         @Test
         fun `should get all products successfully`() {
             mockMvc
@@ -98,6 +106,10 @@ class AdminMenuControllerTest
             verify { productService.getAllProducts() }
         }
 
+        /**
+         * Тест для получения продукта по ID.
+         * Ожидается статус 200 (OK) и правильные данные о продукте.
+         */
         @Test
         fun `should get product by id successfully`() {
             mockMvc
@@ -108,6 +120,10 @@ class AdminMenuControllerTest
             verify { productService.getProductById(1L) }
         }
 
+        /**
+         * Тест для обработки случая, когда продукт не найден по ID.
+         * Ожидается статус 404 (Not Found) и соответствующее сообщение об ошибке.
+         */
         @Test
         fun `should return not found when product id does not exist`() {
             every { productService.getProductById(99L) } returns null
@@ -115,10 +131,16 @@ class AdminMenuControllerTest
             mockMvc
                 .perform(get("/admin/menu/items/99"))
                 .andExpect(status().isNotFound)
+                .andExpect(jsonPath("$.error").value("NOT_FOUND"))
+                .andExpect(jsonPath("$.message").value("Продукт не найден"))
 
             verify { productService.getProductById(99L) }
         }
 
+        /**
+         * Тест для удаления продукта.
+         * Ожидается статус 204 (No Content) при успешном удалении.
+         */
         @Test
         fun `should delete product successfully`() {
             mockMvc
@@ -128,6 +150,10 @@ class AdminMenuControllerTest
             verify { productService.deleteProduct(1L) }
         }
 
+        /**
+         * Тест для обновления данных продукта.
+         * Ожидается статус 200 (OK) и что данные продукта обновляются.
+         */
         @Test
         fun `should update product successfully`() {
             mockMvc
@@ -142,6 +168,10 @@ class AdminMenuControllerTest
             verify { productService.updateProduct(1L, productUpdateRequest) }
         }
 
+        /**
+         * Тест для обновления доступности продукта.
+         * Ожидается статус 200 (OK) и что доступность продукта обновляется.
+         */
         @Test
         fun `should update product availability successfully`() {
             val availabilityRequest = AdminProductAvailabilityRequest(isAvailable = false)

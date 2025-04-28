@@ -1,5 +1,6 @@
 package com.freddypizza.website.controller.admin
 
+import com.freddypizza.website.exception.StaffNotFoundException
 import com.freddypizza.website.request.StaffRequest
 import com.freddypizza.website.response.StaffResponse
 import com.freddypizza.website.service.admin.StaffService
@@ -36,7 +37,7 @@ class StaffController(
     fun getStaffById(
         @PathVariable id: Long,
     ): ResponseEntity<StaffResponse> {
-        val staff = staffService.getStaffById(id) ?: return ResponseEntity.notFound().build()
+        val staff = staffService.getStaffById(id) ?: throw StaffNotFoundException()
         return ResponseEntity.ok(staff.toStaffResponseDTO())
     }
 

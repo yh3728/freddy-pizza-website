@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
+import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
@@ -30,7 +31,7 @@ class AuthControllerTest
     ) {
         private val authRequest = AuthRequest("admin", "password")
         private val authResponse = AuthResponse("access_token", "refresh_token")
-
+        private val invalidAuthRequest = AuthRequest("invalid_user", "wrong_password")
         private val refreshTokenRequest = RefreshTokenRequest("refresh_token")
         private val expectedTokenResponse = AuthResponse("new_access_token", "new_refresh_token")
 
@@ -42,6 +43,7 @@ class AuthControllerTest
             every { authService.refreshAccessToken("refresh_token") } returns expectedTokenResponse
             every { authService.refreshAccessToken("invalid_refresh_token") } throws InvalidRefreshTokenException()
             every { authService.logout(any()) } returns Unit
+            every { authService.authentication(invalidAuthRequest, any()) } throws BadCredentialsException("Неверные учетные данные")
         }
 
         /**
@@ -92,6 +94,8 @@ class AuthControllerTest
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jacksonObjectMapper().writeValueAsString(invalidRefreshToken)),
                 ).andExpect(status().isForbidden)
+                .andExpect(jsonPath("$.error").value("FORBIDDEN"))
+                .andExpect(jsonPath("$.message").value("Неверный токен обновления"))
         }
 
         /**
@@ -124,5 +128,23 @@ class AuthControllerTest
                         .content(jacksonObjectMapper().writeValueAsString(authRequest)),
                 ).andExpect(status().isOk)
                 .andExpect(header().exists("Content-Type"))
+        }
+
+        /**
+         * Тест проверяет ошибку при неправильных учетных данных.
+         * Ожидается статус 401 (Unauthorized) и соответствующее сообщение об ошибке.
+         */
+        @Test
+        fun `should return unauthorized when credentials are invalid`() {
+            mockMvc
+                .perform(
+                    post("/admin/auth")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jacksonObjectMapper().writeValueAsString(invalidAuthRequest)),
+                ).andExpect(status().isUnauthorized)
+                .andExpect(jsonPath("$.error").value("UNAUTHORIZED"))
+                .andExpect(jsonPath("$.message").value("Неверные учетные данные"))
+
+            verify { authService.authentication(invalidAuthRequest, any()) }
         }
     }

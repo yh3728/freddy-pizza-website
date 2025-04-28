@@ -2,6 +2,7 @@ package com.freddypizza.website.service.admin
 
 import com.freddypizza.website.entity.StaffEntity
 import com.freddypizza.website.enums.StaffRole
+import com.freddypizza.website.exception.UsernameAlreadyExistsException
 import com.freddypizza.website.repository.StaffRepository
 import jakarta.transaction.Transactional
 import org.assertj.core.api.Assertions.assertThat
@@ -55,10 +56,10 @@ class StaffServiceTest
          * Ожидается, что будет выброшено исключение IllegalArgumentException.
          */
         @Test
-        fun `test that adding existing username throws IllegalArgumentException`() {
+        fun `test that adding existing username throws UsernameAlreadyExistsException`() {
             underTest.addStaff(staff1)
 	
-            assertThrows<IllegalArgumentException> {
+            assertThrows<UsernameAlreadyExistsException> {
                 underTest.addStaff(staff1.copy(id = 0L))
             }
         }

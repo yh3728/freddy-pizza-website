@@ -2,6 +2,7 @@ package com.freddypizza.website.service.admin
 
 import com.freddypizza.website.entity.ProductEntity
 import com.freddypizza.website.enums.ProductCategory
+import com.freddypizza.website.exception.ProductNotFoundException
 import com.freddypizza.website.repository.ProductRepository
 import com.freddypizza.website.request.AdminProductAvailabilityRequest
 import com.freddypizza.website.request.AdminProductUpdateRequest
@@ -135,7 +136,7 @@ class AdminProductServiceTest
         fun `should throw exception when updating non-existent product`() {
             val updateRequest = AdminProductUpdateRequest(name = "New Name")
 
-            assertThrows<IllegalStateException> {
+            assertThrows<ProductNotFoundException> {
                 underTest.updateProduct(999L, updateRequest)
             }
         }
@@ -176,7 +177,7 @@ class AdminProductServiceTest
         fun `test that updateAvailability throws exception when product does not exist`() {
             val availabilityRequest = AdminProductAvailabilityRequest(isAvailable = true)
 
-            assertThrows<IllegalStateException> {
+            assertThrows<ProductNotFoundException> {
                 underTest.updateAvailability(999L, availabilityRequest)
             }
         }

@@ -1,6 +1,7 @@
 package com.freddypizza.website.service.admin
 
 import com.freddypizza.website.entity.ProductEntity
+import com.freddypizza.website.exception.ProductNotFoundException
 import com.freddypizza.website.repository.ProductRepository
 import com.freddypizza.website.request.AdminProductAvailabilityRequest
 import com.freddypizza.website.request.AdminProductUpdateRequest
@@ -23,8 +24,7 @@ class AdminProductService(
         id: Long,
         productUpdateRequest: AdminProductUpdateRequest,
     ): ProductEntity {
-        val existingProduct = productRepository.findByIdOrNull(id)
-        checkNotNull(existingProduct)
+        val existingProduct = productRepository.findByIdOrNull(id) ?: throw ProductNotFoundException()
         val updatedProduct =
             existingProduct.copy(
                 name = productUpdateRequest.name ?: existingProduct.name,
@@ -40,8 +40,7 @@ class AdminProductService(
         id: Long,
         availabilityRequest: AdminProductAvailabilityRequest,
     ): ProductEntity {
-        val existingProduct = productRepository.findByIdOrNull(id)
-        checkNotNull(existingProduct)
+        val existingProduct = productRepository.findByIdOrNull(id) ?: throw ProductNotFoundException()
         return productRepository.save(existingProduct.copy(isAvailable = availabilityRequest.isAvailable))
     }
 }

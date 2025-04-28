@@ -1,6 +1,7 @@
 package com.freddypizza.website.service.admin
 
 import com.freddypizza.website.entity.StaffEntity
+import com.freddypizza.website.exception.UsernameAlreadyExistsException
 import com.freddypizza.website.repository.StaffRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -13,7 +14,9 @@ class StaffService(
 ) {
     fun addStaff(staff: StaffEntity): StaffEntity {
         val found = staffRepository.findByUsername(staff.username)
-        require(found == null)
+        if (found != null) {
+            throw UsernameAlreadyExistsException()
+        }
         val updated = staff.copy(password = encoder.encode(staff.password))
         return staffRepository.save(updated)
     }

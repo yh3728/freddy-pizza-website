@@ -1,5 +1,6 @@
 package com.freddypizza.website.controller.admin
 
+import com.freddypizza.website.exception.ProductNotFoundException
 import com.freddypizza.website.request.AdminProductAvailabilityRequest
 import com.freddypizza.website.request.AdminProductRequest
 import com.freddypizza.website.request.AdminProductUpdateRequest
@@ -37,7 +38,7 @@ class AdminMenuController(
     fun getItemById(
         @PathVariable id: Long,
     ): ResponseEntity<AdminProductResponse> {
-        val item = productService.getProductById(id) ?: return ResponseEntity.notFound().build()
+        val item = productService.getProductById(id) ?: throw ProductNotFoundException()
         return ResponseEntity.ok(item.toAdminProductResponseDTO())
     }
 

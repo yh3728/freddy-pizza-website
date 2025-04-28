@@ -98,6 +98,8 @@ class StaffControllerTest
             mockMvc
                 .perform(get("/admin/staff/999"))
                 .andExpect(status().isNotFound)
+                .andExpect(jsonPath("$.error").value("NOT_FOUND"))
+                .andExpect(jsonPath("$.message").value("Сотрудник не найден"))
 	
             verify { staffService.getStaffById(999L) }
         }
