@@ -3,8 +3,8 @@ package com.freddypizza.website.service.admin
 import com.freddypizza.website.entity.ProductEntity
 import com.freddypizza.website.exception.ProductNotFoundException
 import com.freddypizza.website.repository.ProductRepository
-import com.freddypizza.website.request.AdminProductAvailabilityRequest
-import com.freddypizza.website.request.AdminProductUpdateRequest
+import com.freddypizza.website.request.admin.AdminProductAvailabilityRequest
+import com.freddypizza.website.request.admin.AdminProductUpdateRequest
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 
@@ -18,7 +18,10 @@ class AdminProductService(
 
     fun addProduct(productEntity: ProductEntity): ProductEntity = productRepository.save(productEntity)
 
-    fun deleteProduct(id: Long) = productRepository.deleteById(id)
+    fun deleteProduct(id: Long) {
+        productRepository.findById(id).orElseThrow { ProductNotFoundException() }
+        productRepository.deleteById(id)
+    }
 
     fun updateProduct(
         id: Long,

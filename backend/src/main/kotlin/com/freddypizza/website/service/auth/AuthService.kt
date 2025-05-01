@@ -3,8 +3,8 @@ package com.freddypizza.website.service.auth
 import com.freddypizza.website.config.JwtProperties
 import com.freddypizza.website.detail.CustomStaffUserDetails
 import com.freddypizza.website.exception.InvalidRefreshTokenException
-import com.freddypizza.website.request.AuthRequest
-import com.freddypizza.website.response.AuthResponse
+import com.freddypizza.website.request.auth.AuthRequest
+import com.freddypizza.website.response.auth.AuthResponse
 import jakarta.servlet.http.Cookie
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.security.authentication.AuthenticationManager

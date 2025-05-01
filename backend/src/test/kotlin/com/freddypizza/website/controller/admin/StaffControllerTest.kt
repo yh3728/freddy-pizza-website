@@ -3,7 +3,7 @@ package com.freddypizza.website.controller.admin
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.freddypizza.website.entity.StaffEntity
 import com.freddypizza.website.enums.StaffRole
-import com.freddypizza.website.request.StaffRequest
+import com.freddypizza.website.request.admin.StaffRequest
 import com.freddypizza.website.service.admin.StaffService
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every

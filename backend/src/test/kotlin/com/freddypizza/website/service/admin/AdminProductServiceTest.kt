@@ -4,8 +4,8 @@ import com.freddypizza.website.entity.ProductEntity
 import com.freddypizza.website.enums.ProductCategory
 import com.freddypizza.website.exception.ProductNotFoundException
 import com.freddypizza.website.repository.ProductRepository
-import com.freddypizza.website.request.AdminProductAvailabilityRequest
-import com.freddypizza.website.request.AdminProductUpdateRequest
+import com.freddypizza.website.request.admin.AdminProductAvailabilityRequest
+import com.freddypizza.website.request.admin.AdminProductUpdateRequest
 import jakarta.transaction.Transactional
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -116,7 +116,7 @@ class AdminProductServiceTest
                     description = "Updated Description",
                     price = BigDecimal(18.0),
                     isAvailable = false,
-                    category = ProductCategory.OTHER,
+                    category = ProductCategory.MERCH,
                 )
 
             val updatedProduct = underTest.updateProduct(savedProduct.id, updateRequest)

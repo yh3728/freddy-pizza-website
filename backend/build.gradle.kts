@@ -4,6 +4,7 @@ plugins {
     id("org.springframework.boot") version "3.4.4"
     id("io.spring.dependency-management") version "1.1.7"
     kotlin("plugin.jpa") version "1.9.25"
+    id("org.jetbrains.kotlinx.kover") version "0.7.4"
 }
 
 group = "com.freddypizza"
@@ -32,6 +33,8 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-impl:0.12.5")
     implementation("io.jsonwebtoken:jjwt-jackson:0.12.5")
 
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
@@ -43,6 +46,14 @@ dependencies {
 kotlin {
     compilerOptions {
         freeCompilerArgs.addAll("-Xjsr305=strict")
+    }
+}
+
+koverReport {
+    filters {
+        includes {
+            classes("*.controller.*", "*.service.*")
+        }
     }
 }
 

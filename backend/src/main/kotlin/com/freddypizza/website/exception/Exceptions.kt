@@ -22,3 +22,13 @@ class ProductNotFoundException(
 class StaffNotFoundException(
     message: String = "Сотрудник не найден",
 ) : Exception(message)
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
+class OrderNotFoundException(
+    message: String = "Заказ не найден",
+) : Exception(message)
+
+@ResponseStatus(HttpStatus.BAD_REQUEST)
+class InvalidOrderStatusException(
+    message: String = "Некорректный статус",
+) : Exception(message)

@@ -2,9 +2,9 @@ package com.freddypizza.website.controller.auth
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.freddypizza.website.exception.InvalidRefreshTokenException
-import com.freddypizza.website.request.AuthRequest
-import com.freddypizza.website.request.RefreshTokenRequest
-import com.freddypizza.website.response.AuthResponse
+import com.freddypizza.website.request.auth.AuthRequest
+import com.freddypizza.website.request.auth.RefreshTokenRequest
+import com.freddypizza.website.response.auth.AuthResponse
 import com.freddypizza.website.service.auth.AuthService
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every

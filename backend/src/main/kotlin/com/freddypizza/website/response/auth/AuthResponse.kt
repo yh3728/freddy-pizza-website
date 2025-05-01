@@ -1,4 +1,4 @@
-package com.freddypizza.website.response
+package com.freddypizza.website.response.auth
 
 data class AuthResponse(
     val accessToken: String,

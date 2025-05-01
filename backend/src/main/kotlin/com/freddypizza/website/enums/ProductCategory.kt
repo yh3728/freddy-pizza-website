@@ -5,7 +5,9 @@ enum class ProductCategory(
 ) {
     PIZZA("Пицца"),
     SNACK("Закуски"),
+    SALAD("Салаты"),
     DRINK("Напитки"),
     DESSERT("Десерты"),
-    OTHER("Прочее"),
+    ROLLS("Роллы"),
+    MERCH("Мерч"),
 }

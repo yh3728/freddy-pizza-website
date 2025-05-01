@@ -1,15 +1,13 @@
 package com.freddypizza.website.util
 
-import com.freddypizza.website.dto.OrderItemDto
-import com.freddypizza.website.dto.admin.*
 import com.freddypizza.website.entity.OrderEntity
 import com.freddypizza.website.entity.OrderItemEntity
 import com.freddypizza.website.entity.ProductEntity
 import com.freddypizza.website.entity.StaffEntity
-import com.freddypizza.website.request.AdminProductRequest
-import com.freddypizza.website.request.StaffRequest
-import com.freddypizza.website.response.AdminProductResponse
-import com.freddypizza.website.response.StaffResponse
+import com.freddypizza.website.request.admin.AdminProductRequest
+import com.freddypizza.website.request.admin.StaffRequest
+import com.freddypizza.website.response.admin.*
+import com.freddypizza.website.response.admin.OrderItemResponse
 
 fun ProductEntity.toAdminProductResponseDTO() =
     AdminProductResponse(
@@ -30,18 +28,8 @@ fun AdminProductRequest.toProductEntity() =
         category = this.category,
     )
 
-fun OrderEntity.toAdminOrderResponse() =
-    AdminOrderShortResponse(
-        id = this.id,
-        status = this.status,
-        totalPrice = this.totalPrice,
-        items = this.items.map { it.toOrderItemDto() },
-        createdAt = this.createdAt,
-        comment = this.comment,
-    )
-
 fun OrderItemEntity.toOrderItemDto() =
-    OrderItemDto(
+    OrderItemResponse(
         productName = this.product.name,
         quantity = this.quantity,
     )
@@ -57,6 +45,37 @@ fun OrderEntity.toAdminOrderFullResponse() =
         customerName = this.customerName,
         phone = this.phone,
         address = this.address,
+    )
+
+fun OrderEntity.toAdminOrderShortResponse() =
+    AdminOrderShortResponse(
+        id = this.id,
+        status = this.status,
+        createdAt = this.createdAt,
+        items = this.items.map { it.toOrderItemDto() },
+        address = this.address,
+        phone = this.phone,
+        customerName = this.customerName,
+    )
+
+fun OrderEntity.toCookOrderShortResponse() =
+    CookOrderShortResponse(
+        id = this.id,
+        status = this.status,
+        createdAt = this.createdAt,
+        items = this.items.map { it.toOrderItemDto() },
+        comment = this.comment,
+    )
+
+fun OrderEntity.toDeliveryOrderResponse() =
+    DeliveryOrderResponse(
+        id = this.id,
+        status = this.status,
+        createdAt = this.createdAt,
+        comment = this.comment,
+        address = this.address,
+        phone = this.phone,
+        customerName = this.customerName,
     )
 
 fun StaffRequest.toStaffEntity() =

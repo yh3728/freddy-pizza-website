@@ -28,12 +28,14 @@ class SecurityConfiguration(
             .csrf { it.disable() }
             .authorizeHttpRequests {
                 it
-                    .requestMatchers("/admin/auth", "/admin/auth/refresh", "/admin/auth/logout", "/error")
-                    .permitAll()
                     .requestMatchers("/admin/staff/**")
                     .hasRole("ADMIN")
-                    .anyRequest()
+                    .requestMatchers("/admin/orders/**", "/admin/menu/items/**")
                     .fullyAuthenticated()
+                    .requestMatchers("/admin/auth/logout", "/admin/auth/", "/admin/auth/refresh")
+                    .permitAll()
+                    .anyRequest()
+                    .permitAll()
             }.exceptionHandling {
                 it.authenticationEntryPoint { _, response, _ ->
                     response.contentType = MediaType.APPLICATION_JSON_VALUE

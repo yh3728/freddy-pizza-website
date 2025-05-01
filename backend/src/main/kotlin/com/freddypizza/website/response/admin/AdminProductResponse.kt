@@ -1,12 +1,13 @@
-package com.freddypizza.website.request
+package com.freddypizza.website.response.admin
 
 import com.freddypizza.website.enums.ProductCategory
 import java.math.BigDecimal
 
-data class AdminProductRequest(
+data class AdminProductResponse(
+    val id: Long,
     val name: String,
-    val description: String? = null,
+    val description: String?,
     val price: BigDecimal,
-    val isAvailable: Boolean = false,
+    val isAvailable: Boolean,
     val category: ProductCategory,
 )

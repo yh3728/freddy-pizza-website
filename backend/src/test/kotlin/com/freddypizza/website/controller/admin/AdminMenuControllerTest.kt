@@ -3,9 +3,9 @@ package com.freddypizza.website.controller.admin
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.freddypizza.website.entity.ProductEntity
 import com.freddypizza.website.enums.ProductCategory
-import com.freddypizza.website.request.AdminProductAvailabilityRequest
-import com.freddypizza.website.request.AdminProductRequest
-import com.freddypizza.website.request.AdminProductUpdateRequest
+import com.freddypizza.website.request.admin.AdminProductAvailabilityRequest
+import com.freddypizza.website.request.admin.AdminProductRequest
+import com.freddypizza.website.request.admin.AdminProductUpdateRequest
 import com.freddypizza.website.service.admin.AdminProductService
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every

@@ -1,6 +1,7 @@
 package com.freddypizza.website.service.admin
 
 import com.freddypizza.website.entity.StaffEntity
+import com.freddypizza.website.exception.StaffNotFoundException
 import com.freddypizza.website.exception.UsernameAlreadyExistsException
 import com.freddypizza.website.repository.StaffRepository
 import org.springframework.data.repository.findByIdOrNull
@@ -27,5 +28,8 @@ class StaffService(
 
     fun getStaffByUsername(username: String): StaffEntity? = staffRepository.findByUsername(username)
 
-    fun deleteStaff(id: Long) = staffRepository.deleteById(id)
+    fun deleteStaff(id: Long) {
+        staffRepository.findById(id).orElseThrow { StaffNotFoundException() }
+        staffRepository.deleteById(id)
+    }
 }

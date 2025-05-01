@@ -1,4 +1,4 @@
-package com.freddypizza.website.response
+package com.freddypizza.website.response.admin
 
 import com.freddypizza.website.enums.StaffRole
 

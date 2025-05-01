@@ -20,5 +20,5 @@ data class ProductEntity(
     val isAvailable: Boolean = false,
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    val category: ProductCategory = ProductCategory.OTHER,
+    val category: ProductCategory,
 )

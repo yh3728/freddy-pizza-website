@@ -48,6 +48,26 @@ class GlobalExceptionHandler {
         return ResponseEntity(errorResponse, HttpStatus.NOT_FOUND)
     }
 
+    @ExceptionHandler(OrderNotFoundException::class)
+    fun handleOrderNotFoundException(ex: OrderNotFoundException): ResponseEntity<ErrorResponse> {
+        val errorResponse =
+            ErrorResponse(
+                error = "NOT_FOUND",
+                message = ex.message ?: "Заказ не найден",
+            )
+        return ResponseEntity(errorResponse, HttpStatus.NOT_FOUND)
+    }
+
+    @ExceptionHandler(InvalidOrderStatusException::class)
+    fun handleInvalidOrderStatusException(ex: InvalidOrderStatusException): ResponseEntity<ErrorResponse> {
+        val errorResponse =
+            ErrorResponse(
+                error = "BAD_REQUEST",
+                message = ex.message ?: "Некорректный статус",
+            )
+        return ResponseEntity(errorResponse, HttpStatus.BAD_REQUEST)
+    }
+
     @ExceptionHandler(BadCredentialsException::class)
     fun handleBadCredentialsException(ex: BadCredentialsException): ResponseEntity<ErrorResponse> {
         val errorResponse =
@@ -59,11 +79,11 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception::class)
-    fun handleAllExceptions(): ResponseEntity<ErrorResponse> {
+    fun handleAllExceptions(ex: Exception): ResponseEntity<ErrorResponse> {
         val errorResponse =
             ErrorResponse(
                 error = HttpStatus.INTERNAL_SERVER_ERROR.name,
-                message = "Произошла непредвиденная ошибка. Попробуйте снова позже: ",
+                message = "Произошла непредвиденная ошибка. Попробуйте снова позже: " + ex.message,
             )
         return ResponseEntity(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR)
     }

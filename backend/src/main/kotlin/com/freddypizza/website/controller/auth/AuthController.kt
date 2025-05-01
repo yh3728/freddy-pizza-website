@@ -1,9 +1,15 @@
 package com.freddypizza.website.controller.auth
 
-import com.freddypizza.website.request.AuthRequest
-import com.freddypizza.website.request.RefreshTokenRequest
-import com.freddypizza.website.response.AuthResponse
+import com.freddypizza.website.exception.ErrorResponse
+import com.freddypizza.website.request.auth.AuthRequest
+import com.freddypizza.website.request.auth.RefreshTokenRequest
+import com.freddypizza.website.response.auth.AuthResponse
 import com.freddypizza.website.service.auth.AuthService
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.media.Content
+import io.swagger.v3.oas.annotations.media.Schema
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.responses.ApiResponses
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -17,6 +23,17 @@ class AuthController(
     private val authService: AuthService,
 ) {
     @PostMapping
+    @Operation(summary = "Войти в систему")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "Успешный вход"),
+            ApiResponse(
+                responseCode = "401",
+                description = "Неверные учетные данные",
+                content = [Content(schema = Schema(implementation = ErrorResponse::class))],
+            ),
+        ],
+    )
     fun login(
         @RequestBody request: AuthRequest,
         response: HttpServletResponse,
@@ -26,6 +43,17 @@ class AuthController(
     }
 
     @PostMapping("/refresh")
+    @Operation(summary = "Обновить токен доступа")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "Токен обновлен успешно", content = []),
+            ApiResponse(
+                responseCode = "403",
+                description = "Неверный токен обновления",
+                content = [Content(schema = Schema(implementation = ErrorResponse::class))],
+            ),
+        ],
+    )
     fun refreshTokens(
         @RequestBody refreshRequest: RefreshTokenRequest,
     ): ResponseEntity<AuthResponse> {
@@ -34,6 +62,10 @@ class AuthController(
     }
 
     @PostMapping("/logout")
+    @Operation(summary = "Выйти из системы")
+    @ApiResponses(
+        value = [ApiResponse(responseCode = "200", description = "Выход из системы выполнен успешно", content = [])],
+    )
     fun logout(response: HttpServletResponse): ResponseEntity<String> {
         authService.logout(response)
         return ResponseEntity.ok("Logged out successfully")

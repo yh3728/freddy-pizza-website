@@ -5,7 +5,7 @@ import com.freddypizza.website.entity.StaffEntity
 import com.freddypizza.website.enums.StaffRole
 import com.freddypizza.website.exception.InvalidRefreshTokenException
 import com.freddypizza.website.repository.StaffRepository
-import com.freddypizza.website.request.AuthRequest
+import com.freddypizza.website.request.auth.AuthRequest
 import jakarta.transaction.Transactional
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach

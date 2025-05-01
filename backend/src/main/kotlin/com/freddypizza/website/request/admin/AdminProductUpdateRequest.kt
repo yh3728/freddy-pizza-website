@@ -1,4 +1,4 @@
-package com.freddypizza.website.request
+package com.freddypizza.website.request.admin
 
 import com.freddypizza.website.enums.ProductCategory
 import java.math.BigDecimal
