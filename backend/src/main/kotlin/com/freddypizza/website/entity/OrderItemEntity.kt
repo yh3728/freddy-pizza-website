@@ -16,4 +16,6 @@ data class OrderItemEntity(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
     val product: ProductEntity,
-)
+) {
+    override fun toString(): String = "OrderItemEntity(id=$id, quantity=$quantity, productId=${product.id})"
+}
