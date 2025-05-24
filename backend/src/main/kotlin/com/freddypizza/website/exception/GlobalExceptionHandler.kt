@@ -67,7 +67,15 @@ class GlobalExceptionHandler {
             )
         return ResponseEntity(errorResponse, HttpStatus.BAD_REQUEST)
     }
-
+    @ExceptionHandler(EmptyOrderException::class)
+    fun handleEmptyOrderException(ex: EmptyOrderException): ResponseEntity<ErrorResponse> {
+        val errorResponse =
+            ErrorResponse(
+                error = "BAD_REQUEST",
+                message = ex.message ?: "Пустой заказ",
+            )
+        return ResponseEntity(errorResponse, HttpStatus.BAD_REQUEST)
+    }
     @ExceptionHandler(BadCredentialsException::class)
     fun handleBadCredentialsException(ex: BadCredentialsException): ResponseEntity<ErrorResponse> {
         val errorResponse =

@@ -1,7 +1,25 @@
 package com.freddypizza.website
 
+import com.freddypizza.website.entity.OrderEntity
+import com.freddypizza.website.entity.OrderItemEntity
+import com.freddypizza.website.entity.ProductEntity
+import com.freddypizza.website.entity.StaffEntity
+import com.freddypizza.website.enums.OrderStatus
+import com.freddypizza.website.enums.ProductCategory
+import com.freddypizza.website.enums.StaffRole
+import com.freddypizza.website.repository.OrderItemRepository
+import com.freddypizza.website.repository.OrderRepository
+import com.freddypizza.website.repository.ProductRepository
+import com.freddypizza.website.repository.StaffRepository
+import com.freddypizza.website.service.admin.StaffService
+import jakarta.annotation.PostConstruct
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import org.springframework.stereotype.Component
+import java.math.BigDecimal
+import java.time.LocalDateTime
+import kotlin.random.Random
 
 @SpringBootApplication
 class Application
@@ -9,8 +27,8 @@ class Application
 fun main(args: Array<String>) {
     runApplication<Application>(*args)
 }
-
-// Создание пользователя админа
+//
+//// Создание пользователя админа
 // @Component
 // class AdminDataInitializer(
 //    private val staffRepository: StaffRepository,
@@ -26,8 +44,8 @@ fun main(args: Array<String>) {
 //        println("Admin account created successfully.")
 //    }
 // }
-
-// Создание заказов и продуктов
+//
+//// Создание заказов и продуктов
 // @Component
 // class TestOrderGenerator(
 //    @Autowired private val orderRepository: OrderRepository,
@@ -79,10 +97,10 @@ fun main(args: Array<String>) {
 //    private fun createTestProducts(): List<ProductEntity> {
 //        val products =
 //            listOf(
-//                ProductEntity(name = "Pizza", price = BigDecimal(400)),
-//                ProductEntity(name = "Burger", price = BigDecimal(150)),
-//                ProductEntity(name = "Sushi", price = BigDecimal(600)),
-//                ProductEntity(name = "Pasta", price = BigDecimal(300)),
+//                ProductEntity(name = "Pizza", price = BigDecimal(400), category = ProductCategory.PIZZA),
+//                ProductEntity(name = "Burger", price = BigDecimal(150), category = ProductCategory.SNACK),
+//                ProductEntity(name = "Sushi", price = BigDecimal(600), category = ProductCategory.ROLLS),
+//                ProductEntity(name = "Pasta", price = BigDecimal(300), category = ProductCategory.SNACK),
 //            )
 //        return productRepository.saveAll(products)
 //    }

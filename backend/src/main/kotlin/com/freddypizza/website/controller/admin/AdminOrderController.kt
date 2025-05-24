@@ -30,7 +30,7 @@ class AdminOrderController(
     @GetMapping
     @Operation(
         summary =
-            "Получить список всех заказов + фильтровать по нужному статусу по необходимости" +
+        "Получить список всех заказов + фильтровать по нужному статусу по необходимости" +
                 "(ADMIN - все заказы," +
                 " COOK - NEW и IN_PROGRESS," +
                 " DELIVERY - READY_FOR_DELIVERY и OUT_FOR_DELIVERY",
@@ -43,16 +43,16 @@ class AdminOrderController(
                 content = [
                     Content(
                         array =
-                            ArraySchema(
-                                schema =
-                                    Schema(
-                                        oneOf = [
-                                            CookOrderShortResponse::class,
-                                            DeliveryOrderResponse::class,
-                                            AdminOrderShortResponse::class,
-                                        ],
-                                    ),
+                        ArraySchema(
+                            schema =
+                            Schema(
+                                oneOf = [
+                                    CookOrderShortResponse::class,
+                                    DeliveryOrderResponse::class,
+                                    AdminOrderShortResponse::class,
+                                ],
                             ),
+                        ),
                     ),
                 ],
             ),
