@@ -16,12 +16,14 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
+import org.springframework.mock.web.MockMultipartFile
 import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import java.math.BigDecimal
+import java.nio.charset.StandardCharsets
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -82,7 +84,7 @@ class AdminMenuControllerTest
         fun `should add product successfully`() {
             mockMvc
                 .perform(
-                    post("/admin/menu/items")
+                    post("/admin/menu/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jacksonObjectMapper().writeValueAsString(productRequestDTO)),
                 ).andExpect(status().isCreated)
@@ -99,7 +101,7 @@ class AdminMenuControllerTest
         @Test
         fun `should get all products successfully`() {
             mockMvc
-                .perform(get("/admin/menu/items"))
+                .perform(get("/admin/menu/"))
                 .andExpect(status().isOk)
                 .andExpect(jsonPath("$[0].name").value("Pizza Margherita"))
 
@@ -113,7 +115,7 @@ class AdminMenuControllerTest
         @Test
         fun `should get product by id successfully`() {
             mockMvc
-                .perform(get("/admin/menu/items/1"))
+                .perform(get("/admin/menu/1"))
                 .andExpect(status().isOk)
                 .andExpect(jsonPath("$.name").value("Pizza Margherita"))
 
@@ -129,7 +131,7 @@ class AdminMenuControllerTest
             every { productService.getProductById(99L) } returns null
 
             mockMvc
-                .perform(get("/admin/menu/items/99"))
+                .perform(get("/admin/menu/99"))
                 .andExpect(status().isNotFound)
                 .andExpect(jsonPath("$.error").value("NOT_FOUND"))
                 .andExpect(jsonPath("$.message").value("Продукт не найден"))
@@ -144,7 +146,7 @@ class AdminMenuControllerTest
         @Test
         fun `should delete product successfully`() {
             mockMvc
-                .perform(delete("/admin/menu/items/1"))
+                .perform(delete("/admin/menu/1"))
                 .andExpect(status().isNoContent)
 
             verify { productService.deleteProduct(1L) }
@@ -158,7 +160,7 @@ class AdminMenuControllerTest
         fun `should update product successfully`() {
             mockMvc
                 .perform(
-                    put("/admin/menu/items/1")
+                    put("/admin/menu/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jacksonObjectMapper().writeValueAsString(productUpdateRequest)),
                 ).andExpect(status().isOk)
@@ -178,12 +180,37 @@ class AdminMenuControllerTest
 
             mockMvc
                 .perform(
-                    patch("/admin/menu/items/1/availability")
+                    patch("/admin/menu/1/availability")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jacksonObjectMapper().writeValueAsString(availabilityRequest)),
                 ).andExpect(status().isOk)
                 .andExpect(jsonPath("$.isAvailable").value(false))
 
             verify { productService.updateAvailability(1L, availabilityRequest) }
+        }
+
+        /**
+         * Тест для обновления изображения продукта.
+         * Ожидается статус 200 (OK) и что путь к изображению продукта обновляется.
+         */
+        @Test
+        fun `should upload product photo successfully`() {
+            val updatedEntity = productEntity.copy(imagePath = "/uploads/products/test-image.jpg")
+            every { productService.updateImagePath(1L, any()) } returns updatedEntity
+            val content = "fake image content".toByteArray(StandardCharsets.UTF_8)
+            val multipartFile =
+                MockMultipartFile(
+                    "photo",
+                    "test.jpg",
+                    MediaType.IMAGE_JPEG_VALUE,
+                    content,
+                )
+            mockMvc
+                .perform(
+                    multipart("/admin/menu/1/photo")
+                        .file(multipartFile),
+                ).andExpect(status().isOk)
+                .andExpect(jsonPath("$.imagePath").value("/uploads/products/test-image.jpg"))
+            verify { productService.updateImagePath(1L, any()) }
         }
     }

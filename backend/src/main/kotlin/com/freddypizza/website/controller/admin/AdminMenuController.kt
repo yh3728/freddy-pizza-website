@@ -3,6 +3,7 @@ package com.freddypizza.website.controller.admin
 import com.freddypizza.website.exception.ErrorResponse
 import com.freddypizza.website.exception.ProductNotFoundException
 import com.freddypizza.website.request.admin.AdminProductAvailabilityRequest
+import com.freddypizza.website.request.admin.AdminProductImageRequest
 import com.freddypizza.website.request.admin.AdminProductRequest
 import com.freddypizza.website.request.admin.AdminProductUpdateRequest
 import com.freddypizza.website.response.admin.AdminProductResponse
@@ -19,7 +20,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/admin/menu/items")
+@RequestMapping("/admin/menu")
 class AdminMenuController(
     private val productService: AdminProductService,
 ) {
@@ -132,6 +133,26 @@ class AdminMenuController(
         @RequestBody availabilityRequest: AdminProductAvailabilityRequest,
     ): ResponseEntity<AdminProductResponse> {
         val product = productService.updateAvailability(id, availabilityRequest)
+        return ResponseEntity.ok(product.toAdminProductResponseDTO())
+    }
+
+    @PostMapping("/{id}/image")
+    @Operation(summary = "Загрузить фото продукта")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "Фото обновлено"),
+            ApiResponse(
+                responseCode = "404",
+                description = "Продукт не найден",
+                content = [Content(schema = Schema(implementation = ErrorResponse::class))],
+            ),
+        ],
+    )
+    fun uploadProductPhoto(
+        @PathVariable id: Long,
+        @ModelAttribute request: AdminProductImageRequest,
+    ): ResponseEntity<AdminProductResponse> {
+        val product = productService.updateImagePath(id, request)
         return ResponseEntity.ok(product.toAdminProductResponseDTO())
     }
 }

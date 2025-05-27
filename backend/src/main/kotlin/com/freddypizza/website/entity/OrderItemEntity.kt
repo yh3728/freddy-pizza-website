@@ -12,7 +12,7 @@ data class OrderItemEntity(
     val quantity: Int,
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", nullable = false)
-    val order: OrderEntity,
+    var order: OrderEntity,
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
     val product: ProductEntity,

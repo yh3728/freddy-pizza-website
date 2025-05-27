@@ -14,18 +14,24 @@ fun ProductEntity.toAdminProductResponseDTO() =
         id = this.id,
         name = this.name,
         description = this.description,
+        weight = this.weight,
+        ingredients = this.ingredients,
         price = this.price,
         isAvailable = this.isAvailable,
         category = this.category,
+        imagePath = this.imagePath,
     )
 
 fun AdminProductRequest.toProductEntity() =
     ProductEntity(
         name = this.name,
         description = this.description,
+        weight = this.weight,
+        ingredients = this.ingredients,
         price = this.price,
         isAvailable = this.isAvailable,
         category = this.category,
+        imagePath = this.imagePath,
     )
 
 fun OrderItemEntity.toOrderItemDto() =

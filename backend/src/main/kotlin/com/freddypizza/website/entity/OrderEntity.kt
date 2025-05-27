@@ -26,6 +26,6 @@ data class OrderEntity(
     val comment: String? = null,
     @Column(name = "created_at", nullable = false)
     val createdAt: LocalDateTime = LocalDateTime.now(),
-    @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL])
-    val items: List<OrderItemEntity> = listOf(),
+    @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL], orphanRemoval = true)
+    var items: MutableList<OrderItemEntity> = mutableListOf(),
 )
