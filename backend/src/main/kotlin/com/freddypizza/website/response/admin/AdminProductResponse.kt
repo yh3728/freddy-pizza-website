@@ -7,7 +7,10 @@ data class AdminProductResponse(
     val id: Long,
     val name: String,
     val description: String?,
+    val weight: Int?,
+    val ingredients: String?,
     val price: BigDecimal,
     val isAvailable: Boolean,
     val category: ProductCategory,
+    val imagePath: String?,
 )

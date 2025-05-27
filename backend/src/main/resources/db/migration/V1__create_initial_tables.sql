@@ -1,5 +1,5 @@
 -- Создание таблицы работников (staff)
-CREATE TABLE staff (
+CREATE TABLE IF NOT EXISTS staff (
     id BIGSERIAL PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
@@ -7,17 +7,20 @@ CREATE TABLE staff (
 );
 
 -- Создание таблицы продуктов (Products)
-CREATE TABLE products (
+CREATE TABLE IF NOT EXISTS products (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT,
+    weight INT,
+    ingredients VARCHAR(255),
     price DECIMAL(10, 2) NOT NULL,
     is_available BOOLEAN NOT NULL DEFAULT false,
-    category VARCHAR(100) NOT NULL DEFAULT 'OTHER'
+    category VARCHAR(100) NOT NULL,
+    image_path VARCHAR(255) DEFAULT '/uploads/products/image_placeholder.png'
 );
 
 -- Создание таблицы заказов (Orders)
-CREATE TABLE orders (
+CREATE TABLE IF NOT EXISTS orders (
     id BIGSERIAL PRIMARY KEY,
     customer_name VARCHAR(255) NOT NULL,
     phone VARCHAR(20) NOT NULL,
@@ -29,7 +32,7 @@ CREATE TABLE orders (
 );
 
 -- Создание таблицы позиций в заказе (OrderItem)
-CREATE TABLE order_item (
+CREATE TABLE IF NOT EXISTS order_item (
     id BIGSERIAL PRIMARY KEY,
     quantity INT NOT NULL,
     order_id BIGINT NOT NULL,

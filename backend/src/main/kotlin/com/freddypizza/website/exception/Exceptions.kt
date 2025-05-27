@@ -32,3 +32,8 @@ class OrderNotFoundException(
 class InvalidOrderStatusException(
     message: String = "Некорректный статус",
 ) : Exception(message)
+
+@ResponseStatus(HttpStatus.BAD_REQUEST)
+class EmptyOrderException(
+    message: String = "Пустой заказ"
+) : Exception(message)

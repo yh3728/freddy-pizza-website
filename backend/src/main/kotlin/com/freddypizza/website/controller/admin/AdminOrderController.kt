@@ -69,7 +69,6 @@ class AdminOrderController(
     ): ResponseEntity<List<BaseOrderResponse>> {
         val role = user.getRole()
         val orders = orderService.getOrdersByRole(role, status)
-        println(status)
         val response =
             orders.map { order ->
                 when (user.getRole()) {
@@ -140,7 +139,6 @@ class AdminOrderController(
         @RequestBody orderStatusRequest: AdminOrderStatusRequest,
         @AuthenticationPrincipal user: CustomStaffUserDetails,
     ): ResponseEntity<BaseOrderResponse> {
-        println(orderStatusRequest)
         val order = orderService.updateOrderStatusByRole(id, user.getRole(), orderStatusRequest)
         val response =
             when (user.getRole()) {

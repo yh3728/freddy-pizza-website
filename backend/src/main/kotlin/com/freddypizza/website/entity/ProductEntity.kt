@@ -14,6 +14,10 @@ data class ProductEntity(
     val name: String,
     @Column(columnDefinition = "TEXT")
     val description: String? = null,
+    @Column
+    val weight: Int? = null,
+    @Column
+    val ingredients: String? = null,
     @Column(nullable = false)
     val price: BigDecimal,
     @Column(name = "is_available", nullable = false)
@@ -21,4 +25,6 @@ data class ProductEntity(
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     val category: ProductCategory,
+    @Column(name = "image_path")
+    val imagePath: String? = "/uploads/products/image_placeholder.png",
 )

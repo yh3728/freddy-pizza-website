@@ -7,25 +7,51 @@ import com.freddypizza.website.entity.StaffEntity
 import com.freddypizza.website.request.admin.AdminProductRequest
 import com.freddypizza.website.request.admin.StaffRequest
 import com.freddypizza.website.response.admin.*
-import com.freddypizza.website.response.admin.OrderItemResponse
+import com.freddypizza.website.response.user.OrderResponse
+import com.freddypizza.website.response.user.ProductResponse
+
+fun ProductEntity.toProductDTO() =
+    ProductResponse(
+        name = this.name,
+        description = this.description,
+        price = this.price,
+        category = this.category
+    )
+fun OrderEntity.toOrderDTO() =
+    OrderResponse(
+        customerName = this.customerName,
+        phone = this.phone,
+        address = this.address,
+        status = this.status,
+        totalPrice = this.totalPrice,
+        comment = this.comment,
+        createdAt = this.createdAt,
+        items = this.items.map { it.toOrderItemDto() }
+    )
 
 fun ProductEntity.toAdminProductResponseDTO() =
     AdminProductResponse(
         id = this.id,
         name = this.name,
         description = this.description,
+        weight = this.weight,
+        ingredients = this.ingredients,
         price = this.price,
         isAvailable = this.isAvailable,
         category = this.category,
+        imagePath = this.imagePath,
     )
 
 fun AdminProductRequest.toProductEntity() =
     ProductEntity(
         name = this.name,
         description = this.description,
+        weight = this.weight,
+        ingredients = this.ingredients,
         price = this.price,
         isAvailable = this.isAvailable,
         category = this.category,
+        imagePath = this.imagePath,
     )
 
 fun OrderItemEntity.toOrderItemDto() =

@@ -6,7 +6,10 @@ import java.math.BigDecimal
 data class AdminProductUpdateRequest(
     val name: String? = null,
     val description: String? = null,
+    val weight: Int? = null,
+    val ingredients: String? = null,
     val price: BigDecimal? = null,
     val isAvailable: Boolean? = null,
     val category: ProductCategory? = null,
+    val imagePath: String? = null,
 )

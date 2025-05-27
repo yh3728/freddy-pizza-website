@@ -21,11 +21,11 @@ data class OrderEntity(
     @Column(nullable = false)
     val status: OrderStatus = OrderStatus.NEW,
     @Column(name = "total_price", nullable = false)
-    val totalPrice: BigDecimal = BigDecimal.ZERO,
+    var totalPrice: BigDecimal = BigDecimal.ZERO,
     @Column(columnDefinition = "TEXT")
     val comment: String? = null,
     @Column(name = "created_at", nullable = false)
     val createdAt: LocalDateTime = LocalDateTime.now(),
-    @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL])
-    val items: List<OrderItemEntity> = listOf(),
+    @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL], orphanRemoval = true)
+    var items: MutableList<OrderItemEntity> = mutableListOf(),
 )
