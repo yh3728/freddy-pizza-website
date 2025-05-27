@@ -20,8 +20,8 @@ data class ProductEntity(
     val ingredients: String? = null,
     @Column(nullable = false)
     val price: BigDecimal,
-    @Column(name = "is_available", nullable = false)
-    val isAvailable: Boolean = false,
+    @Column(name = "quantity", nullable = false)
+    val quantity: Int = 0,
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     val category: ProductCategory,

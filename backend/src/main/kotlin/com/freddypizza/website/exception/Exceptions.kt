@@ -37,3 +37,8 @@ class InvalidOrderStatusException(
 class EmptyOrderException(
     message: String = "Пустой заказ"
 ) : Exception(message)
+
+@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+class FailedGenerateCodeException(
+    message: String = "Ошибка в генерации кода"
+) : Exception(message)

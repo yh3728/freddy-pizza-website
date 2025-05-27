@@ -9,7 +9,7 @@ data class AdminProductRequest(
     val weight: Int? = null,
     val ingredients: String? = null,
     val price: BigDecimal,
-    val isAvailable: Boolean = false,
+    val quantity: Int = 0,
     val category: ProductCategory,
     val imagePath: String? = null,
 )

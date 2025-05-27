@@ -95,4 +95,15 @@ class GlobalExceptionHandler {
             )
         return ResponseEntity(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR)
     }
+
+    @ExceptionHandler(FailedGenerateCodeException::class)
+    fun handleFailedGenerateCodeException(ex: FailedGenerateCodeException): ResponseEntity<ErrorResponse> =
+        ResponseEntity(
+            ErrorResponse(
+                error = HttpStatus.CONFLICT.name,
+                message = ex.message ?: "Ошибка в генерации кода",
+            ),
+            HttpStatus.INTERNAL_SERVER_ERROR,
+        )
+
 }

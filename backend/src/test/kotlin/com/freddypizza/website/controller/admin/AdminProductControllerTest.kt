@@ -3,7 +3,7 @@ package com.freddypizza.website.controller.admin
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.freddypizza.website.entity.ProductEntity
 import com.freddypizza.website.enums.ProductCategory
-import com.freddypizza.website.request.admin.AdminProductAvailabilityRequest
+import com.freddypizza.website.request.admin.AdminProductQuantityRequest
 import com.freddypizza.website.request.admin.AdminProductRequest
 import com.freddypizza.website.request.admin.AdminProductUpdateRequest
 import com.freddypizza.website.service.admin.AdminProductService
@@ -69,7 +69,7 @@ class AdminProductControllerTest
                     price = productUpdateRequest.price!!,
                     isAvailable = productUpdateRequest.isAvailable!!,
                 )
-            every { productService.updateAvailability(1L, any()) } returns
+            every { productService.updateQuantity(1L, any()) } returns
                 productEntity.copy(
                     isAvailable = productUpdateRequest.isAvailable!!,
                 )
@@ -176,7 +176,7 @@ class AdminProductControllerTest
          */
         @Test
         fun `should update product availability successfully`() {
-            val availabilityRequest = AdminProductAvailabilityRequest(isAvailable = false)
+            val availabilityRequest = AdminProductQuantityRequest(isAvailable = false)
 
             mockMvc
                 .perform(
@@ -186,7 +186,7 @@ class AdminProductControllerTest
                 ).andExpect(status().isOk)
                 .andExpect(jsonPath("$.isAvailable").value(false))
 
-            verify { productService.updateAvailability(1L, availabilityRequest) }
+            verify { productService.updateQuantity(1L, availabilityRequest) }
         }
 
         /**

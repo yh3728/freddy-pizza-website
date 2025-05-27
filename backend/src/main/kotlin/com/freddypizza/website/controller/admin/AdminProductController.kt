@@ -2,8 +2,8 @@ package com.freddypizza.website.controller.admin
 
 import com.freddypizza.website.exception.ErrorResponse
 import com.freddypizza.website.exception.ProductNotFoundException
-import com.freddypizza.website.request.admin.AdminProductAvailabilityRequest
 import com.freddypizza.website.request.admin.AdminProductImageRequest
+import com.freddypizza.website.request.admin.AdminProductQuantityRequest
 import com.freddypizza.website.request.admin.AdminProductRequest
 import com.freddypizza.website.request.admin.AdminProductUpdateRequest
 import com.freddypizza.website.response.admin.AdminProductResponse
@@ -116,11 +116,11 @@ class AdminProductController(
         return ResponseEntity.ok(product.toAdminProductResponseDTO())
     }
 
-    @PatchMapping("/{id}/availability")
-    @Operation(summary = "Изменить доступность продукта по ID")
+    @PatchMapping("/{id}/quantity")
+    @Operation(summary = "Изменить количество продукта по ID")
     @ApiResponses(
         value = [
-            ApiResponse(responseCode = "200", description = "Доступность обновлена"),
+            ApiResponse(responseCode = "200", description = "Количество обновлено"),
             ApiResponse(
                 responseCode = "404",
                 description = "Продукт не найден",
@@ -128,11 +128,11 @@ class AdminProductController(
             ),
         ],
     )
-    fun updateAvailability(
+    fun updateQuantity(
         @PathVariable id: Long,
-        @RequestBody availabilityRequest: AdminProductAvailabilityRequest,
+        @RequestBody availabilityRequest: AdminProductQuantityRequest,
     ): ResponseEntity<AdminProductResponse> {
-        val product = productService.updateAvailability(id, availabilityRequest)
+        val product = productService.updateQuantity(id, availabilityRequest)
         return ResponseEntity.ok(product.toAdminProductResponseDTO())
     }
 

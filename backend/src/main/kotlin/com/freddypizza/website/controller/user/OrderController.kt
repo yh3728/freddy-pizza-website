@@ -45,11 +45,11 @@ class OrderController(
             ),
         ],
     )
-    @GetMapping("/{id}")
-    fun getOrderById(
-        @PathVariable id: Long
+    @GetMapping("/{code}")
+    fun getOrderByCode(
+        @PathVariable code: String
     ): ResponseEntity<OrderResponse>{
-        val item = orderService.getOrderById(id) ?: throw OrderNotFoundException()
+        val item = orderService.getOrderByCode(code) ?: throw OrderNotFoundException()
         return ResponseEntity.ok(item.toOrderDTO())
     }
 

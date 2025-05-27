@@ -13,8 +13,8 @@ fun main(args: Array<String>) {
 // // Создание пользователя админа
 // @Component
 // class AdminDataInitializer(
-//    private val staffRepository: StaffRepository,
-//    private val staffService: StaffService,
+//     private val staffRepository: StaffRepository,
+//     private val staffService: StaffService,
 // ) {
 //    @PostConstruct
 //    fun init() {
@@ -26,13 +26,12 @@ fun main(args: Array<String>) {
 //        println("Admin account created successfully.")
 //    }
 // }
-//
 // // Создание заказов и продуктов
 // @Component
 // class TestOrderGenerator(
-//    @Autowired private val orderRepository: OrderRepository,
-//    @Autowired private val productRepository: ProductRepository,
-//    @Autowired private val orderItemRepository: OrderItemRepository,
+//     @Autowired private val orderRepository: OrderRepository,
+//     @Autowired private val productRepository: ProductRepository,
+//     @Autowired private val orderItemRepository: OrderItemRepository,
 // ) {
 //    @PostConstruct
 //    fun generateTestOrders() {
@@ -47,7 +46,8 @@ fun main(args: Array<String>) {
 //            val address = "Address ${random.nextInt(1, 100)}"
 //            val totalPrice = BigDecimal(random.nextInt(100, 1000))
 //            val comment = "Комментарий для заказа ${it + 1}"
-//
+//            val chars = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+//            val trackingCode = (1..3).map { chars.random() }.joinToString("")
 //            val order =
 //                OrderEntity(
 //                    customerName = customerName,
@@ -58,6 +58,7 @@ fun main(args: Array<String>) {
 //                    comment = comment,
 //                    createdAt = LocalDateTime.now(),
 //                    items = mutableListOf(),
+//                    trackingCode = trackingCode
 //                )
 //
 //            val savedOrder = orderRepository.save(order)
@@ -79,10 +80,10 @@ fun main(args: Array<String>) {
 //    private fun createTestProducts(): List<ProductEntity> {
 //        val products =
 //            listOf(
-//                ProductEntity(name = "Pizza", price = BigDecimal(400), category = ProductCategory.PIZZA),
-//                ProductEntity(name = "Burger", price = BigDecimal(150), category = ProductCategory.SNACK),
-//                ProductEntity(name = "Sushi", price = BigDecimal(600), category = ProductCategory.ROLLS),
-//                ProductEntity(name = "Pasta", price = BigDecimal(300), category = ProductCategory.SNACK),
+//                ProductEntity(name = "Pizza", price = BigDecimal(400), category = ProductCategory.PIZZA, quantity = 100),
+//                ProductEntity(name = "Burger", price = BigDecimal(150), category = ProductCategory.SNACK, quantity = 0),
+//                ProductEntity(name = "Sushi", price = BigDecimal(600), category = ProductCategory.ROLLS, quantity = 10),
+//                ProductEntity(name = "Pasta", price = BigDecimal(300), category = ProductCategory.SNACK, quantity = 1),
 //            )
 //        return productRepository.saveAll(products)
 //    }

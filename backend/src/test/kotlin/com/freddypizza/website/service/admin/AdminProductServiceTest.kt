@@ -4,7 +4,7 @@ import com.freddypizza.website.entity.ProductEntity
 import com.freddypizza.website.enums.ProductCategory
 import com.freddypizza.website.exception.ProductNotFoundException
 import com.freddypizza.website.repository.ProductRepository
-import com.freddypizza.website.request.admin.AdminProductAvailabilityRequest
+import com.freddypizza.website.request.admin.AdminProductQuantityRequest
 import com.freddypizza.website.request.admin.AdminProductUpdateRequest
 import jakarta.transaction.Transactional
 import org.assertj.core.api.Assertions.assertThat
@@ -163,9 +163,9 @@ class AdminProductServiceTest
         fun `should update product availability successfully`() {
             val savedProduct = productRepository.save(product1)
 
-            val availabilityRequest = AdminProductAvailabilityRequest(isAvailable = false)
+            val availabilityRequest = AdminProductQuantityRequest(isAvailable = false)
 
-            val updatedProduct = underTest.updateAvailability(savedProduct.id, availabilityRequest)
+            val updatedProduct = underTest.updateQuantity(savedProduct.id, availabilityRequest)
 
             assertThat(updatedProduct.isAvailable).isEqualTo(false)
         }
@@ -175,10 +175,10 @@ class AdminProductServiceTest
          */
         @Test
         fun `test that updateAvailability throws exception when product does not exist`() {
-            val availabilityRequest = AdminProductAvailabilityRequest(isAvailable = true)
+            val availabilityRequest = AdminProductQuantityRequest(isAvailable = true)
 
             assertThrows<ProductNotFoundException> {
-                underTest.updateAvailability(999L, availabilityRequest)
+                underTest.updateQuantity(999L, availabilityRequest)
             }
         }
     }
