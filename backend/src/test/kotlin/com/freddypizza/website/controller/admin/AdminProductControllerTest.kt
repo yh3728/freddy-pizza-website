@@ -28,7 +28,7 @@ import java.nio.charset.StandardCharsets
 @SpringBootTest
 @AutoConfigureMockMvc
 @WithMockUser(roles = ["ADMIN"])
-class AdminMenuControllerTest
+class AdminProductControllerTest
     @Autowired
     constructor(
         private val mockMvc: MockMvc,
@@ -84,7 +84,7 @@ class AdminMenuControllerTest
         fun `should add product successfully`() {
             mockMvc
                 .perform(
-                    post("/admin/menu/")
+                    post("/admin/menu")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jacksonObjectMapper().writeValueAsString(productRequestDTO)),
                 ).andExpect(status().isCreated)
@@ -101,7 +101,7 @@ class AdminMenuControllerTest
         @Test
         fun `should get all products successfully`() {
             mockMvc
-                .perform(get("/admin/menu/"))
+                .perform(get("/admin/menu"))
                 .andExpect(status().isOk)
                 .andExpect(jsonPath("$[0].name").value("Pizza Margherita"))
 
@@ -194,20 +194,20 @@ class AdminMenuControllerTest
          * Ожидается статус 200 (OK) и что путь к изображению продукта обновляется.
          */
         @Test
-        fun `should upload product photo successfully`() {
+        fun `should upload product image successfully`() {
             val updatedEntity = productEntity.copy(imagePath = "/uploads/products/test-image.jpg")
             every { productService.updateImagePath(1L, any()) } returns updatedEntity
             val content = "fake image content".toByteArray(StandardCharsets.UTF_8)
             val multipartFile =
                 MockMultipartFile(
-                    "photo",
+                    "image",
                     "test.jpg",
                     MediaType.IMAGE_JPEG_VALUE,
                     content,
                 )
             mockMvc
                 .perform(
-                    multipart("/admin/menu/1/photo")
+                    multipart("/admin/menu/1/image")
                         .file(multipartFile),
                 ).andExpect(status().isOk)
                 .andExpect(jsonPath("$.imagePath").value("/uploads/products/test-image.jpg"))

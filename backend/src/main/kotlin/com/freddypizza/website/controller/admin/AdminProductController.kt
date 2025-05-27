@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/admin/menu")
-class AdminMenuController(
+class AdminProductController(
     private val productService: AdminProductService,
 ) {
     @PostMapping

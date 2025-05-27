@@ -9,7 +9,7 @@ class Application
 fun main(args: Array<String>) {
     runApplication<Application>(*args)
 }
-
+//
 // // Создание пользователя админа
 // @Component
 // class AdminDataInitializer(
