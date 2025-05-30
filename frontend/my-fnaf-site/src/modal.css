@@ -1,0 +1,219 @@
+/* Модальное окно 
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+
+.modal-image {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+
+
+.modal-quantity {
+  margin-top: 15px;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.quantity-controls button {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  border: none;
+  background-color: #eee;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.add-to-cart-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #1e90ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #0d6efd;
+}
+
+*/
+
+/*body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+    */
+
+.modal-overlay1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный фон */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+  background-image: url('./assets/content.jpeg');; /* Наследует фон от .content-box */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 25px;
+  border-radius: 15px;
+  max-width: 800px;
+  width: 95%;
+  position: relative;
+  text-align: center;
+}
+
+.modal-content h2,
+.modal-content p,
+.modal-content span {
+  color: black;
+}
+
+.modal-content p {
+  margin-bottom: 1em; /* или любое другое значение (10px, 15px и т. д.) */
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.product-container1 {
+    position: relative;
+    width: 1000px;
+    border: 2px solid #ff0000;
+    background-color: white;
+    padding: 20px;
+    box-sizing: border-box;
+    padding-bottom: 80px;
+    z-index: 1001;
+}
+
+.product-content1 {
+    display: flex;
+    width: 100%;
+}
+
+.product-image1 {
+    flex: 1;
+    padding: 10px;
+    margin-top: 30px;
+}
+
+.product-image1 img {
+    width: 90%;
+    height: auto;
+    border: 2px solid #ed1308;
+    display: block;
+    margin: 0 auto;
+}
+
+.product-info1 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    font-family: 'kellyslab', sans-serif;
+}
+
+.product-title1 {
+    border: 2px solid #ed1308;
+    background-color: #f6fb90;
+    padding: 8px 15px;
+    text-align: center;
+    margin-top: 10px;
+    width: 70%;
+    align-self: center;
+}
+
+.product-description1 {
+    border: 2px solid #ed1308;
+    background-color: #f6fb90;
+    padding: 15px;
+    text-align: left;
+    margin-top: 20px;
+    width: 80%;
+    align-self: center;
+}
+
+.product-actions1 {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.quantity-control1 {
+    display: flex;
+    align-items: center;
+    border: 2px solid #ed1308;
+    background-color: #f6fb90;
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-family: 'kellyslab', sans-serif;
+}
+
+.quantity-btn1 {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.quantity1 {
+    margin: 0 10px;
+}
+
+.add-to-cart1 {
+    border: 2px solid #ed1308;
+    background-color: #f6fb90;
+    border-radius: 20px;
+    padding: 8px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'kellyslab', sans-serif;
+}
