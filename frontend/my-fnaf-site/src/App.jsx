@@ -1,5 +1,5 @@
 // src/App.jsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.css';
 import './productcard.css';
 import './modal.css';
@@ -22,6 +22,28 @@ function ScrollToTop() {
 }
 
 export default function App() {
+
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+   useEffect(() => {
+      fetch('http://localhost:8081/menu') // Твой endpoint из Spring Boot
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error('Ошибка при загрузке меню');
+          }
+          return res.json();
+        })
+        .then((data) => {
+          setProducts(data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error('Ошибка API:', err);
+          setLoading(false);
+        });
+    }, []);
+
   const categories = [...new Set(products.map(p => p.category))];
 
   return (

@@ -13,8 +13,8 @@ fun main(args: Array<String>) {
 // // Создание пользователя админа
 // @Component
 // class AdminDataInitializer(
-//    private val staffRepository: StaffRepository,
-//    private val staffService: StaffService,
+//     private val staffRepository: StaffRepository,
+//     private val staffService: StaffService,
 // ) {
 //    @PostConstruct
 //    fun init() {
@@ -30,9 +30,9 @@ fun main(args: Array<String>) {
 // // Создание заказов и продуктов
 // @Component
 // class TestOrderGenerator(
-//    @Autowired private val orderRepository: OrderRepository,
-//    @Autowired private val productRepository: ProductRepository,
-//    @Autowired private val orderItemRepository: OrderItemRepository,
+//     @Autowired private val orderRepository: OrderRepository,
+//     @Autowired private val productRepository: ProductRepository,
+//     @Autowired private val orderItemRepository: OrderItemRepository,
 // ) {
 //    @PostConstruct
 //    fun generateTestOrders() {
