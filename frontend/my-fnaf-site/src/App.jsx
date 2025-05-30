@@ -27,7 +27,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
 
    useEffect(() => {
-      fetch('http://localhost:8081/menu') // Твой endpoint из Spring Boot
+      fetch('http://localhost:8080/menu') // Твой endpoint из Spring Boot
         .then((res) => {
           if (!res.ok) {
             throw new Error('Ошибка при загрузке меню');
