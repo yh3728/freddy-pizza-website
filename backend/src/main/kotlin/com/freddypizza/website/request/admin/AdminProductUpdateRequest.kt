@@ -9,7 +9,7 @@ data class AdminProductUpdateRequest(
     val weight: Int? = null,
     val ingredients: String? = null,
     val price: BigDecimal? = null,
-    val quantity: Int = 0,
+    val quantity: Int? = null,
     val category: ProductCategory? = null,
     val imagePath: String? = null,
 )

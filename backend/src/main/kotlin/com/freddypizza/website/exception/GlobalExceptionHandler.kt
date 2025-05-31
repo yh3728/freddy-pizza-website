@@ -67,6 +67,7 @@ class GlobalExceptionHandler {
             )
         return ResponseEntity(errorResponse, HttpStatus.BAD_REQUEST)
     }
+
     @ExceptionHandler(EmptyOrderException::class)
     fun handleEmptyOrderException(ex: EmptyOrderException): ResponseEntity<ErrorResponse> {
         val errorResponse =
@@ -76,6 +77,7 @@ class GlobalExceptionHandler {
             )
         return ResponseEntity(errorResponse, HttpStatus.BAD_REQUEST)
     }
+
     @ExceptionHandler(BadCredentialsException::class)
     fun handleBadCredentialsException(ex: BadCredentialsException): ResponseEntity<ErrorResponse> {
         val errorResponse =
@@ -106,4 +108,21 @@ class GlobalExceptionHandler {
             HttpStatus.INTERNAL_SERVER_ERROR,
         )
 
+    @ExceptionHandler(NotEnoughStockException::class)
+    fun handleNotEnoughStockException(ex: NotEnoughStockException): ResponseEntity<ErrorResponse> {
+        val errorResponse =
+            ErrorResponse(
+                error = HttpStatus.BAD_REQUEST.name,
+                message = ex.message ?: "Недостаточно товара в наличии",
+                details =
+                    ex.errors.map {
+                        mapOf(
+                            "productId" to it.productId,
+                            "requestedQuantity" to it.requestedQuantity,
+                            "availableQuantity" to it.availableQuantity,
+                        )
+                    },
+            )
+        return ResponseEntity(errorResponse, HttpStatus.BAD_REQUEST)
+    }
 }

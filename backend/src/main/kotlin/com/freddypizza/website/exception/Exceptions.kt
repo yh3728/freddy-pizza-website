@@ -35,10 +35,16 @@ class InvalidOrderStatusException(
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 class EmptyOrderException(
-    message: String = "Пустой заказ"
+    message: String = "Пустой заказ",
+) : Exception(message)
+
+@ResponseStatus(HttpStatus.BAD_REQUEST)
+class NotEnoughStockException(
+    message: String = "Недостаточно товара в наличии",
+    val errors: List<StockError>,
 ) : Exception(message)
 
 @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 class FailedGenerateCodeException(
-    message: String = "Ошибка в генерации кода"
+    message: String = "Ошибка в генерации кода",
 ) : Exception(message)

@@ -37,11 +37,6 @@ class TokenService(
 
     fun extractUsername(token: String): String? = getAllClaims(token)?.subject
 
-    fun extractRole(token: String): String? {
-        val claims = getAllClaims(token)
-        return claims?.get("authorities")?.toString()
-    }
-
     fun isExpired(token: String): Boolean =
         getAllClaims(token)?.expiration?.before(Date(System.currentTimeMillis()))
             ?: true

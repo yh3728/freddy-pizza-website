@@ -39,14 +39,14 @@ class AdminProductControllerTest
                 name = "Pizza Margherita",
                 description = "Classic pizza with mozzarella and basil",
                 price = BigDecimal(10.99),
-                isAvailable = true,
+                quantity = 3,
                 category = ProductCategory.PIZZA,
             )
 
         private val productUpdateRequest =
             AdminProductUpdateRequest(
                 price = BigDecimal(12.99),
-                isAvailable = false,
+                quantity = 5,
             )
 
         private val productEntity =
@@ -55,7 +55,7 @@ class AdminProductControllerTest
                 name = "Pizza Margherita",
                 description = "Classic pizza with mozzarella and basil",
                 price = BigDecimal(10.99),
-                isAvailable = true,
+                quantity = 1,
                 category = ProductCategory.PIZZA,
             )
 
@@ -67,11 +67,11 @@ class AdminProductControllerTest
             every { productService.updateProduct(1L, productUpdateRequest) } returns
                 productEntity.copy(
                     price = productUpdateRequest.price!!,
-                    isAvailable = productUpdateRequest.isAvailable!!,
+                    quantity = productUpdateRequest.quantity!!,
                 )
             every { productService.updateQuantity(1L, any()) } returns
                 productEntity.copy(
-                    isAvailable = productUpdateRequest.isAvailable!!,
+                    quantity = productUpdateRequest.quantity!!,
                 )
             every { productService.deleteProduct(1L) } returns Unit
         }
@@ -165,7 +165,7 @@ class AdminProductControllerTest
                         .content(jacksonObjectMapper().writeValueAsString(productUpdateRequest)),
                 ).andExpect(status().isOk)
                 .andExpect(jsonPath("$.price").value(12.99))
-                .andExpect(jsonPath("$.isAvailable").value(false))
+                .andExpect(jsonPath("$.quantity").value(5))
 
             verify { productService.updateProduct(1L, productUpdateRequest) }
         }
@@ -176,17 +176,15 @@ class AdminProductControllerTest
          */
         @Test
         fun `should update product availability successfully`() {
-            val availabilityRequest = AdminProductQuantityRequest(isAvailable = false)
-
             mockMvc
                 .perform(
-                    patch("/admin/menu/1/availability")
+                    patch("/admin/menu/1/quantity")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jacksonObjectMapper().writeValueAsString(availabilityRequest)),
+                        .content(jacksonObjectMapper().writeValueAsString(productUpdateRequest)),
                 ).andExpect(status().isOk)
-                .andExpect(jsonPath("$.isAvailable").value(false))
-
-            verify { productService.updateQuantity(1L, availabilityRequest) }
+                .andExpect(jsonPath("$.quantity").value(productUpdateRequest.quantity))
+            val productQuantityRequest = AdminProductQuantityRequest(productUpdateRequest.quantity!!)
+            verify { productService.updateQuantity(1L, productQuantityRequest) }
         }
 
         /**

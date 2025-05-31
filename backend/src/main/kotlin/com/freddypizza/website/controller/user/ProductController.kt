@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/menu")
 class ProductController(
-    private val productService: ProductService
+    private val productService: ProductService,
 ) {
     @Operation(summary = "Получить все продукты в меню (для главной страницы меню)")
     @ApiResponses(
@@ -34,7 +34,7 @@ class ProductController(
         ResponseEntity.ok(
             productService.getAllProducts().map {
                 it.toMenuItemDTO()
-            }
+            },
         )
 
     @GetMapping("/{id}")
@@ -50,11 +50,9 @@ class ProductController(
         ],
     )
     fun getProductById(
-        @PathVariable id: Long
+        @PathVariable id: Long,
     ): ResponseEntity<CardItemResponse> {
         val product = productService.getProductById(id) ?: throw ProductNotFoundException()
         return ResponseEntity.ok(product.toCardItemDTO())
     }
-
-
 }

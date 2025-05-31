@@ -36,7 +36,7 @@ class AdminProductController(
             ),
         ],
     )
-    fun addItem(
+    fun addProduct(
         @RequestBody productRequestDTO: AdminProductRequest,
     ): ResponseEntity<AdminProductResponse> {
         val productEntity = productRequestDTO.toProductEntity()
@@ -51,7 +51,7 @@ class AdminProductController(
             ApiResponse(responseCode = "200", description = "Список продуктов получен"),
         ],
     )
-    fun getAllItems(): ResponseEntity<List<AdminProductResponse>> =
+    fun getAllProducts(): ResponseEntity<List<AdminProductResponse>> =
         ResponseEntity.ok(
             productService.getAllProducts().map {
                 it.toAdminProductResponseDTO()
@@ -70,7 +70,7 @@ class AdminProductController(
             ),
         ],
     )
-    fun getItemById(
+    fun getProductById(
         @PathVariable id: Long,
     ): ResponseEntity<AdminProductResponse> {
         val item = productService.getProductById(id) ?: throw ProductNotFoundException()
@@ -89,7 +89,7 @@ class AdminProductController(
             ),
         ],
     )
-    fun deleteItem(
+    fun deleteProduct(
         @PathVariable id: Long,
     ): ResponseEntity<Void> {
         productService.deleteProduct(id)
@@ -108,7 +108,7 @@ class AdminProductController(
             ),
         ],
     )
-    fun updateItem(
+    fun updateProduct(
         @PathVariable id: Long,
         @RequestBody productUpdateRequest: AdminProductUpdateRequest,
     ): ResponseEntity<AdminProductResponse> {

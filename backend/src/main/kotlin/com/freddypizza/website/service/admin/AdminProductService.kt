@@ -9,6 +9,7 @@ import com.freddypizza.website.request.admin.AdminProductUpdateRequest
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.nio.file.Files
+import java.nio.file.Path
 import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 import java.util.*
@@ -16,6 +17,7 @@ import java.util.*
 @Service
 class AdminProductService(
     private val productRepository: ProductRepository,
+    var uploadDir: Path = Paths.get("uploads/products"),
 ) {
     fun getProductById(id: Long): ProductEntity? = productRepository.findByIdOrNull(id)
 
@@ -61,7 +63,6 @@ class AdminProductService(
     ): ProductEntity {
         val product = getProductById(id) ?: throw ProductNotFoundException()
         val image = imageRequest.image
-        val uploadDir = Paths.get("uploads/products")
         if (!Files.exists(uploadDir)) {
             Files.createDirectories(uploadDir)
         }

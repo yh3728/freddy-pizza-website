@@ -10,13 +10,11 @@ import com.freddypizza.website.response.admin.*
 import com.freddypizza.website.response.user.CardItemResponse
 import com.freddypizza.website.response.user.MenuItemResponse
 import com.freddypizza.website.response.user.OrderResponse
-import com.freddypizza.website.response.user.ProductResponse
 
 fun ProductEntity.toMenuItemDTO() =
     MenuItemResponse(
         name = this.name,
-        ingredients = this.ingredients,
-        weight = this.weight,
+        description = this.description,
         price = this.price,
         imagePath = this.imagePath,
     )
@@ -24,30 +22,20 @@ fun ProductEntity.toMenuItemDTO() =
 fun ProductEntity.toCardItemDTO() =
     CardItemResponse(
         name = this.name,
-        description = this.description,
         ingredients = this.ingredients,
+        weight = this.weight,
         price = this.price,
         imagePath = this.imagePath,
     )
 
-fun ProductEntity.toProductDTO() =
-    ProductResponse(
-        name = this.name,
-        description = this.description,
-        price = this.price,
-        category = this.category
-    )
 fun OrderEntity.toOrderDTO() =
     OrderResponse(
-        customerName = this.customerName,
-        phone = this.phone,
-        address = this.address,
         status = this.status,
         totalPrice = this.totalPrice,
         comment = this.comment,
         createdAt = this.createdAt,
         items = this.items.map { it.toOrderItemDto() },
-        payment = this.payment
+        payment = this.payment,
     )
 
 fun ProductEntity.toAdminProductResponseDTO() =
@@ -93,7 +81,7 @@ fun OrderEntity.toAdminOrderFullResponse() =
         phone = this.phone,
         address = this.address,
         payment = this.payment,
-        trackingCode = this.trackingCode
+        trackingCode = this.trackingCode,
     )
 
 fun OrderEntity.toAdminOrderShortResponse() =
@@ -125,7 +113,7 @@ fun OrderEntity.toDeliveryOrderResponse() =
         address = this.address,
         phone = this.phone,
         customerName = this.customerName,
-        payment = this.payment
+        payment = this.payment,
     )
 
 fun StaffRequest.toStaffEntity() =
