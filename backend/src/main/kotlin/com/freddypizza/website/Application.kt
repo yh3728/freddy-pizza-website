@@ -9,7 +9,7 @@ class Application
 fun main(args: Array<String>) {
     runApplication<Application>(*args)
 }
-//
+
 // // Создание пользователя админа
 // @Component
 // class AdminDataInitializer(
@@ -47,7 +47,8 @@ fun main(args: Array<String>) {
 //            val address = "Address ${random.nextInt(1, 100)}"
 //            val totalPrice = BigDecimal(random.nextInt(100, 1000))
 //            val comment = "Комментарий для заказа ${it + 1}"
-//
+//            val chars = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+//            val trackingCode = (1..3).map { chars.random() }.joinToString("")
 //            val order =
 //                OrderEntity(
 //                    customerName = customerName,
@@ -58,6 +59,7 @@ fun main(args: Array<String>) {
 //                    comment = comment,
 //                    createdAt = LocalDateTime.now(),
 //                    items = mutableListOf(),
+//                    trackingCode = trackingCode,
 //                )
 //
 //            val savedOrder = orderRepository.save(order)
@@ -79,10 +81,38 @@ fun main(args: Array<String>) {
 //    private fun createTestProducts(): List<ProductEntity> {
 //        val products =
 //            listOf(
-//                ProductEntity(name = "Pizza", price = BigDecimal(400), category = ProductCategory.PIZZA),
-//                ProductEntity(name = "Burger", price = BigDecimal(150), category = ProductCategory.SNACK),
-//                ProductEntity(name = "Sushi", price = BigDecimal(600), category = ProductCategory.ROLLS),
-//                ProductEntity(name = "Pasta", price = BigDecimal(300), category = ProductCategory.SNACK),
+//                ProductEntity(
+//                    name = "Pizza",
+//                    price = BigDecimal(400),
+//                    category = ProductCategory.PIZZA,
+//                    quantity = 100,
+//                    weight = 100,
+//                    ingredients = "tomato cheese",
+//                ),
+//                ProductEntity(
+//                    name = "Burger",
+//                    price = BigDecimal(150),
+//                    category = ProductCategory.SNACK,
+//                    quantity = 0,
+//                    weight = 200,
+//                    ingredients = "cucmber straw",
+//                ),
+//                ProductEntity(
+//                    name = "Sushi",
+//                    price = BigDecimal(600),
+//                    category = ProductCategory.ROLLS,
+//                    quantity = 10,
+//                    weight = 50,
+//                    ingredients = "skdfjsdf sdsdfg",
+//                ),
+//                ProductEntity(
+//                    name = "Pasta",
+//                    price = BigDecimal(300),
+//                    category = ProductCategory.SNACK,
+//                    quantity = 1,
+//                    weight = 1000,
+//                    ingredients = "dfsg dfg",
+//                ),
 //            )
 //        return productRepository.saveAll(products)
 //    }

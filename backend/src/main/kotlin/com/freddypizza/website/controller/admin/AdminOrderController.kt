@@ -81,7 +81,7 @@ class AdminOrderController(
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Получить продукт по ID")
+    @Operation(summary = "Получить заказ по ID")
     @ApiResponses(
         value = [
             ApiResponse(responseCode = "200", description = "Заказ найден"),

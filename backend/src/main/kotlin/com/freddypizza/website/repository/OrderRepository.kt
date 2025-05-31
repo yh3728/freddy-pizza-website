@@ -10,4 +10,5 @@ interface OrderRepository : JpaRepository<OrderEntity, Long> {
     fun findByStatus(status: OrderStatus): List<OrderEntity>
 
     fun findByStatusIn(statusList: List<OrderStatus>): List<OrderEntity>
+    fun findByTrackingCode(trackingCode: String): OrderEntity?
 }

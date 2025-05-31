@@ -121,4 +121,30 @@ class AuthServiceTest
                 underTest.refreshAccessToken(expiredRefreshToken)
             }
         }
+
+        /**
+         * Тест проверяет, что при вызове logout устанавливаются куки с access_token и refresh_token,
+         * у которых `maxAge = 0`, что означает их удаление на клиенте.
+         */
+        @Test
+        fun `should clear cookies on logout`() {
+            val response = MockHttpServletResponse()
+
+            underTest.logout(response)
+
+            val accessTokenCookie = response.cookies.find { it.name == "access_token" }
+            val refreshTokenCookie = response.cookies.find { it.name == "refresh_token" }
+
+            assertThat(accessTokenCookie).isNotNull
+            assertThat(refreshTokenCookie).isNotNull
+
+            assertThat(accessTokenCookie!!.maxAge).isEqualTo(0)
+            assertThat(refreshTokenCookie!!.maxAge).isEqualTo(0)
+
+            assertThat(accessTokenCookie.value).isNull()
+            assertThat(refreshTokenCookie.value).isNull()
+
+            assertThat(accessTokenCookie.path).isEqualTo("/")
+            assertThat(refreshTokenCookie.path).isEqualTo("/")
+        }
     }

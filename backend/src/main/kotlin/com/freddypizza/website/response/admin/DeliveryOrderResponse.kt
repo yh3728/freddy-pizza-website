@@ -1,6 +1,7 @@
 package com.freddypizza.website.response.admin
 
 import com.freddypizza.website.enums.OrderStatus
+import com.freddypizza.website.enums.PaymentType
 import java.time.LocalDateTime
 
 data class DeliveryOrderResponse(
@@ -11,4 +12,5 @@ data class DeliveryOrderResponse(
     val address: String,
     val phone: String,
     val customerName: String,
+    val payment: PaymentType
 ) : BaseOrderResponse()

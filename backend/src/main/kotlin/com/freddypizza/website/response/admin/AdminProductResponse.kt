@@ -10,7 +10,7 @@ data class AdminProductResponse(
     val weight: Int?,
     val ingredients: String?,
     val price: BigDecimal,
-    val isAvailable: Boolean,
+    val quantity: Int,
     val category: ProductCategory,
     val imagePath: String?,
 )

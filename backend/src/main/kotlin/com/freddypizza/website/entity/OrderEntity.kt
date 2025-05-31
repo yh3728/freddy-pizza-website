@@ -1,6 +1,7 @@
 package com.freddypizza.website.entity
 
 import com.freddypizza.website.enums.OrderStatus
+import com.freddypizza.website.enums.PaymentType
 import jakarta.persistence.*
 import java.math.BigDecimal
 import java.time.LocalDateTime
@@ -26,6 +27,11 @@ data class OrderEntity(
     val comment: String? = null,
     @Column(name = "created_at", nullable = false)
     val createdAt: LocalDateTime = LocalDateTime.now(),
+    @Column(name = "tracking_code", unique = true, nullable = false)
+    val trackingCode: String,
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    val payment: PaymentType = PaymentType.CARD,
     @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL], orphanRemoval = true)
     var items: MutableList<OrderItemEntity> = mutableListOf(),
 )
