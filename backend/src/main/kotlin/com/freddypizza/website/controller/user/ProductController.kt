@@ -3,10 +3,10 @@ package com.freddypizza.website.controller.user
 import com.freddypizza.website.exception.ErrorResponse
 import com.freddypizza.website.exception.ProductNotFoundException
 import com.freddypizza.website.response.user.CardItemResponse
-import com.freddypizza.website.response.user.MenuItemResponse
+import com.freddypizza.website.response.user.ProductResponse
 import com.freddypizza.website.service.user.ProductService
 import com.freddypizza.website.util.toCardItemDTO
-import com.freddypizza.website.util.toMenuItemDTO
+import com.freddypizza.website.util.toProductResponse
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
@@ -30,10 +30,10 @@ class ProductController(
         ],
     )
     @GetMapping
-    fun getAllProducts(): ResponseEntity<List<MenuItemResponse>> =
+    fun getAllProducts(): ResponseEntity<List<ProductResponse>> =
         ResponseEntity.ok(
             productService.getAllProducts().map {
-                it.toMenuItemDTO()
+                it.toProductResponse()
             },
         )
 

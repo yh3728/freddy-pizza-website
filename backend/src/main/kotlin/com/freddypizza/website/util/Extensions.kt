@@ -8,15 +8,16 @@ import com.freddypizza.website.request.admin.AdminProductRequest
 import com.freddypizza.website.request.admin.StaffRequest
 import com.freddypizza.website.response.admin.*
 import com.freddypizza.website.response.user.CardItemResponse
-import com.freddypizza.website.response.user.MenuItemResponse
 import com.freddypizza.website.response.user.OrderResponse
+import com.freddypizza.website.response.user.ProductResponse
 
-fun ProductEntity.toMenuItemDTO() =
-    MenuItemResponse(
+fun ProductEntity.toProductResponse() =
+    ProductResponse(
         name = this.name,
         description = this.description,
         price = this.price,
         imagePath = this.imagePath,
+        category = this.category,
     )
 
 fun ProductEntity.toCardItemDTO() =
