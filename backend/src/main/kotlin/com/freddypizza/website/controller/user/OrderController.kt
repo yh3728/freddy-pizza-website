@@ -15,10 +15,10 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
-@RestController()
+@RestController
 @RequestMapping("/orders")
 class OrderController(
-    private val orderService: OrderService
+    private val orderService: OrderService,
 ) {
     @Operation(summary = "Создать новый заказ")
     @ApiResponses(
@@ -28,13 +28,13 @@ class OrderController(
     )
     @PostMapping
     fun createOrder(
-        @RequestBody createOrderRequest: CreateOrderRequest
+        @RequestBody createOrderRequest: CreateOrderRequest,
     ): ResponseEntity<OrderResponse> {
         val orderResponse = orderService.createOrder(createOrderRequest).toOrderDTO()
         return ResponseEntity(orderResponse, HttpStatus.CREATED)
     }
 
-    @Operation(summary = "Получить заказ по ID")
+    @Operation(summary = "Получить заказ по трек коду")
     @ApiResponses(
         value = [
             ApiResponse(responseCode = "200", description = "Заказ успешно найден"),
@@ -45,12 +45,11 @@ class OrderController(
             ),
         ],
     )
-    @GetMapping("/{id}")
-    fun getOrderById(
-        @PathVariable id: Long
-    ): ResponseEntity<OrderResponse>{
-        val item = orderService.getOrderById(id) ?: throw OrderNotFoundException()
+    @GetMapping("/{code}")
+    fun getOrderByCode(
+        @PathVariable code: String,
+    ): ResponseEntity<OrderResponse> {
+        val item = orderService.getOrderByCode(code) ?: throw OrderNotFoundException()
         return ResponseEntity.ok(item.toOrderDTO())
     }
-
 }

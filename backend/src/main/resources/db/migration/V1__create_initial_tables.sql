@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS products (
     weight INT,
     ingredients VARCHAR(255),
     price DECIMAL(10, 2) NOT NULL,
-    is_available BOOLEAN NOT NULL DEFAULT false,
+    quantity INT,
     category VARCHAR(100) NOT NULL,
     image_path VARCHAR(255) DEFAULT '/uploads/products/image_placeholder.png'
 );
@@ -28,7 +28,9 @@ CREATE TABLE IF NOT EXISTS orders (
     status VARCHAR(50) NOT NULL DEFAULT 'NEW',
     total_price DECIMAL(10, 2) NOT NULL DEFAULT 0,
     comment TEXT,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    payment VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    tracking_code VARCHAR(6) UNIQUE NOT NULL
 );
 
 -- Создание таблицы позиций в заказе (OrderItem)
