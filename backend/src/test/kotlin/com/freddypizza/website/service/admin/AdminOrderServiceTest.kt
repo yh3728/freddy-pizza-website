@@ -2,12 +2,12 @@ package com.freddypizza.website.service.admin
 
 import com.freddypizza.website.entity.OrderEntity
 import com.freddypizza.website.enums.OrderStatus
+import com.freddypizza.website.enums.PaymentType
 import com.freddypizza.website.enums.StaffRole
 import com.freddypizza.website.exception.InvalidOrderStatusException
 import com.freddypizza.website.exception.ProductNotFoundException
 import com.freddypizza.website.repository.OrderRepository
 import com.freddypizza.website.request.admin.AdminOrderStatusRequest
-import com.freddypizza.website.service.user.OrderService
 import jakarta.transaction.Transactional
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -26,7 +26,6 @@ class AdminOrderServiceTest
     constructor(
         private val underTest: AdminOrderService,
         private val orderRepository: OrderRepository,
-        private val orderService: OrderService,
     ) {
         private lateinit var order1: OrderEntity
         private lateinit var order2: OrderEntity
@@ -54,6 +53,7 @@ class AdminOrderServiceTest
                     status = status,
                     createdAt = LocalDateTime.now(),
                     trackingCode = randomCode(),
+                    payment = PaymentType.CASH,
                 ),
             )
 

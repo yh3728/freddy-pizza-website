@@ -49,6 +49,7 @@ class OrderService(
                 address = request.address,
                 comment = request.comment,
                 trackingCode = uniqCode,
+                payment = request.payment,
             )
 
         val orderItems =

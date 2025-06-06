@@ -31,7 +31,7 @@ data class OrderEntity(
     val trackingCode: String,
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    val payment: PaymentType = PaymentType.CARD,
+    val payment: PaymentType,
     @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL], orphanRemoval = true)
     var items: MutableList<OrderItemEntity> = mutableListOf(),
 )
