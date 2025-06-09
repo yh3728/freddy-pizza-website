@@ -30,7 +30,7 @@ class SecurityConfiguration(
                 it
                     .requestMatchers("/admin/staff/**")
                     .hasRole("ADMIN")
-                    .requestMatchers("/admin/orders/**", "/admin/menu/**")
+                    .requestMatchers("/admin/orders/**", "/admin/menu/**", "/admin/auth/me")
                     .fullyAuthenticated()
                     .requestMatchers("/admin/auth/logout", "/admin/auth/", "/admin/auth/refresh")
                     .permitAll()
