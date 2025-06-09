@@ -1,0 +1,54 @@
+/* src/admin.css */
+.admin-container {
+  padding: 30px;
+  font-family: 'kellyslab', sans-serif;
+}
+
+.admin-order-card {
+  border: 2px solid #ed1308;
+  border-radius: 10px;
+  background-color: #FDF5C9;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.admin-order-card p {
+  margin: 5px 0;
+}
+
+.admin-order-card select {
+  margin-top: 10px;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.admin-order-card button {
+  margin-left: 20px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.admin-login-form label {
+  font-size: 18px;
+}
+
+.admin-login-form input {
+  padding: 8px;
+  font-size: 16px;
+  border: 2px solid #ed1308;
+  border-radius: 5px;
+  background-color: #FDF5C9;
+}

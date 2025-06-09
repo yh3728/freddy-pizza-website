@@ -3,12 +3,13 @@ package com.freddypizza.website.service.admin
 import com.freddypizza.website.entity.ProductEntity
 import com.freddypizza.website.exception.ProductNotFoundException
 import com.freddypizza.website.repository.ProductRepository
-import com.freddypizza.website.request.admin.AdminProductAvailabilityRequest
 import com.freddypizza.website.request.admin.AdminProductImageRequest
+import com.freddypizza.website.request.admin.AdminProductQuantityRequest
 import com.freddypizza.website.request.admin.AdminProductUpdateRequest
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.nio.file.Files
+import java.nio.file.Path
 import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 import java.util.*
@@ -16,6 +17,7 @@ import java.util.*
 @Service
 class AdminProductService(
     private val productRepository: ProductRepository,
+    var uploadDir: Path = Paths.get("uploads/products"),
 ) {
     fun getProductById(id: Long): ProductEntity? = productRepository.findByIdOrNull(id)
 
@@ -40,19 +42,19 @@ class AdminProductService(
                 weight = productUpdateRequest.weight ?: existingProduct.weight,
                 ingredients = productUpdateRequest.ingredients ?: existingProduct.ingredients,
                 price = productUpdateRequest.price ?: existingProduct.price,
-                isAvailable = productUpdateRequest.isAvailable ?: existingProduct.isAvailable,
+                quantity = productUpdateRequest.quantity ?: existingProduct.quantity,
                 category = productUpdateRequest.category ?: existingProduct.category,
                 imagePath = productUpdateRequest.imagePath ?: existingProduct.imagePath,
             )
         return productRepository.save(updatedProduct)
     }
 
-    fun updateAvailability(
+    fun updateQuantity(
         id: Long,
-        availabilityRequest: AdminProductAvailabilityRequest,
+        quantityRequest: AdminProductQuantityRequest,
     ): ProductEntity {
         val existingProduct = productRepository.findByIdOrNull(id) ?: throw ProductNotFoundException()
-        return productRepository.save(existingProduct.copy(isAvailable = availabilityRequest.isAvailable))
+        return productRepository.save(existingProduct.copy(quantity = quantityRequest.quantity))
     }
 
     fun updateImagePath(
@@ -61,7 +63,6 @@ class AdminProductService(
     ): ProductEntity {
         val product = getProductById(id) ?: throw ProductNotFoundException()
         val image = imageRequest.image
-        val uploadDir = Paths.get("uploads/products")
         if (!Files.exists(uploadDir)) {
             Files.createDirectories(uploadDir)
         }

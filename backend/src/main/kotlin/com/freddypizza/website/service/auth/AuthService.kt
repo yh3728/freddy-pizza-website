@@ -78,10 +78,10 @@ class AuthService(
         maxAge: Int,
     ): Cookie {
         val cookie = Cookie(name, value)
-        cookie.isHttpOnly = true // Запрещает доступ через JavaScript
-        cookie.secure = true // Отправляется только через HTTPS
-        cookie.maxAge = maxAge // Срок действия cookie
-        cookie.path = "/" // Доступна на всем сайте
+        cookie.isHttpOnly = true
+        cookie.secure = true
+        cookie.maxAge = maxAge
+        cookie.path = "/"
         return cookie
     }
 

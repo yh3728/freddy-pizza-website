@@ -2,6 +2,7 @@ package com.freddypizza.website.service.admin
 
 import com.freddypizza.website.entity.OrderEntity
 import com.freddypizza.website.enums.OrderStatus
+import com.freddypizza.website.enums.PaymentType
 import com.freddypizza.website.enums.StaffRole
 import com.freddypizza.website.exception.InvalidOrderStatusException
 import com.freddypizza.website.exception.ProductNotFoundException
@@ -37,6 +38,11 @@ class AdminOrderServiceTest
             order3 = createOrder(OrderStatus.DELIVERED)
         }
 
+        private fun randomCode() =
+            (1..6)
+                .map { "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ".random() }
+                .joinToString("")
+
         private fun createOrder(status: OrderStatus): OrderEntity =
             orderRepository.save(
                 OrderEntity(
@@ -46,6 +52,8 @@ class AdminOrderServiceTest
                     totalPrice = BigDecimal.valueOf(25.0),
                     status = status,
                     createdAt = LocalDateTime.now(),
+                    trackingCode = randomCode(),
+                    payment = PaymentType.CASH,
                 ),
             )
 
@@ -164,6 +172,17 @@ class AdminOrderServiceTest
         }
 
         /**
+         * Тест проверяет, что COOK может обновить статус заказа на READY_FOR_DELIVERY.
+         */
+        @Test
+        fun `COOK updates order to READY_FOR_DELIVERY`() {
+            val request = AdminOrderStatusRequest(OrderStatus.READY_FOR_DELIVERY)
+            val result = underTest.updateOrderStatusByRole(order1.id, StaffRole.COOK, request)
+
+            assertThat(result.status).isEqualTo(OrderStatus.READY_FOR_DELIVERY)
+        }
+
+        /**
          * Тест проверяет, что статус заказа в базе обновился на IN_PROGRESS.
          */
         @Test
@@ -195,6 +214,17 @@ class AdminOrderServiceTest
             val result = underTest.updateOrderStatusByRole(order2.id, StaffRole.DELIVERY, request)
 
             assertThat(result.status).isEqualTo(OrderStatus.OUT_FOR_DELIVERY)
+        }
+
+        /**
+         * Тест проверяет, что DELIVERY может обновить статус на DELIVERED.
+         */
+        @Test
+        fun `DELIVERY updates order to DELIVERED`() {
+            val request = AdminOrderStatusRequest(OrderStatus.DELIVERED)
+            val result = underTest.updateOrderStatusByRole(order2.id, StaffRole.DELIVERY, request)
+
+            assertThat(result.status).isEqualTo(OrderStatus.DELIVERED)
         }
 
         /**

@@ -4,17 +4,23 @@ import com.freddypizza.website.entity.ProductEntity
 import com.freddypizza.website.enums.ProductCategory
 import com.freddypizza.website.exception.ProductNotFoundException
 import com.freddypizza.website.repository.ProductRepository
-import com.freddypizza.website.request.admin.AdminProductAvailabilityRequest
+import com.freddypizza.website.request.admin.AdminProductImageRequest
+import com.freddypizza.website.request.admin.AdminProductQuantityRequest
 import com.freddypizza.website.request.admin.AdminProductUpdateRequest
 import jakarta.transaction.Transactional
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.api.io.TempDir
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.repository.findByIdOrNull
+import org.springframework.mock.web.MockMultipartFile
 import java.math.BigDecimal
+import java.nio.file.Files
+import java.nio.file.Path
+import kotlin.test.assertTrue
 
 @SpringBootTest
 @Transactional
@@ -27,6 +33,9 @@ class AdminProductServiceTest
         private lateinit var product1: ProductEntity
         private lateinit var product2: ProductEntity
 
+        @TempDir
+        lateinit var tempUploadDir: Path
+
         @BeforeEach
         fun setUp() {
             product1 =
@@ -34,7 +43,7 @@ class AdminProductServiceTest
                     name = "Cheesy pizza",
                     description = "Delicious cheesy pizza",
                     price = BigDecimal(15.0),
-                    isAvailable = true,
+                    quantity = 3,
                     category = ProductCategory.PIZZA,
                 )
             product2 =
@@ -42,9 +51,10 @@ class AdminProductServiceTest
                     name = "Burger",
                     description = "Juicy beef burger",
                     price = BigDecimal(10.0),
-                    isAvailable = true,
+                    quantity = 5,
                     category = ProductCategory.SNACK,
                 )
+            underTest.uploadDir = tempUploadDir.resolve("uploads/test")
         }
 
         /**
@@ -115,8 +125,9 @@ class AdminProductServiceTest
                     name = "Updated Pizza",
                     description = "Updated Description",
                     price = BigDecimal(18.0),
-                    isAvailable = false,
+                    quantity = 7,
                     category = ProductCategory.MERCH,
+                    ingredients = "so much stuff",
                 )
 
             val updatedProduct = underTest.updateProduct(savedProduct.id, updateRequest)
@@ -124,8 +135,9 @@ class AdminProductServiceTest
             assertThat(updatedProduct.name).isEqualTo(updateRequest.name)
             assertThat(updatedProduct.description).isEqualTo(updateRequest.description)
             assertThat(updatedProduct.price).isEqualTo(updateRequest.price)
-            assertThat(updatedProduct.isAvailable).isEqualTo(updateRequest.isAvailable)
+            assertThat(updatedProduct.quantity).isEqualTo(updateRequest.quantity)
             assertThat(updatedProduct.category).isEqualTo(updateRequest.category)
+            assertThat(updatedProduct.ingredients).isEqualTo(updateRequest.ingredients)
         }
 
         /**
@@ -156,29 +168,57 @@ class AdminProductServiceTest
         }
 
         /**
-         * Тест проверяет, что метод updateAvailability обновляет доступность продукта.
-         * Ожидается, что доступность продукта будет обновлена в базе данных.
+         * Тест проверяет, что метод updateQuantity обновляет количество продукта.
+         * Ожидается, что количество продукта будет обновлена в базе данных.
          */
         @Test
-        fun `should update product availability successfully`() {
+        fun `should update product quantity successfully`() {
             val savedProduct = productRepository.save(product1)
 
-            val availabilityRequest = AdminProductAvailabilityRequest(isAvailable = false)
+            val quantityRequest = AdminProductQuantityRequest(quantity = 5)
 
-            val updatedProduct = underTest.updateAvailability(savedProduct.id, availabilityRequest)
+            val updatedProduct = underTest.updateQuantity(savedProduct.id, quantityRequest)
 
-            assertThat(updatedProduct.isAvailable).isEqualTo(false)
+            assertThat(updatedProduct.quantity).isEqualTo(5)
         }
 
         /**
-         * Тест проверяет, что метод updateAvailability выбрасывает исключение, если продукт не найден.
+         * Тест проверяет, что метод updateQuantity выбрасывает исключение, если продукт не найден.
          */
         @Test
         fun `test that updateAvailability throws exception when product does not exist`() {
-            val availabilityRequest = AdminProductAvailabilityRequest(isAvailable = true)
+            val quantityRequest = AdminProductQuantityRequest(quantity = 2)
 
             assertThrows<ProductNotFoundException> {
-                underTest.updateAvailability(999L, availabilityRequest)
+                underTest.updateQuantity(999L, quantityRequest)
+            }
+        }
+
+        /**
+         * Тест проверяет, что метод updateImagePath обновляет путь к фото продукта и сохраняет фото по этому пути.
+         */
+        @Test
+        fun `updateImagePath should save file into custom dir and update imagePat`() {
+            val savedProduct = productRepository.save(product1)
+            val mockFile = MockMultipartFile("image", "photo.png", "image/png", "hello".toByteArray())
+            val imageRequest = AdminProductImageRequest(image = mockFile)
+
+            val updatedProduct = underTest.updateImagePath(savedProduct.id, imageRequest)
+            val filename = updatedProduct.imagePath!!.substringAfterLast('/')
+            val savedFile = underTest.uploadDir.resolve(filename)
+            assertTrue(Files.exists(savedFile))
+        }
+
+        /**
+         * Тест проверяет, что метод updateImagePath выбрасывает исключение, если продукт не найден.
+         */
+        @Test
+        fun `updateImagePath should throw when product not found`() {
+            val mockFile = MockMultipartFile("image", "photo.png", "image/png", "hello".toByteArray())
+            val imageRequest = AdminProductImageRequest(image = mockFile)
+
+            assertThrows<ProductNotFoundException> {
+                underTest.updateImagePath(999L, imageRequest)
             }
         }
     }

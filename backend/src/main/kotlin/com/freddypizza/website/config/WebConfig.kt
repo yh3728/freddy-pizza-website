@@ -1,6 +1,5 @@
 package com.freddypizza.website.config
 
-import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
@@ -20,18 +19,13 @@ class WebConfig : WebMvcConfigurer {
             .addResourceHandler("/uploads/products/**")
             .addResourceLocations(uploadPath)
     }
-}
 
-@Configuration
-class CorsConfig {
-    @Bean
-    fun corsConfigurer(): WebMvcConfigurer {
-        return object : WebMvcConfigurer {
-            override fun addCorsMappings(registry: CorsRegistry) {
-                registry.addMapping("/**")
-                    .allowedOrigins("http://localhost:3000") // адрес фронта
-                    .allowedMethods("*")
-            }
-        }
+    override fun addCorsMappings(registry: CorsRegistry) {
+        registry
+            .addMapping("/**")
+            .allowedOrigins("http://localhost:3000")
+            .allowedMethods("*")
+            .allowedHeaders("*")
+            .allowCredentials(true)
     }
 }
