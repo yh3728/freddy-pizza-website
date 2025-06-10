@@ -11,5 +11,4 @@ data class AdminProductRequest(
     val price: BigDecimal,
     val quantity: Int = 0,
     val category: ProductCategory,
-    val imagePath: String? = null,
 )

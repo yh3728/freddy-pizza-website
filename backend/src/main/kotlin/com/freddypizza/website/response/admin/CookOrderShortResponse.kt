@@ -9,4 +9,5 @@ data class CookOrderShortResponse(
     val createdAt: LocalDateTime = LocalDateTime.now(),
     val items: List<OrderItemResponse> = listOf(),
     val comment: String? = null,
+    val trackingCode: String,
 ) : BaseOrderResponse()

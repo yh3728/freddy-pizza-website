@@ -64,7 +64,6 @@ fun AdminProductRequest.toProductEntity() =
         price = this.price,
         quantity = this.quantity,
         category = this.category,
-        imagePath = this.imagePath,
     )
 
 fun OrderItemEntity.toOrderItemDto() =
@@ -107,6 +106,7 @@ fun OrderEntity.toCookOrderShortResponse() =
         createdAt = this.createdAt,
         items = this.items.map { it.toOrderItemDto() },
         comment = this.comment,
+        trackingCode = this.trackingCode,
     )
 
 fun OrderEntity.toDeliveryOrderResponse() =
