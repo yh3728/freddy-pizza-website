@@ -33,11 +33,13 @@ export default function Modal({ product, onClose, onAddToCart }) {
             <button 
                 class="add-to-cart1"
                 onClick={() => {
+                  /*
                   const maxAvailable = product.quantity;
                   if (count > maxAvailable) {
                     alert(`Недостаточное количество товара на складе (доступно: ${maxAvailable} шт.)`);
                     return;
                     }
+                  */
                   for (let i = 0; i < count; i++) {
                     onAddToCart(); // Добавляем нужное количество товаров
                     }

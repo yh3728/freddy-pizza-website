@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import '../order.css';
 import API from '../api';
 
@@ -19,10 +20,13 @@ export default function Order() {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const tracking_code = localStorage.getItem('lastTrackingCode') || 'не найден'
+    
+    const { tracking_code } = useParams();
+
+    console.log(tracking_code);
 
     useEffect(() => {
-        if (tracking_code === "не найден")
+        if (!tracking_code)
             return;
         // Функция для получения данных
         const fetchData = async () => {
@@ -31,7 +35,10 @@ export default function Order() {
             setData(response.data);
             setError(null);
         } catch (err) {
-            setError(err.message);
+            if (err.response.status === 404)
+                setError("Заказ не найден.")
+            else
+                setError(err.message);
         } finally {
             setLoading(false);
         }
@@ -45,10 +52,10 @@ export default function Order() {
 
         // Очистка интервала при размонтировании компонента
         return () => clearInterval(intervalId);
-    }, [tracking_code]); 
+    }, [tracking_code]);
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
+    if (error) return <div className="error-style">{error}</div>;
+    if (loading) return <h2>Загрузка...</h2>;
 
     const order = data;
 
@@ -66,53 +73,53 @@ export default function Order() {
         year: 'numeric'
     }).replace(/\//g, '.');
 
-return (
-    <div class="orders-container">
-        <div class="orders-info-container">
-            <div class="orders-block block1">
-                Трек-номер:
-            </div>
-            <div class="orders-block block2">
-                {tracking_code}
-            </div>
-            <div class="orders-block block3">
-                {rus_status[order.status]}
-            </div>
-            <div class="orders-extra-block">Для отслеживания статуса заказа введите номер в разделе "Заказ"</div>
-        </div>
-        <div className="order-info1">
-            <p>Заказ:</p>
-            <span className="order-time">
-                {timeString}
-            </span>
-            <span className="order-date">
-                {dateString}
-            </span>
-        </div>
-        {order.items.map(item => (
-            <div className="order-cart-item">
-                <div className="order-product-info">
-                    <p>{item.productName}</p>
+    return (
+        <div class="orders-container">
+            <div class="orders-info-container">
+                <div class="orders-block block1">
+                    Трек-номер:
                 </div>
-                <div className="order-quantity-group">
-                    <span className="order-quantity">{item.quantity}</span>
+                <div class="orders-block block2">
+                    {tracking_code}
                 </div>
-                <div className="order-price">{item.quantity * item.price} ₽</div>
+                <div class="orders-block block3">
+                    {rus_status[order.status]}
+                </div>
+                <div class="orders-extra-block">Для отслеживания статуса заказа введите номер в разделе "Заказ"</div>
             </div>
-        ))}
-        
-        <div className="order-info2">
-            Тип оплаты: {rus_payment[order.payment]}
+            <div className="order-info1">
+                <p>Заказ:</p>
+                <span className="order-time">
+                    {timeString}
+                </span>
+                <span className="order-date">
+                    {dateString}
+                </span>
+            </div>
+            {order.items.map(item => (
+                <div className="order-cart-item">
+                    <div className="order-product-info">
+                        <p>{item.productName}</p>
+                    </div>
+                    <div className="order-quantity-group">
+                        <span className="order-quantity">{item.quantity}</span>
+                    </div>
+                    <div className="order-price">{item.quantity * item.price} ₽</div>
+                </div>
+            ))}
+            
+            <div className="order-info2">
+                Тип оплаты: {rus_payment[order.payment]}
+            </div>
+            <div className="order-info3">
+                Комментарий:
+            </div>
+            <div className="order-comment">
+                {order.comment}
+            </div>
+            <div className="order-info4">
+                Итого: {order.totalPrice} ₽
+            </div>
         </div>
-        <div className="order-info3">
-            Комментарий:
-        </div>
-        <div className="order-comment">
-            {order.comment}
-        </div>
-        <div className="order-info4">
-            Итого: {order.totalPrice} ₽
-        </div>
-    </div>
-  )
+    )
 }

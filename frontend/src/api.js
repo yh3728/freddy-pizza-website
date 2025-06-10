@@ -6,6 +6,15 @@ const API = axios.create({
   withCredentials: true,
 });
 
+// Добавим accessToken к каждому запросу
+API.interceptors.request.use((config) => {
+  const token = localStorage.getItem('adminAccess');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
 API.getBaseURL = () => API.defaults.baseURL;
 
 API.getImageURL = (product) => `${API.getBaseURL()}${product.imagePath}`;

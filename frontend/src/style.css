@@ -397,3 +397,18 @@ html {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень для объёма */
   background-color: #FDF5C9; /* Жёлтый фон */
 }
+
+.item-container-order {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.error-style{
+  text-align: center;
+  font-size: 45px;
+  margin-top: 20px;
+  font-weight: bold;
+}

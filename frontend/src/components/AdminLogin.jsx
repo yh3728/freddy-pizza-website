@@ -1,22 +1,34 @@
-// src/components/AdminLogin.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../admin.css'; // Можно переиспользовать
+import API from '../api';
+import '../admin.css';
 
 export default function AdminLogin() {
-  const [username, setUsername] = useState('');
+  const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setError('');
 
-    // Простой логин (можно заменить на реальный запрос к backend)
-    if (username === 'admin' && password === 'pizza123') {
-      localStorage.setItem('adminAuth', 'true');
+    try {
+      // 1. Вход по логину/паролю
+      await API.post('/admin/auth', { username: login, password }, { withCredentials: true });
+
+      // 2. Получение информации о текущем пользователе
+      const res = await API.get('/admin/auth/me', { withCredentials: true });
+      const { role, id, username } = res.data;
+
+      localStorage.setItem('adminAccess', 'true'); // маркер авторизации
+      localStorage.setItem('adminRole', role); // теперь точно ADMIN/COOK/DELIVERY
+      localStorage.setItem('adminUser', username);
+
       navigate('/admin');
-    } else {
-      alert('Неверный логин или пароль');
+    } catch (err) {
+      console.error('Ошибка входа:', err);
+      setError('Неверный логин или пароль');
     }
   };
 
@@ -26,12 +38,13 @@ export default function AdminLogin() {
       <form onSubmit={handleLogin} className="admin-login-form">
         <label>
           Логин:
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+          <input type="text" value={login} onChange={(e) => setLogin(e.target.value)} required />
         </label>
         <label>
           Пароль:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         </label>
+        {error && <p className="form-error">{error}</p>}
         <button type="submit" className="order-btn">Войти</button>
       </form>
     </div>

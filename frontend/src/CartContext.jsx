@@ -22,18 +22,10 @@ export const CartProvider = ({ children }) => {
 
     if (existing) {
       const newQuantity = existing.quantity + 1;
-      if (newQuantity > max) {
-        alert(`Недостаточное количество товара на складе (доступно: ${max} шт.)`);
-        return prev;
-      }
       return prev.map(item =>
         item.id === product.id ? { ...item, quantity: newQuantity } : item
       );
     } else {
-      if (max < 1) {
-        alert(`Товар недоступен (на складе 0)`);
-        return prev;
-      }
       return [...prev, { ...product, quantity: 1 }];
     }
     });
@@ -48,10 +40,6 @@ export const CartProvider = ({ children }) => {
     return prev.map(item => {
       if (item.id === id) {
         const newQuantity = item.quantity + delta;
-        if (newQuantity > item.quantity && newQuantity > item.quantityLimit) {
-          alert(`Достигнут лимит (на складе только ${item.quantityLimit} шт.)`);
-          return item;
-        }
         return { ...item, quantity: Math.max(1, newQuantity) };
       }
       return item;

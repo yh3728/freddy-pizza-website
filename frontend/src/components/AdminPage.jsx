@@ -10,9 +10,9 @@ export default function AdminPage() {
 
   // Проверка авторизации
   useEffect(() => {
-    if (localStorage.getItem('adminAuth') !== 'true') {
-      navigate('/admin-login');
-    }
+    if (!localStorage.getItem('adminAccess')) {
+  navigate('/admin-login');
+  }
   }, [navigate]);
 
   useEffect(() => {
@@ -46,10 +46,18 @@ export default function AdminPage() {
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem('adminAuth');
-    navigate('/admin-login');
-  };
+  const logout = async () => {
+  try {
+    await API.post('/admin/auth/logout', {}, { withCredentials: true });
+  } catch (e) {
+    console.warn("Ошибка при выходе", e);
+  }
+  localStorage.removeItem('adminAccess');
+  localStorage.removeItem('adminRefresh');
+  localStorage.removeItem('adminRole');
+  navigate('/admin-login');
+};
+
 
   return (
     <div className="admin-container">
