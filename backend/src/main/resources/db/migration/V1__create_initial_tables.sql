@@ -30,7 +30,8 @@ CREATE TABLE IF NOT EXISTS orders (
     comment TEXT,
     payment VARCHAR(100) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    tracking_code VARCHAR(6) UNIQUE NOT NULL
+    tracking_code VARCHAR(6) UNIQUE NOT NULL,
+    assigned_delivery_id BIGINT REFERENCES staff(id)
 );
 
 -- Создание таблицы позиций в заказе (OrderItem)

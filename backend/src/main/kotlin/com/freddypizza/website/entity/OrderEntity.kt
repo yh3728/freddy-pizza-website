@@ -34,4 +34,7 @@ data class OrderEntity(
     val payment: PaymentType,
     @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL], orphanRemoval = true)
     var items: MutableList<OrderItemEntity> = mutableListOf(),
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "assigned_delivery_id")
+    var assignedDelivery: StaffEntity? = null,
 )

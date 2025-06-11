@@ -8,7 +8,6 @@ import com.freddypizza.website.repository.ProductRepository
 import com.freddypizza.website.request.admin.AdminProductQuantityRequest
 import com.freddypizza.website.request.user.CreateOrderRequest
 import com.freddypizza.website.service.admin.AdminProductService
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 
 @Service
@@ -54,9 +53,7 @@ class OrderService(
 
         val orderItems =
             request.items.map { item ->
-                val product =
-                    productRepository.findByIdOrNull(item.productId)
-                        ?: throw ProductNotFoundException()
+                val product = productService.getProductById(item.productId) ?: throw ProductNotFoundException()
                 productService.updateQuantity(item.productId, AdminProductQuantityRequest(product.quantity - item.quantity))
                 OrderItemEntity(
                     quantity = item.quantity,

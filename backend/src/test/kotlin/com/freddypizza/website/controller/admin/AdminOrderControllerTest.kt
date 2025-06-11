@@ -14,6 +14,7 @@ import com.freddypizza.website.exception.InvalidOrderStatusException
 import com.freddypizza.website.exception.OrderNotFoundException
 import com.freddypizza.website.request.admin.AdminOrderStatusRequest
 import com.freddypizza.website.service.admin.AdminOrderService
+import com.freddypizza.website.util.toStaffEntity
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.*
 import org.junit.jupiter.api.BeforeEach
@@ -104,7 +105,7 @@ class AdminOrderControllerTest
          */
         @Test
         fun `getOrders should return all orders for ADMIN role`() {
-            every { orderService.getOrdersByRole(StaffRole.ADMIN, null) } returns listOf(testOrder)
+            every { orderService.getOrdersByRole(null, adminStaff) } returns listOf(testOrder)
             mockMvc
                 .get("/admin/orders") {
                     with(user(adminStaff))
@@ -115,7 +116,7 @@ class AdminOrderControllerTest
                     jsonPath("$[0].status") { value("NEW") }
                     jsonPath("$[0].items[0].productName") { value("Test Pizza") }
                 }
-            verify { orderService.getOrdersByRole(StaffRole.ADMIN, null) }
+            verify { orderService.getOrdersByRole(null, adminStaff) }
         }
 
         /**
@@ -124,7 +125,7 @@ class AdminOrderControllerTest
          */
         @Test
         fun `getOrders should return NEW orders for COOK role`() {
-            every { orderService.getOrdersByRole(StaffRole.COOK, null) } returns listOf(testOrder)
+            every { orderService.getOrdersByRole(null, cookStaff) } returns listOf(testOrder)
 
             mockMvc
                 .get("/admin/orders") {
@@ -134,7 +135,7 @@ class AdminOrderControllerTest
                     jsonPath("$[0].status") { value("NEW") }
                 }
 
-            verify { orderService.getOrdersByRole(StaffRole.COOK, null) }
+            verify { orderService.getOrdersByRole(null, cookStaff) }
         }
 
         /**
@@ -144,7 +145,8 @@ class AdminOrderControllerTest
          */
         @Test
         fun `getOrders should 400 for COOK requesting READY_FOR_DELIVERY`() {
-            every { orderService.getOrdersByRole(StaffRole.COOK, OrderStatus.READY_FOR_DELIVERY) } throws InvalidOrderStatusException()
+            every { orderService.getOrdersByRole(OrderStatus.READY_FOR_DELIVERY, cookStaff) } throws
+                InvalidOrderStatusException()
 
             mockMvc
                 .get("/admin/orders?status=READY_FOR_DELIVERY") {
@@ -163,7 +165,7 @@ class AdminOrderControllerTest
         @Test
         fun `getOrders should return READY_FOR_DELIVERY for DELIVERY role`() {
             val readyOrder = testOrder.copy(status = OrderStatus.READY_FOR_DELIVERY)
-            every { orderService.getOrdersByRole(StaffRole.DELIVERY, null) } returns listOf(readyOrder)
+            every { orderService.getOrdersByRole(null, deliveryStaff) } returns listOf(readyOrder)
 
             mockMvc
                 .get("/admin/orders") {
@@ -173,7 +175,7 @@ class AdminOrderControllerTest
                     jsonPath("$[0].status") { value("READY_FOR_DELIVERY") }
                 }
 
-            verify { orderService.getOrdersByRole(StaffRole.DELIVERY, null) }
+            verify { orderService.getOrdersByRole(null, deliveryStaff) }
         }
 
         /**
@@ -222,7 +224,7 @@ class AdminOrderControllerTest
         fun `updateOrderStatus should allow COOK to IN_PROGRESS`() {
             val req = AdminOrderStatusRequest(OrderStatus.IN_PROGRESS)
             val updated = testOrder.copy(status = OrderStatus.IN_PROGRESS)
-            every { orderService.updateOrderStatusByRole(1L, StaffRole.COOK, req) } returns updated
+            every { orderService.updateOrderStatusByRole(1L, req, cookStaff) } returns updated
 
             mockMvc
                 .patch("/admin/orders/1/status") {
@@ -234,7 +236,7 @@ class AdminOrderControllerTest
                     jsonPath("$.status") { value("IN_PROGRESS") }
                 }
 
-            verify { orderService.updateOrderStatusByRole(1L, StaffRole.COOK, req) }
+            verify { orderService.updateOrderStatusByRole(1L, req, cookStaff) }
         }
 
         /**
@@ -244,7 +246,7 @@ class AdminOrderControllerTest
         @Test
         fun `updateOrderStatus should 400 when DELIVERY sets invalid status`() {
             val req = AdminOrderStatusRequest(OrderStatus.NEW)
-            every { orderService.updateOrderStatusByRole(1L, StaffRole.DELIVERY, req) } throws InvalidOrderStatusException()
+            every { orderService.updateOrderStatusByRole(1L, req, deliveryStaff) } throws InvalidOrderStatusException()
 
             mockMvc
                 .patch("/admin/orders/1/status") {
@@ -265,7 +267,7 @@ class AdminOrderControllerTest
         fun `updateOrderStatus should allow DELIVERY to DELIVERED`() {
             val req = AdminOrderStatusRequest(OrderStatus.DELIVERED)
             val updated = testOrder.copy(status = OrderStatus.DELIVERED)
-            every { orderService.updateOrderStatusByRole(1L, StaffRole.DELIVERY, req) } returns updated
+            every { orderService.updateOrderStatusByRole(1L, req, deliveryStaff) } returns updated
 
             mockMvc
                 .patch("/admin/orders/1/status") {
@@ -277,7 +279,7 @@ class AdminOrderControllerTest
                     jsonPath("$.status") { value("DELIVERED") }
                 }
 
-            verify { orderService.updateOrderStatusByRole(1L, StaffRole.DELIVERY, req) }
+            verify { orderService.updateOrderStatusByRole(1L, req, deliveryStaff) }
         }
 
         /**
@@ -288,7 +290,7 @@ class AdminOrderControllerTest
         fun `updateOrderStatus should allow ADMIN to CANCELLED`() {
             val req = AdminOrderStatusRequest(OrderStatus.CANCELLED)
             val updated = testOrder.copy(status = OrderStatus.CANCELLED)
-            every { orderService.updateOrderStatusByRole(1L, StaffRole.ADMIN, req) } returns updated
+            every { orderService.updateOrderStatusByRole(1L, req, adminStaff) } returns updated
 
             mockMvc
                 .patch("/admin/orders/1/status") {
@@ -300,7 +302,7 @@ class AdminOrderControllerTest
                     jsonPath("$.status") { value("CANCELLED") }
                 }
 
-            verify { orderService.updateOrderStatusByRole(1L, StaffRole.ADMIN, req) }
+            verify { orderService.updateOrderStatusByRole(1L, req, adminStaff) }
         }
 
         /**
@@ -310,7 +312,7 @@ class AdminOrderControllerTest
         @Test
         fun `updateOrderStatus should 404 when order not found`() {
             val req = AdminOrderStatusRequest(OrderStatus.DELIVERED)
-            every { orderService.updateOrderStatusByRole(99L, StaffRole.ADMIN, req) } throws OrderNotFoundException()
+            every { orderService.updateOrderStatusByRole(99L, req, adminStaff) } throws OrderNotFoundException()
 
             mockMvc
                 .patch("/admin/orders/99/status") {
@@ -397,5 +399,70 @@ class AdminOrderControllerTest
                     status { isOk() }
                     jsonPath("$.length()") { value(0) }
                 }
+        }
+
+        /**
+         * Тест для обновления DELIVERY статуса заказа на OUT_FOR_DELIVERY.
+         * Ожидается статус 200 (OK) и что статус поменяется на "OUT_FOR_DELIVERY" и у заказа появится assignedDelivery.
+         */
+        @Test
+        fun `updateOrderStatus should allow DELIVERY to OUT_FOR_DELIVERY and assign delivery staff`() {
+            val req = AdminOrderStatusRequest(OrderStatus.OUT_FOR_DELIVERY)
+            val updated =
+                testOrder.copy(
+                    status = OrderStatus.OUT_FOR_DELIVERY,
+                    assignedDelivery = deliveryStaff.toStaffEntity(),
+                )
+            every { orderService.updateOrderStatusByRole(1L, req, deliveryStaff) } returns updated
+
+            mockMvc
+                .patch("/admin/orders/1/status") {
+                    with(user(deliveryStaff))
+                    contentType = MediaType.APPLICATION_JSON
+                    content = mapper.writeValueAsString(req)
+                }.andExpect {
+                    status { isOk() }
+                    jsonPath("$.status") { value("OUT_FOR_DELIVERY") }
+                    jsonPath("$.assignedDelivery.id") { value(deliveryStaff.id) }
+                    jsonPath("$.assignedDelivery.username") { value(deliveryStaff.username) }
+                }
+
+            verify { orderService.updateOrderStatusByRole(1L, req, deliveryStaff) }
+        }
+
+        /**
+         * Тест для получения DELIVERY списка заказов.
+         * Ожидается статус 200 (OK) и что список будет состоять из заказов со статусом READY_FOR_DELIVERY и своими OUT_FOR_DELIVERY.
+         */
+        @Test
+        fun `getOrders should return only READY_FOR_DELIVERY and own OUT_FOR_DELIVERY for DELIVERY role`() {
+            val readyOrder = testOrder.copy(status = OrderStatus.READY_FOR_DELIVERY)
+            val outForDeliveryOwn =
+                testOrder.copy(
+                    status = OrderStatus.OUT_FOR_DELIVERY,
+                    assignedDelivery = deliveryStaff.toStaffEntity(),
+                )
+            val outForDeliveryOther =
+                testOrder.copy(
+                    id = 2L,
+                    status = OrderStatus.OUT_FOR_DELIVERY,
+                    assignedDelivery = StaffEntity(99, "otherDelivery", "pass", StaffRole.DELIVERY),
+                )
+
+            every { orderService.getOrdersByRole(null, deliveryStaff) } returns listOf(readyOrder, outForDeliveryOwn)
+
+            mockMvc
+                .get("/admin/orders") {
+                    with(user(deliveryStaff))
+                }.andExpect {
+                    status { isOk() }
+                    jsonPath("$.length()") { value(2) }
+                    jsonPath("$[?(@.status == 'READY_FOR_DELIVERY')]") { exists() }
+                    jsonPath("$[?(@.status == 'OUT_FOR_DELIVERY')]") { exists() }
+                    jsonPath("$[?(@.assignedDelivery.id == ${deliveryStaff.id})]") { exists() }
+                    jsonPath("$[?(@.assignedDelivery.id == 99)]") { doesNotExist() }
+                }
+
+            verify { orderService.getOrdersByRole(null, deliveryStaff) }
         }
     }

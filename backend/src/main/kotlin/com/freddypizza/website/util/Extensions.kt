@@ -1,5 +1,6 @@
 package com.freddypizza.website.util
 
+import com.freddypizza.website.detail.CustomStaffUserDetails
 import com.freddypizza.website.entity.OrderEntity
 import com.freddypizza.website.entity.OrderItemEntity
 import com.freddypizza.website.entity.ProductEntity
@@ -86,6 +87,7 @@ fun OrderEntity.toAdminOrderFullResponse() =
         address = this.address,
         payment = this.payment,
         trackingCode = this.trackingCode,
+        assignedDelivery = this.assignedDelivery?.toStaffResponseDTO(),
     )
 
 fun OrderEntity.toAdminOrderShortResponse() =
@@ -94,9 +96,10 @@ fun OrderEntity.toAdminOrderShortResponse() =
         status = this.status,
         createdAt = this.createdAt,
         items = this.items.map { it.toOrderItemDto() },
-        address = this.address,
-        phone = this.phone,
         customerName = this.customerName,
+        comment = this.comment,
+        trackingCode = this.trackingCode,
+        assignedDelivery = this.assignedDelivery?.toStaffResponseDTO(),
     )
 
 fun OrderEntity.toCookOrderShortResponse() =
@@ -119,6 +122,10 @@ fun OrderEntity.toDeliveryOrderResponse() =
         phone = this.phone,
         customerName = this.customerName,
         payment = this.payment,
+        trackingCode = this.trackingCode,
+        items = this.items.map { it.toOrderItemDto() },
+        assignedDelivery = this.assignedDelivery?.toStaffResponseDTO(),
+        totalPrice = this.totalPrice,
     )
 
 fun StaffRequest.toStaffEntity() =
@@ -133,4 +140,12 @@ fun StaffEntity.toStaffResponseDTO() =
         id = this.id,
         username = this.username,
         role = this.role,
+    )
+
+fun CustomStaffUserDetails.toStaffEntity() =
+    StaffEntity(
+        id = this.id,
+        username = this.username,
+        password = this.password,
+        role = this.getRole(),
     )
