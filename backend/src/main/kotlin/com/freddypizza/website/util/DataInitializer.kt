@@ -24,6 +24,7 @@ class DataInitializer {
 //        private val productRepository: ProductRepository,
 //        private val orderRepository: OrderRepository,
 //        private val orderItemRepository: OrderItemRepository,
+//        private val staffService: StaffService,
 //    ) {
 //        private val descriptions =
 //            listOf(
@@ -98,8 +99,9 @@ class DataInitializer {
 //
 //        @PostConstruct
 //        fun generateTestData() {
+//            val deliveryStaff = createDeliveryStaffIfNeeded()
 //            val products = createVariedTestProducts()
-//            createVariedTestOrders(products)
+//            createVariedTestOrders(products, deliveryStaff)
 //        }
 //
 //        private fun createVariedTestProducts(): List<ProductEntity> {
@@ -127,8 +129,12 @@ class DataInitializer {
 //            return productRepository.saveAll(products)
 //        }
 //
-//        private fun createVariedTestOrders(products: List<ProductEntity>) {
+//        private fun createVariedTestOrders(
+//            products: List<ProductEntity>,
+//            deliveryStaffList: List<StaffEntity>,
+//        ) {
 //            val statuses = OrderStatus.entries.toTypedArray()
+//
 //            repeat(30) {
 //                val customerName = customerNames.random()
 //                val phone = "+7-${random.nextInt(900, 999)}-${random.nextInt(100, 999)}-${random.nextInt(1000, 9999)}"
@@ -139,6 +145,13 @@ class DataInitializer {
 //                val chars = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 //                val trackingCode = (1..6).map { chars.random() }.joinToString("")
 //                val createdAt = LocalDateTime.now().minusDays(random.nextLong(0, 30))
+//
+//                val assignedDelivery =
+//                    if ((status == OrderStatus.OUT_FOR_DELIVERY || status == OrderStatus.DELIVERED) && deliveryStaffList.isNotEmpty()) {
+//                        deliveryStaffList.random()
+//                    } else {
+//                        null
+//                    }
 //
 //                val order =
 //                    OrderEntity(
@@ -152,6 +165,7 @@ class DataInitializer {
 //                        items = mutableListOf(),
 //                        trackingCode = trackingCode,
 //                        payment = payment,
+//                        assignedDelivery = assignedDelivery,
 //                    )
 //
 //                val savedOrder = orderRepository.save(order)
@@ -162,6 +176,7 @@ class DataInitializer {
 //                    orderItems.fold(BigDecimal.ZERO) { acc, item ->
 //                        acc + (item.product.price.multiply(BigDecimal(item.quantity)))
 //                    }
+//
 //                savedOrder.totalPrice = total
 //                orderRepository.save(savedOrder)
 //            }
@@ -201,6 +216,15 @@ class DataInitializer {
 //                    "Центральная",
 //                )
 //            return streetNames.random()
+//        }
+//
+//        private fun createDeliveryStaffIfNeeded(): List<StaffEntity> {
+//            if (staffService.getAllStaff() != null) return staffService.getAllStaff()
+//            return listOf(
+//                StaffEntity(username = "delivery1", password = "pass", role = StaffRole.DELIVERY),
+//                StaffEntity(username = "delivery2", password = "pass", role = StaffRole.DELIVERY),
+//                StaffEntity(username = "delivery3", password = "pass", role = StaffRole.DELIVERY),
+//            ).map { staffService.addStaff(it) }
 //        }
 //    }
 }

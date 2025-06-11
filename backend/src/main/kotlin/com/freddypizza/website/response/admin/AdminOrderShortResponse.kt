@@ -8,7 +8,8 @@ data class AdminOrderShortResponse(
     val status: OrderStatus,
     val createdAt: LocalDateTime = LocalDateTime.now(),
     val items: List<OrderItemResponse> = listOf(),
-    val address: String,
-    val phone: String,
     val customerName: String,
+    val comment: String? = null,
+    val trackingCode: String,
+    val assignedDelivery: StaffResponse? = null,
 ) : BaseOrderResponse()
