@@ -44,7 +44,7 @@ class AdminProductService(
                 price = productUpdateRequest.price ?: existingProduct.price,
                 quantity = productUpdateRequest.quantity ?: existingProduct.quantity,
                 category = productUpdateRequest.category ?: existingProduct.category,
-                imagePath = productUpdateRequest.imagePath ?: existingProduct.imagePath,
+                
             )
         return productRepository.save(updatedProduct)
     }

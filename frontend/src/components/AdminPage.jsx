@@ -60,11 +60,8 @@ export default function AdminPage() {
 
 
   return (
-    <div className="admin-container">
+    <div className="admin-container full-bg">
       <h2>Панель администратора</h2>
-      <button onClick={logout} className="order-btn" style={{ marginBottom: '20px' }}>
-        Выйти
-      </button>
 
       {orders.map(order => (
         <div key={order.id} className="admin-order-card">

@@ -412,3 +412,11 @@ html {
   margin-top: 20px;
   font-weight: bold;
 }
+
+.order-search{
+  display: grid;
+  place-items: center; /* Центрирует и по горизонтали, и по вертикали */
+  height: 200px;
+  font-size: 22px;
+  margin-top: 70px;
+}

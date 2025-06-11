@@ -1,12 +1,13 @@
 // src/components/CartPage.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import '../cart.css';
 import { useCart } from '../CartContext';
 import API from '../api';
 
 export default function CartPage() {
   const { cartItems, updateQuantity, removeFromCart, total } = useCart();
-  const [setCartItems] = useState(() => () => {}); // Заглушка, если понадобится напрямую
+  const [setCartItems] = useState(() => () => {});
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
@@ -19,6 +20,10 @@ export default function CartPage() {
     comment: '',
     products: {}
   });
+
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [addressConfirmed, setAddressConfirmed] = useState(false);
 
   const handleOrder = async (e) => {
     e.preventDefault();
@@ -37,13 +42,13 @@ export default function CartPage() {
       hasError = true;
     }
 
-    if (address.trim().length < 5) {
-      newErrors.address = 'Адрес должен содержать минимум 5 символов.';
+    if (comment.length > 200) {
+      newErrors.comment = 'Комментарий не должен превышать 200 символов.';
       hasError = true;
     }
 
-    if (comment.length > 200) {
-      newErrors.comment = 'Комментарий не должен превышать 200 символов.';
+    if (!addressConfirmed) {
+      newErrors.address = 'Пожалуйста, введите допустимый адрес.';
       hasError = true;
     }
 
@@ -65,13 +70,10 @@ export default function CartPage() {
         }))
       };
 
-      await API.post('/orders', payload) 
-      .then(res => {
-          const code = res.data.trackingCode;
-          localStorage.removeItem('cart');
-          window.location.href = `/order/${code}`;
-          })
-
+      const res = await API.post('/orders', payload);
+      const code = res.data.trackingCode;
+      localStorage.removeItem('cart');
+      window.location.href = `/order/${code}`;
     } catch (err) {
       console.error('Ошибка при заказе:', err);
       const resp = err.response?.data;
@@ -83,18 +85,40 @@ export default function CartPage() {
         const updatedProductErrors = {};
         resp.details.forEach(item => {
           updatedProductErrors[item.productId] = `Недостаточно товара в наличии (доступно: ${item.availableQuantity} шт.)`;
-
-          // Откатить количество до максимально допустимого
           const cartItem = cartItems.find(p => p.id === item.productId);
           if (cartItem && cartItem.quantity > item.availableQuantity) {
-            updateQuantity(item.productId, item.availableQuantity - cartItem.quantity); // корректировка
+            updateQuantity(item.productId, item.availableQuantity - cartItem.quantity);
           }
         });
-
         setErrors(prev => ({ ...prev, products: updatedProductErrors }));
       } else {
         alert('Не удалось оформить заказ. Попробуйте позже.');
       }
+    }
+  };
+
+  const fetchSuggestions = async (query) => {
+    if (query.length < 3) {
+      setSuggestions([]);
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address",
+        { query },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": "Token 554acbc27ba1622e76adea8f5ffe027cecdd2cc7"
+          }
+        }
+      );
+      setSuggestions(response.data.suggestions || []);
+      setShowSuggestions(true);
+    } catch (error) {
+      console.error("Ошибка при получении подсказок:", error);
     }
   };
 
@@ -144,9 +168,36 @@ export default function CartPage() {
             <input type="tel" id="phone" value={phone} onChange={e => setPhone(e.target.value)} />
             {errors.phone && <p className="form-error">{errors.phone}</p>}
           </div>
-          <div className="right-column">
+          <div className="right-column" style={{ position: 'relative' }}>
             <label htmlFor="address">Адрес</label>
-            <input type="text" id="address" value={address} onChange={e => setAddress(e.target.value)} />
+            <input
+              type="text"
+              id="address"
+              value={address}
+              onChange={(e) => {
+                setAddress(e.target.value);
+                fetchSuggestions(e.target.value);
+                setAddressConfirmed(false);
+              }}
+              onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+              onFocus={() => fetchSuggestions(address)}
+            />
+            {showSuggestions && suggestions.length > 0 && (
+              <ul className="suggestions-list">
+                {suggestions.map((s, i) => (
+                  <li
+                    key={i}
+                    onClick={() => {
+                      setAddress(s.value);
+                      setAddressConfirmed(true);
+                      setShowSuggestions(false);
+                    }}
+                  >
+                    {s.value}
+                  </li>
+                ))}
+              </ul>
+            )}
             {errors.address && <p className="form-error">{errors.address}</p>}
 
             <label htmlFor="payment">Способ оплаты</label>
@@ -164,7 +215,7 @@ export default function CartPage() {
             value={comment}
             onChange={e => setComment(e.target.value)}
             rows="4"
-            maxLength="200"
+            maxLength="250"
           ></textarea>
           {errors.comment && <p className="form-error">{errors.comment}</p>}
         </div>

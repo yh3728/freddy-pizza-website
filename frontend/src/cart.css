@@ -22,7 +22,8 @@
   gap: 10px;
   border: 2px solid #ed1308; /* Красная рамка */
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень для объёма */
   background-color: #FDF5C9; /* Жёлтый фон */
   font-family: 'kellyslab', sans-serif;
@@ -129,15 +130,18 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
+  font-size: 20px;
 }
 
 .order-btn {
   padding: 10px 20px;
   background-color: #ed1308;
-  color: white;
+  color: black;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .order-btn:hover {
@@ -184,4 +188,32 @@
   box-sizing: border-box;
   background-color: #FDF5C9;
   font-family: 'handjet', sans-serif;
+}
+
+.form-error {
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.suggestions-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  background: white;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+}
+
+.suggestions-list li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestions-list li:hover {
+  background-color: #f0f0f0;
 }
