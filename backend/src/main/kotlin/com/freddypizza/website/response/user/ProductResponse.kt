@@ -9,4 +9,6 @@ data class ProductResponse(
     val price: BigDecimal,
     val imagePath: String? = "/uploads/products/image_placeholder.png",
     val category: ProductCategory,
+    val id: Long,
+    val quantity: Int,
 )

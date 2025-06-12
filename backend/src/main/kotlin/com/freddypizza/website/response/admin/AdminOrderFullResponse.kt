@@ -16,5 +16,6 @@ data class AdminOrderFullResponse(
     val createdAt: LocalDateTime = LocalDateTime.now(),
     val payment: PaymentType,
     val items: List<OrderItemResponse> = listOf(),
-    val trackingCode: String
+    val trackingCode: String,
+    val assignedDelivery: StaffResponse? = null,
 )

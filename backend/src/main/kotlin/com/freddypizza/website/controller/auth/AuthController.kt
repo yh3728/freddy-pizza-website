@@ -1,5 +1,6 @@
 package com.freddypizza.website.controller.auth
 
+import com.freddypizza.website.detail.CustomStaffUserDetails
 import com.freddypizza.website.exception.ErrorResponse
 import com.freddypizza.website.request.auth.AuthRequest
 import com.freddypizza.website.request.auth.RefreshTokenRequest
@@ -12,10 +13,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/admin/auth")
@@ -70,4 +69,14 @@ class AuthController(
         authService.logout(response)
         return ResponseEntity.ok("Logged out successfully")
     }
+
+    @GetMapping("/me")
+    fun whoAmI(
+        @AuthenticationPrincipal user: CustomStaffUserDetails,
+    ): Map<String, Any> =
+        mapOf(
+            "id" to user.id,
+            "username" to user.username,
+            "role" to user.getRole().name,
+        )
 }

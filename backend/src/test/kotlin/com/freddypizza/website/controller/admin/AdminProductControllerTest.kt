@@ -176,15 +176,16 @@ class AdminProductControllerTest
          */
         @Test
         fun `should update product availability successfully`() {
+            val quantityRequest = AdminProductQuantityRequest(productUpdateRequest.quantity!!)
             mockMvc
                 .perform(
                     patch("/admin/menu/1/quantity")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jacksonObjectMapper().writeValueAsString(productUpdateRequest)),
+                        .content(jacksonObjectMapper().writeValueAsString(quantityRequest)),
                 ).andExpect(status().isOk)
                 .andExpect(jsonPath("$.quantity").value(productUpdateRequest.quantity))
-            val productQuantityRequest = AdminProductQuantityRequest(productUpdateRequest.quantity!!)
-            verify { productService.updateQuantity(1L, productQuantityRequest) }
+
+            verify { productService.updateQuantity(1L, quantityRequest) }
         }
 
         /**

@@ -1,6 +1,9 @@
 package com.freddypizza.website.controller.auth
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.freddypizza.website.detail.CustomStaffUserDetails
+import com.freddypizza.website.entity.StaffEntity
+import com.freddypizza.website.enums.StaffRole
 import com.freddypizza.website.exception.InvalidRefreshTokenException
 import com.freddypizza.website.request.auth.AuthRequest
 import com.freddypizza.website.request.auth.RefreshTokenRequest
@@ -17,7 +20,9 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.test.context.support.WithMockUser
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 
@@ -146,5 +151,20 @@ class AuthControllerTest
                 .andExpect(jsonPath("$.message").value("Неверные учетные данные"))
 
             verify { authService.authentication(invalidAuthRequest, any()) }
+        }
+
+        @Test
+        fun `should return current user info on me endpoint`() {
+            val adminStaff =
+                CustomStaffUserDetails(
+                    StaffEntity(1, "admin", "password", StaffRole.ADMIN),
+                )
+            mockMvc
+                .get("/admin/auth/me") { with(user(adminStaff)) }
+                .andExpect {
+                    status { isOk() }
+                    jsonPath("$.username") { value("admin") }
+                    jsonPath("$.role") { value("ADMIN") }
+                }
         }
     }

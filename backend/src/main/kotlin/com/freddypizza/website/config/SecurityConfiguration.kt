@@ -5,6 +5,7 @@ import com.freddypizza.website.exception.ErrorResponse
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.security.authentication.AuthenticationProvider
@@ -13,6 +14,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.DefaultSecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
+import org.springframework.web.filter.CorsFilter
 
 @Configuration
 @EnableWebSecurity
@@ -28,9 +32,11 @@ class SecurityConfiguration(
             .csrf { it.disable() }
             .authorizeHttpRequests {
                 it
+                    .requestMatchers(HttpMethod.OPTIONS, "/**")
+                    .permitAll()
                     .requestMatchers("/admin/staff/**")
                     .hasRole("ADMIN")
-                    .requestMatchers("/admin/orders/**", "/admin/menu/**")
+                    .requestMatchers("/admin/orders/**", "/admin/menu/**", "/admin/auth/me")
                     .fullyAuthenticated()
                     .requestMatchers("/admin/auth/logout", "/admin/auth/", "/admin/auth/refresh")
                     .permitAll()
@@ -64,4 +70,18 @@ class SecurityConfiguration(
             }.authenticationProvider(authenticationProvider)
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
             .build()
+
+    @Bean
+    fun corsFilter(): CorsFilter {
+        val configuration =
+            CorsConfiguration().apply {
+                allowedOrigins = listOf("http://localhost:3000")
+                allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
+                allowedHeaders = listOf("*")
+                allowCredentials = true
+            }
+        val source = UrlBasedCorsConfigurationSource()
+        source.registerCorsConfiguration("/**", configuration)
+        return CorsFilter(source)
+    }
 }

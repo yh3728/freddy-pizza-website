@@ -1,0 +1,71 @@
+/* src/about.css */
+
+.about-layout {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 40px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.about-left {
+  flex: 1.4;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.about-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.about-image {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 3px solid #ed1308;
+}
+
+/* Стили рамки */
+.about-section {
+  background-color: #FDF5C9;
+  border: 3px solid #ed1308;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  font-size: 20px;
+  line-height: 1.8;
+}
+
+.about-section h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #ed1308;
+  font-size: 28px;
+}
+
+.about-section ul {
+  padding-left: 25px;
+  margin-bottom: 25px;
+  list-style-type: disc;
+}
+
+/* Адаптив: на узких экранах — в столбик */
+@media (max-width: 768px) {
+  .about-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-left, .about-right {
+    width: 100%;
+  }
+
+  .about-image {
+    width: 100%;
+  }
+}

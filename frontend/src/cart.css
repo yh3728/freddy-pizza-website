@@ -1,0 +1,233 @@
+@font-face {
+    font-family: 'handjet'; /* Название шрифта (можно любое) */
+    src: url('./assets/Handjet-VariableFont.ttf') format('truetype'); /* Путь к файлу */
+    font-weight: normal; /* Жирность (400) */
+    font-style: normal; /* Обычный стиль (не italic) */
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'kellyslab'; /* Название шрифта (можно любое) */
+    src: url('./assets/KellySlab-Regular.ttf') format('truetype'); /* Путь к файлу */
+    font-weight: normal; /* Жирность (400) */
+    font-style: normal; /* Обычный стиль (не italic) */
+    font-display: swap;
+  }
+
+/* Корзина */
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid #ed1308; /* Красная рамка */
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень для объёма */
+  background-color: #FDF5C9; /* Жёлтый фон */
+  font-family: 'kellyslab', sans-serif;
+  font-size: 18px;
+}
+
+.product-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 2px solid #ed1308;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.product-info {
+  flex: 1; /* Занимает всю доступную ширину */
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.quantity-controls button {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  border: none;
+  background-color: #eee;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.quantity-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: relative; /* Для добавления красной линии */
+}
+
+.quantity-group button {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень для кнопок */
+}
+
+.quantity-group .quantity {
+  margin: 0 0px; /* Отступ между кнопками и цифрой */
+  font-size: 20px;
+  font-weight: bold;
+  color: #050505; /* Красный цвет */
+  background-color: #ed1308;
+  padding: 5px 10px;
+  border: 2px solid #ed1308; /* Красная рамка */
+  border-radius: 50%; /* Круглая форма */
+}
+
+/* Красная линия, огибающая группу */
+.quantity-group::before,
+.quantity-group::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 2px solid #ed1308; /* Красная линия */
+  z-index: -1; /* Чтобы была под кнопками */
+}
+
+.quantity-group::before {
+  left: 0;
+  right: calc(50% - 15px); /* До середины круга */
+}
+
+.quantity-group::after {
+  left: calc(50% + 15px); /* После середины круга */
+  right: 0;
+}
+
+.remove-btn {
+  color: #ed1308;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  color: #ff0000;
+}
+
+.price {
+  margin-left: auto; /* Выравнивание цены справа */
+}
+
+.checkout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.order-btn {
+  padding: 10px 20px;
+  background-color: #ed1308;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.order-btn:hover {
+  background-color: #ff0000;
+}
+
+.order-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cart-limit-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 16px;
+  font-family: 'kellyslab', sans-serif;
+}
+
+/* Форма доставки */
+.form-group {
+  margin-bottom: 10px;
+  font-family: 'kellyslab', sans-serif;
+  font-size: 18px;
+}
+
+.delivery-form {
+  display: flex;
+  gap: 20px; /* Отступ между колонками */
+}
+
+.left-column,
+.right-column {
+  flex: 1;
+}
+
+.left-column label,
+.right-column label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.left-column input,
+.right-column input,
+.left-column select,
+.right-column select,
+#comments {
+  width: 100%;
+  padding: 8px;
+  border: 2px solid #ed1308;
+  border-radius: 5px;
+  font-size: 18px;
+  font-family: Arial, sans-serif;
+  resize: vertical;
+  min-height: 34px;
+  max-height: 100px;
+  box-sizing: border-box;
+  background-color: #FDF5C9;
+  font-family: 'handjet', sans-serif;
+}
+
+.form-error {
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.suggestions-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  background: white;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+}
+
+.suggestions-list li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestions-list li:hover {
+  background-color: #f0f0f0;
+}

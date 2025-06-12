@@ -13,4 +13,5 @@ data class OrderResponse(
     val createdAt: LocalDateTime = LocalDateTime.now(),
     val items: List<OrderItemResponse> = listOf(),
     val payment: PaymentType,
+    val trackingCode: String
 )

@@ -1,0 +1,199 @@
+/* src/admin.css */
+.admin-container {
+  padding: 30px;
+  font-family: 'roboto slab', sans-serif;
+}
+
+.admin-order-card {
+  border: 2px solid #ed1308;
+  border-radius: 10px;
+  background-color: #FDF5C9;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.admin-order-card p {
+  margin: 5px 0;
+}
+
+.admin-order-card select {
+  margin-top: 10px;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.admin-order-card button {
+  margin-left: 20px;
+  background-color: #ff7d77;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.admin-login-form label {
+  font-size: 18px;
+}
+
+.admin-login-form input {
+  padding: 8px;
+  font-size: 16px;
+  border: 2px solid #ed1308;
+  border-radius: 5px;
+  background-color: #FDF5C9;
+}
+
+.full-bg {
+  min-height: 100vh;
+  background-color: #fff4d3;
+}
+
+.staff-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.add-button {
+  background-color: #ff7d77;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  color: black;
+  font-size: 28px;
+}
+
+.add-button-stuff {
+  background-color: #ff7d77;
+  color: white;
+  padding: 8px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.staff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  width: 100%;
+}
+
+.staff-card {
+  width: 200px;
+  height: 200px;
+  background-color: #fff786;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.staff-card .staff-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Центрирование по вертикали */
+  gap: 5px;
+  font-size: 19px;
+}
+
+.delete-button {
+  background-color: #ff7d77;
+  color: black;
+  padding: 8px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-box {
+  background-color: #fff4d3;
+  padding: 30px;
+  position: relative;
+  border-radius: 10px;
+  width: 600px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.modal-title {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: #ed1308;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.form-input {
+  padding: 8px;
+  font-size: 16px;
+  border: 2px solid #ed1308;
+  border-radius: 5px;
+  background-color: #FDF5C9;
+}
+
+.form-select {
+  padding: 8px;
+  font-size: 16px;
+  border: 2px solid #ed1308;
+  border-radius: 5px;
+  background-color: #FDF5C9;
+}
+
+.form-error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.input-error {
+  border-color: red;
+}

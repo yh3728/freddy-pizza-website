@@ -1,5 +1,6 @@
 package com.freddypizza.website.util
 
+import com.freddypizza.website.detail.CustomStaffUserDetails
 import com.freddypizza.website.entity.OrderEntity
 import com.freddypizza.website.entity.OrderItemEntity
 import com.freddypizza.website.entity.ProductEntity
@@ -18,6 +19,8 @@ fun ProductEntity.toProductResponse() =
         price = this.price,
         imagePath = this.imagePath,
         category = this.category,
+        id = this.id,
+        quantity = this.quantity,
     )
 
 fun ProductEntity.toCardItemDTO() =
@@ -37,6 +40,7 @@ fun OrderEntity.toOrderDTO() =
         createdAt = this.createdAt,
         items = this.items.map { it.toOrderItemDto() },
         payment = this.payment,
+        trackingCode = this.trackingCode,
     )
 
 fun ProductEntity.toAdminProductResponseDTO() =
@@ -61,13 +65,13 @@ fun AdminProductRequest.toProductEntity() =
         price = this.price,
         quantity = this.quantity,
         category = this.category,
-        imagePath = this.imagePath,
     )
 
 fun OrderItemEntity.toOrderItemDto() =
     OrderItemResponse(
         productName = this.product.name,
         quantity = this.quantity,
+        price = this.product.price,
     )
 
 fun OrderEntity.toAdminOrderFullResponse() =
@@ -83,6 +87,7 @@ fun OrderEntity.toAdminOrderFullResponse() =
         address = this.address,
         payment = this.payment,
         trackingCode = this.trackingCode,
+        assignedDelivery = this.assignedDelivery?.toStaffResponseDTO(),
     )
 
 fun OrderEntity.toAdminOrderShortResponse() =
@@ -91,9 +96,10 @@ fun OrderEntity.toAdminOrderShortResponse() =
         status = this.status,
         createdAt = this.createdAt,
         items = this.items.map { it.toOrderItemDto() },
-        address = this.address,
-        phone = this.phone,
         customerName = this.customerName,
+        comment = this.comment,
+        trackingCode = this.trackingCode,
+        assignedDelivery = this.assignedDelivery?.toStaffResponseDTO(),
     )
 
 fun OrderEntity.toCookOrderShortResponse() =
@@ -103,6 +109,7 @@ fun OrderEntity.toCookOrderShortResponse() =
         createdAt = this.createdAt,
         items = this.items.map { it.toOrderItemDto() },
         comment = this.comment,
+        trackingCode = this.trackingCode,
     )
 
 fun OrderEntity.toDeliveryOrderResponse() =
@@ -115,6 +122,10 @@ fun OrderEntity.toDeliveryOrderResponse() =
         phone = this.phone,
         customerName = this.customerName,
         payment = this.payment,
+        trackingCode = this.trackingCode,
+        items = this.items.map { it.toOrderItemDto() },
+        assignedDelivery = this.assignedDelivery?.toStaffResponseDTO(),
+        totalPrice = this.totalPrice,
     )
 
 fun StaffRequest.toStaffEntity() =
@@ -129,4 +140,12 @@ fun StaffEntity.toStaffResponseDTO() =
         id = this.id,
         username = this.username,
         role = this.role,
+    )
+
+fun CustomStaffUserDetails.toStaffEntity() =
+    StaffEntity(
+        id = this.id,
+        username = this.username,
+        password = this.password,
+        role = this.getRole(),
     )

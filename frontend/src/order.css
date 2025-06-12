@@ -1,0 +1,136 @@
+.orders-container {
+  padding-top: 70px;
+  padding-right: 70px;
+  padding-bottom: 100px;
+  padding-left: 70px;
+}
+
+.orders-info-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 3 колонки */
+  gap: 10px;
+  align-items: end;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.orders-block, .orders-extra-block {
+  padding: 10px;
+  text-align: center; /* Выравниваем текст по центру во всех блоках */
+}
+
+.orders-block.block1 {
+  font-size: 30px;
+}
+
+.orders-block.block2 {
+  font-size: 50px;
+  font-weight: bold;
+  font-family: 'handjet', sans-serif;
+}
+
+.orders-block.block3 {
+  font-size: 35px;
+  text-shadow: 
+    -0.5px -0.5px 0 red,
+    0.5px -0.5px 0 red,
+    -0.5px 0.5px 0 red,
+    0.5px 0.5px 0 red;
+}
+
+.orders-extra-block {
+  grid-column: 1; /* Размещаем под первым блоком */
+  grid-row: 2;
+  color: #505050;
+  margin-top: -20px;
+  
+}
+
+.order-info1 {
+  display: grid;
+  grid-template-columns: 1fr 140px 140px; /* Название растягивается, время и дата по 20% */
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  font-size: 24px;
+}
+
+.order-time, .order-date {
+  text-align: right;
+}
+
+.order-cart-item {
+  display: grid;
+  grid-template-columns: 1fr 60px 120px; 
+  align-items: center;
+  gap: 10px;
+  border: 3px solid #ed1308; /* Красная рамка */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень для объёма */
+  background-color: #FDF5C9; /* Жёлтый фон */
+  font-family: 'kellyslab', sans-serif;
+  font-size: 20px;
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.order-product-info {
+  flex: 1; /* Занимает всю доступную ширину */
+  margin-left: 10px;
+}
+
+.order-quantity-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: relative; /* Для добавления красной линии */
+  text-align: center;
+}
+
+.order-quantity-group .order-quantity {
+  margin: 0 0px; /* Отступ между кнопками и цифрой */
+  font-size: 20px;
+  font-weight: bold;
+  color: #050505; /* Красный цвет */
+  background-color: #ed1308;
+  padding: 5px 10px;
+  border: 2px solid #ed1308; /* Красная рамка */
+  border-radius: 50%; /* Круглая форма */
+}
+
+.order-price {
+  text-align: center;
+}
+
+.order-info2 {
+  font-size: 24px;
+  text-align: right;
+  padding: 10px;
+}
+
+.order-info3 {
+  font-size: 24px;
+  text-align: left;
+  padding: 20px;
+  margin-top: -30px;
+}
+
+.order-comment {
+  border: 3px solid #ed1308; /* Красная рамка */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень для объёма */
+  background-color: #FDF5C9; /* Жёлтый фон */
+  font-family: 'kellyslab', sans-serif;
+  font-size: 20px;
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 15px;
+  width: 70%;
+  word-wrap: break-word;
+}
+
+.order-info4 {
+  font-size: 24px;
+  text-align: right;
+  padding: 20px;
+  margin-top: -30px;
+}
