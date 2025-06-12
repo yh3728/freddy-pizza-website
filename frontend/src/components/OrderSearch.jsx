@@ -19,7 +19,7 @@ export default function OrderSearch() {
     };
   
     return (
-        <div className="order-search">
+        <div style={{ padding: '20px' }}>
             <h2>Введите номер заказа:</h2>
             <input
                 type="text"
@@ -28,7 +28,7 @@ export default function OrderSearch() {
                 maxLength={6}
                 style={{
                 padding: '8px',
-                fontSize: '22px',
+                fontSize: '16px',
                 marginRight: '10px'
                 }}
             />
@@ -36,7 +36,7 @@ export default function OrderSearch() {
                 onClick={handleSave}
                 style={{
                 padding: '8px 16px',
-                fontSize: '22px',
+                fontSize: '16px',
                 backgroundColor: '#ed1308',
                 color: 'white',
                 border: 'none',

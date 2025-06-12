@@ -42,8 +42,8 @@ export default function CartPage() {
       hasError = true;
     }
 
-    if (comment.length > 200) {
-      newErrors.comment = 'Комментарий не должен превышать 200 символов.';
+    if (comment.length > 250) {
+      newErrors.comment = 'Комментарий не должен превышать 250 символов.';
       hasError = true;
     }
 
@@ -91,9 +91,7 @@ export default function CartPage() {
           }
         });
         setErrors(prev => ({ ...prev, products: updatedProductErrors }));
-      } else {
-        alert('Не удалось оформить заказ. Попробуйте позже.');
-      }
+      } 
     }
   };
 
@@ -154,6 +152,12 @@ export default function CartPage() {
         ))
       ) : (
         <p>Корзина пуста</p>
+      )}
+
+      {cartItems.length >= 20 && (
+        <p className="cart-limit-message">
+          Вы достигли максимального количества разных товаров (20).
+        </p>
       )}
 
       <h2>Доставка</h2>
@@ -222,7 +226,13 @@ export default function CartPage() {
 
         <div className="checkout">
           <p>К оплате: {total} ₽</p>
-          <button className="order-btn" onClick={handleOrder}>Заказать</button>
+          <button
+            className="order-btn"
+            onClick={handleOrder}
+            disabled={cartItems.length === 0}
+          >
+            Заказать
+          </button>
         </div>
       </form>
     </div>

@@ -25,7 +25,7 @@
 
 .admin-order-card button {
   margin-left: 20px;
-  background-color: #ff4d4d;
+  background-color: #ff7d77;
   color: white;
   border: none;
   padding: 8px 12px;
@@ -68,7 +68,7 @@
 }
 
 .add-button {
-  background-color: #ff4d4d;
+  background-color: #ff7d77;
   border: none;
   padding: 10px 15px;
   font-size: 16px;
@@ -80,7 +80,7 @@
 }
 
 .add-button-stuff {
-  background-color: #ff4d4d;
+  background-color: #ff7d77;
   color: white;
   padding: 8px;
   margin-top: 10px;
@@ -121,7 +121,7 @@
 }
 
 .delete-button {
-  background-color: #ff4d4d;
+  background-color: #ff7d77;
   color: black;
   padding: 8px;
   margin-top: 10px;

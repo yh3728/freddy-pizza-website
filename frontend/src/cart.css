@@ -148,6 +148,20 @@
   background-color: #ff0000;
 }
 
+.order-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cart-limit-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 16px;
+  font-family: 'kellyslab', sans-serif;
+}
+
 /* Форма доставки */
 .form-group {
   margin-bottom: 10px;

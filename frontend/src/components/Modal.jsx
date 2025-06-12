@@ -28,7 +28,7 @@ export default function Modal({ product, onClose, onAddToCart }) {
               <div class="quantity-control1">
                   <button class="quantity-btn1" onClick={() => setCount(Math.max(1, count - 1))}>-</button>
                   <span class="quantity1">{count}</span>
-                  <button class="quantity-btn1" onClick={() => setCount(count + 1)}>+</button>
+                  <button class="quantity-btn1" onClick={() => setCount(Math.min(count + 1, 99))}>+</button>
               </div>
             <button 
                 class="add-to-cart1"

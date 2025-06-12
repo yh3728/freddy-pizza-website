@@ -1,0 +1,247 @@
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.add-button {
+  background-color: #ff7d77;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  color: black;
+  font-size: 28px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+.product-card {
+  width: 220px;
+  height: 280px; /* увеличено для размещения кнопки */
+  background-color: #fff786;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  text-align: center;
+}
+
+.product-card .product-image {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+}
+
+.product-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+.product-button {
+  background-color: #ff7d77;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.product-close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: red;
+  cursor: pointer;
+}
+
+/* Modal */
+.modal-box.wide {
+  width: 800px;
+}
+
+.modal-content-product {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.product-details-left {
+  flex: 1;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: justify;
+}
+
+.product-details-right {
+  flex: 1;
+  text-align: center;
+}
+
+.modal-product-image {
+  width: 70%;
+  height: 100%;
+  max-height: 200px;
+  border: 2px solid #ed1308;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.quantity-control {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.quantity-control input::-webkit-outer-spin-button,
+.quantity-control input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.quantity-control input[type="number"] {
+  border: 2px solid #ed1308;
+  width: 60px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 50%;
+  background-color: #ed1308;
+  color: white;
+  padding: 5px;
+}
+
+.quantity-control button {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.edit-button {
+  margin-top: 20px;
+  background-color: #ff7d77;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Добавление нового продукта */
+.modal-box.add-product {
+  width: 600px;
+}
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.add-form label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  gap: 20px;
+}
+
+.add-form input,
+.add-form textarea,
+.add-form select {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ed1308;
+  border-radius: 5px;
+  background-color: #FDF5C9;
+}
+
+.add-form textarea {
+  resize: vertical;
+}
+
+.add-product-btn {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.form-row label {
+  min-width: 120px;
+  font-weight: bold;
+}
+
+.form-input.wide,
+.form-select.wide {
+  flex: 1;
+  padding: 8px;
+  font-size: 16px;
+  border: 2px solid #ed1308;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.form-input-quantity {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px
+}
+
+.form-error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
