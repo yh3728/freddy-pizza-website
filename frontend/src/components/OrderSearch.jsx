@@ -38,7 +38,8 @@ export default function OrderSearch() {
                 padding: '8px 16px',
                 fontSize: '22px',
                 backgroundColor: '#ed1308',
-                color: 'white',
+                color: 'black',
+                fontWeight: 700,
                 border: 'none',
                 borderRadius: '4px',
                 cursor: 'pointer'

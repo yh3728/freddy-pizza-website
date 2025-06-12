@@ -48,7 +48,7 @@
 .admin-login-form input {
   padding: 8px;
   font-size: 16px;
-  border: 2px solid #ed1308;
+  border: 2px solid #ff7d77;
   border-radius: 5px;
   background-color: #FDF5C9;
 }
@@ -65,6 +65,7 @@
   margin-bottom: 20px;
   font-size: 28px;
   font-weight: 700;
+  padding-left: 90px;
 }
 
 .add-button {
@@ -81,12 +82,13 @@
 
 .add-button-stuff {
   background-color: #ff7d77;
-  color: white;
+  color: black;
   padding: 8px;
   margin-top: 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 20px;
 }
 
 
@@ -96,11 +98,12 @@
   gap: 20px;
   justify-items: center;
   width: 100%;
+  padding: 0 80px;
 }
 
 .staff-card {
   width: 200px;
-  height: 200px;
+  height: 220px;
   background-color: #fff786;
   padding: 20px;
   border-radius: 10px;
@@ -115,7 +118,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Центрирование по вертикали */
+  justify-content: center;
   gap: 5px;
   font-size: 19px;
 }
@@ -149,26 +152,26 @@
   background-color: #fff4d3;
   padding: 30px;
   position: relative;
-  border-radius: 10px;
-  width: 600px;
+  border-radius: 7px;
+  width: 650px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 .modal-title {
   margin-bottom: 20px;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 40px;
+  font-weight: 900px;
   text-align: center;
 }
 
 .modal-close {
   position: absolute;
   top: 10px;
-  right: 15px;
-  color: #ed1308;
+  right: 30px;
+  color: #ff2b2b;
   background: none;
   border: none;
-  font-size: 20px;
+  font-size: 36px;
   cursor: pointer;
 }
 
@@ -180,12 +183,17 @@
   background-color: #FDF5C9;
 }
 
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-text-fill-color: black !important;
+}
+
 .form-select {
   padding: 8px;
   font-size: 16px;
-  border: 2px solid #ed1308;
+  border: 2px solid #ff7d77;
   border-radius: 5px;
-  background-color: #FDF5C9;
+  background-color: white;
 }
 
 .form-error {

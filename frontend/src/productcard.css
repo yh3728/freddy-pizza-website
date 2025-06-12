@@ -10,32 +10,34 @@
 .card {
     width: calc(25% - 15px); /* 4 карточки в строке с учетом отступов */
     min-width: 280px; /* Минимальная ширина карточки */
-    border: 3px solid #ed1308;  /* Красная рамка толщиной 2px */
+    border: 2px solid #ed1308;  /* Красная рамка толщиной 2px */
     border-radius: 15px;        /* Закругление углов карточки */
     background-color: #FDF5C9;
     padding: 15px;              /* Внутренние отступы со всех сторон */
     font-family: Arial, sans-serif; /* Шрифт текста внутри карточки */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень для объёма */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.1);
     box-sizing: border-box; /* Чтобы padding не влиял на ширину */
     display: flex;              /* Добавляем flex */
     flex-direction: column;     /* Колонка для содержимого */
-    height: 500px;              /* Занимаем всю доступную высоту */
+    height: 435px;              /* Занимаем всю доступную высоту */
     position: relative;
 }
 
 /* Стили для изображения в карточке */
 .card-image {
-    width: 100%;               /* Ширина на всю доступную область */
+    width: 180px;               /* Ширина на всю доступную область */
     height: 180px;             /* Фиксированная высота изображения */
     object-fit: contain;
     display: block;            /* Блочное отображение (для margin: auto) */
     margin: 0 auto 15px;       /* Центрирование и отступ снизу 15px */
+    border: 2px solid #ed1308;
+    border-radius: 15px;
 }
 
 /* Стили для заголовка товара */
 .card-title {
     text-align: center;        /* Выравнивание текста по центру */
-    font-size: 24px;           /* Размер шрифта */
+    font-size: 25px;           /* Размер шрифта */
     font-weight: bold;        /* Жирное начертание */
     margin-bottom: 10px;      /* Отступ снизу */
     color: #000000;              /* Темно-серый цвет текста */
@@ -48,7 +50,7 @@
     font-size: 18px;          /* Размер шрифта */
     color: #000000;              /* Серый цвет текста */
     margin-bottom: 20px;      /* Отступ снизу */
-    margin-left: 10px;
+    margin-left: 4px;
     flex-grow: 1; 
     font-family: 'kellyslab', sans-serif;
     word-wrap: break-word;

@@ -86,8 +86,8 @@ export default function ProductManagement() {
       errs.name = 'Продукт уже существует';
     }
 
-    if (newProduct.description.length > 250) {
-      errs.description = 'Описание не должно превышать 250 символов.';
+    if (newProduct.description.length > 140) {
+      errs.description = 'Описание не должно превышать 140 символов.';
     }
 
     const weight = parseInt(newProduct.weight);
@@ -105,8 +105,8 @@ export default function ProductManagement() {
       errs.price = 'Цена должна быть числом от 1 до 99999';
     }
 
-    if (newProduct.ingredients.length > 100) {
-      errs.ingredients = 'Ингредиенты не должны превышать 100 символов';
+    if (newProduct.ingredients.length > 70) {
+      errs.ingredients = 'Состав не должен превышать 70 символов';
     }
 
     setErrors(errs);
@@ -157,8 +157,11 @@ export default function ProductManagement() {
             <button className="product-close" onClick={() => confirmDelete(product.id)}>×</button>
             <img src={API.getImageURL(product)} alt={product.name} className="product-image" />
             <h4 className="product-name">{product.name}</h4>
-            <p>В наличии: {product.quantity}</p>
-            <button className="product-button" onClick={() => openModal(product)}>Подробнее</button>
+
+            <div className="product-row">
+                <p className="product-availability">В наличии: {product.quantity}</p>
+                <button className="product-button" onClick={() => openModal(product)}>Подробнее</button>
+            </div>
           </div>
         ))}
       </div>
@@ -190,10 +193,19 @@ export default function ProductManagement() {
                 <p><strong>Ингредиенты:</strong> {selected.ingredients}</p>
                 <p><strong>Категория:</strong> {selected.category}</p>
               </div>
-              <div className="product-details-right">
-                <img src={API.getImageURL(selected)} alt="preview" className="modal-product-image" />
-                <input type="file" onChange={e => setImageFile(e.target.files[0])} />
-              </div>
+               <div className="product-details-right">
+                  <img src={API.getImageURL(selected)} alt="preview" className="modal-product-image" />
+
+                  <label htmlFor="fileUpload" className="file-label">
+                    Загрузить фото
+                  </label>
+                  <input
+                    type="file"
+                    id="fileUpload"
+                    className="file-input"
+                    onChange={e => setImageFile(e.target.files[0])}
+                  />
+               </div>
             </div>
             <button className="edit-button" onClick={handleUpdate}>Редактировать продукт</button>
           </div>
@@ -213,7 +225,7 @@ export default function ProductManagement() {
                 ['Вес:', 'weight'],
                 ['Количество:', 'quantity'],
                 ['Цена:', 'price'],
-                ['Ингредиенты:', 'ingredients']
+                ['Состав:', 'ingredients']
               ].map(([label, key]) => (
                 <div className="form-row" key={key}>
                   <label>{label}</label>

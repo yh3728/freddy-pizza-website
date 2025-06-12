@@ -4,6 +4,7 @@
   left: 0;
   width: 100%;
   z-index: 1000;
+  font-family: 'roboto slab', sans-serif;
 }
 
 .admin-navbar-header {
@@ -32,8 +33,8 @@
 }
 
 .admin-navbar-user button {
-  background-color: #ed1308;
-  color: white;
+  background-color: #ff2b2b;
+  color: black;
   border: none;
   padding: 6px 12px;
   border-radius: 5px;
@@ -53,7 +54,7 @@
 
 .admin-navbar-links a {
   text-decoration: none;
-  color: black; /* Черный текст на желтом фоне */
+  color: black;
   font-weight: bold;
   font-size: 26px;
 }
