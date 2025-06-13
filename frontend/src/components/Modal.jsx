@@ -10,8 +10,15 @@ export default function Modal({ product, onClose, onAddToCart }) {
       <div class="product-container1 modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose}>×</button>
           <div class="product-content1">
-              <div class="product-image1">
-                  <img src={API.getImageURL(product)} alt="Изображение товара"/>
+              <div className="product-image1">
+                <img
+                  src={API.getImageURL(product)}
+                  alt={product.name}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = '/image_placeholder.png';
+                  }}
+                />
               </div>
               <div class="product-info1">
                   <div class="product-title1">

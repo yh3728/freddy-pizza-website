@@ -74,30 +74,6 @@ export default function ProductManagement() {
     });
   };
 
-  const handleUpdateQuantityAndImage = async () => {
-    setFormError('');
-    try {
-      await API.patch(`/admin/menu/${selected.id}/quantity`, { quantity });
-      if (imageFile) {
-        const formData = new FormData();
-        formData.append('image', imageFile);
-        const res = await API.post(`/admin/menu/${selected.id}/image`, formData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        });
-        setProducts(prev =>
-          prev.map(p => p.id === selected.id ? { ...p, imagePath: res.data.imagePath, quantity } : p)
-        );
-      } else {
-        setProducts(prev =>
-          prev.map(p => p.id === selected.id ? { ...p, quantity } : p)
-        );
-      }
-      setShowModal(false);
-    } catch {
-      setFormError('Ошибка при обновлении продукта');
-    }
-  };
-
   const validate = (product = newProduct, editing = false) => {
     const errs = {};
     const nameTrim = product.name.trim();
@@ -196,22 +172,66 @@ export default function ProductManagement() {
       }
     };
 
-const handleQuantityChange = (e) => {
-  const raw = e.target.value;
+    const handleQuantityChange = (e) => {
+      const raw = e.target.value;
 
-  if (raw === '') {
-    setQuantity('');
-    return;
-  }
+      if (raw === '') {
+        setQuantity('');
+        return;
+      }
 
-  const cleaned = raw.replace(/^0+(?=\d)/, '');
+      const digitsOnly = raw.replace(/\D/g, '');
 
-  const num = Math.max(0, Number(cleaned));
-  if (!isNaN(num)) setQuantity(num);
-};
+      const limited = digitsOnly.slice(0, 4);
 
-const decQty = () => setQuantity(prev => Math.max(0, (prev || 0) - 1));
-const incQty = () => setQuantity(prev => (prev || 0) + 1);
+      const cleaned = limited.replace(/^0+(?=\d)/, '');
+
+      const num = Number(cleaned);
+
+      if (!isNaN(num)) {
+        setQuantity(num);
+      }
+    };
+
+    const decQty = () => setQuantity(prev => Math.max(0, (prev || 0) - 1));
+    const incQty = () => setQuantity(prev => {
+      const next = (prev || 0) + 1;
+      return next > 9999 ? 9999 : next;
+    });
+
+    const handleUpdateQuantityAndImage = async () => {
+          setFormError('');
+
+          if (quantity === '' || Number(quantity) > 9999) {
+            setFormError('Введите число от 0 до 9999');
+            return;
+          }
+
+          const safeQuantity = Number(quantity);
+
+          try {
+            await API.patch(`/admin/menu/${selected.id}/quantity`, { quantity: safeQuantity });
+
+            if (imageFile) {
+              const formData = new FormData();
+              formData.append('image', imageFile);
+              const res = await API.post(`/admin/menu/${selected.id}/image`, formData, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+              });
+              setProducts(prev =>
+                prev.map(p => p.id === selected.id ? { ...p, imagePath: res.data.imagePath, quantity: safeQuantity } : p)
+              );
+            } else {
+              setProducts(prev =>
+                prev.map(p => p.id === selected.id ? { ...p, quantity: safeQuantity } : p)
+              );
+            }
+
+            setShowModal(false);
+          } catch {
+            setFormError('Ошибка при обновлении продукта');
+          }
+        };
 
   return (
     <div className="admin-container full-bg">
@@ -263,7 +283,9 @@ const incQty = () => setQuantity(prev => (prev || 0) + 1);
                         style={{ appearance: 'textfield' }}
                       />
                       <button onClick={incQty}>+</button>
-                      <button onClick={handleUpdateQuantityAndImage} title="Сохранить">✔</button>
+                      <button onClick={handleUpdateQuantityAndImage}
+                              title="Сохранить"
+                              disabled={quantity === '' || Number(quantity) > 9999}>✔</button>
                     </div>
                     {formError && <p className="form-error">{formError}</p>}
                 </div>
@@ -334,7 +356,7 @@ const incQty = () => setQuantity(prev => (prev || 0) + 1);
             <h3 className="modal-title">Редактировать</h3>
             <form className="form-grid">
                 {[
-                  ['Название:', 'name', 25],
+                  ['Название:', 'name', 23],
                   ['Описание:', 'description', 140],
                   ['Вес:', 'weight', 4],
                   ['Количество:', 'quantity', 4],
@@ -385,7 +407,7 @@ const incQty = () => setQuantity(prev => (prev || 0) + 1);
             <h3 className="modal-title">Добавление продукта</h3>
             <form onSubmit={handleAddProduct} className="form-grid">
                 {[
-                  ['Название:', 'name', 25],
+                  ['Название:', 'name', 23],
                   ['Описание:', 'description', 140],
                   ['Вес:', 'weight', 4],
                   ['Количество:', 'quantity', 4],
