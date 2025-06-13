@@ -34,8 +34,13 @@ const AdminNavbar = () => {
       </div>
 
       <div className="admin-navbar-links">
-        <Link to="/admin/staff">Работники</Link>
-        <Link to="/admin/products">Продукты</Link>
+        {role === "ADMIN" && (
+          <>
+            <Link to="/admin/staff">Работники</Link>
+            <Link to="/admin/products">Продукты</Link>
+          </>
+        )}
+
         <Link to="/admin/orders">Заказы</Link>
       </div>
     </div>
