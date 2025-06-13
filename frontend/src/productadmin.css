@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'RobotoSlab'; /* Название шрифта (можно любое) */
+    src: url('./assets/RobotoSlab.ttf') format('truetype'); /* Путь к файлу */
+    font-weight: normal; /* Жирность (400) */
+    font-style: normal; /* Обычный стиль (не italic) */
+    font-display: swap;
+  }
+
 .product-header {
   display: flex;
   justify-content: space-between;
@@ -28,7 +36,7 @@
 
 .product-card {
   width: 220px;
-  height: 280px; /* увеличено для размещения кнопки */
+  height: 280px;
   background-color: #fff786;
   padding: 10px;
   border-radius: 10px;
@@ -54,11 +62,12 @@
 
 .product-button {
   background-color: #ff7d77;
-  color: white;
+  color: black;
   border: none;
   padding: 6px 10px;
   border-radius: 5px;
   cursor: pointer;
+  font-weight: 700;
 }
 
 .product-close {
@@ -72,7 +81,6 @@
   cursor: pointer;
 }
 
-/* Modal */
 .modal-box.wide {
   width: 800px;
 }
@@ -98,12 +106,13 @@
 }
 
 .modal-product-image {
-  width: 70%;
-  height: 100%;
+  width: 60%;
+  height: 70%;
   max-height: 200px;
   border: 2px solid #ed1308;
   object-fit: cover;
   margin-bottom: 10px;
+  margin-left: 110px;
 }
 
 .quantity-control {
@@ -126,8 +135,8 @@
   font-size: 18px;
   font-weight: bold;
   border-radius: 50%;
-  background-color: #ed1308;
-  color: white;
+  background-color: #ff4d4d;
+  color: black;
   padding: 5px;
 }
 
@@ -145,16 +154,28 @@
 .edit-button {
   margin-top: 20px;
   background-color: #ff7d77;
-  color: white;
+  color: black;
   padding: 10px;
   width: 100%;
-  font-weight: bold;
+  font-weight: 700;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-/* Добавление нового продукта */
+.edit-photo {
+  margin-top: 20px;
+  background-color: #ff7d77;
+  color: black;
+  padding: 10px;
+  width: 100%;
+  font-weight: 700;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 115px;
+}
+
 .modal-box.add-product {
   width: 600px;
 }
@@ -190,10 +211,10 @@
 
 .add-product-btn {
   background-color: #ff4d4d;
-  color: white;
+  color: black;
   padding: 10px;
   width: 100%;
-  font-weight: bold;
+  font-weight: 700;
   border: none;
   border-radius: 5px;
   cursor: pointer;

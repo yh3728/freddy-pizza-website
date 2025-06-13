@@ -10,11 +10,11 @@ CREATE TABLE IF NOT EXISTS staff (
 CREATE TABLE IF NOT EXISTS products (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    description TEXT,
-    weight INT,
-    ingredients VARCHAR(255),
+    description TEXT NOT NULL,
+    weight INT NOT NULL,
+    ingredients VARCHAR(255) NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
-    quantity INT,
+    quantity INT NOT NULL,
     category VARCHAR(100) NOT NULL,
     image_path VARCHAR(255) DEFAULT '/uploads/products/image_placeholder.png'
 );

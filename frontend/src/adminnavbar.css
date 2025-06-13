@@ -1,9 +1,18 @@
+@font-face {
+    font-family: 'RobotoSlab';
+    src: url('./assets/RobotoSlab.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
 .admin-navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
+  font-family: 'roboto slab';
 }
 
 .admin-navbar-header {
@@ -33,11 +42,12 @@
 
 .admin-navbar-user button {
   background-color: #ed1308;
-  color: white;
+  color: black;
   border: none;
   padding: 6px 12px;
   border-radius: 5px;
   cursor: pointer;
+  font-weight: 700;
 }
 
 .admin-navbar-user button:hover {
@@ -53,7 +63,7 @@
 
 .admin-navbar-links a {
   text-decoration: none;
-  color: black; /* Черный текст на желтом фоне */
+  color: black;
   font-weight: bold;
   font-size: 26px;
 }

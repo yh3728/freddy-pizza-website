@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import API from '../api';
 import '../admin.css';
 import '../adminnavbar.css';
+import AccessDenied from './AccessDenied';
 import { useNavigate } from 'react-router-dom';
+
 
 export default function StaffManagement() {
   const navigate = useNavigate();
@@ -11,17 +13,19 @@ export default function StaffManagement() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
+  const [validationError, setValidationError] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [role, setRole] = useState('');
+  const [allowed, setAllowed] = useState(null);
 
   useEffect(() => {
-    const role = localStorage.getItem('adminRole');
-    if (role !== 'ADMIN') {
-      alert('Доступ запрещён. Только для администраторов.');
-      navigate('/admin');
-    } else {
-      fetchStaff();
-    }
+    const userRole = localStorage.getItem('adminRole');
+    setRole(userRole);
+    setAllowed(userRole === 'ADMIN');
+    fetchStaff()
   }, []);
+
+  if (allowed === false) return <AccessDenied />;
 
   const fetchStaff = () => {
     API.get('/admin/staff')
@@ -30,17 +34,32 @@ export default function StaffManagement() {
   };
 
   const handleDelete = () => {
+    setErrorMessage('');
     API.delete(`/admin/staff/${deleteId}`)
       .then(() => {
         fetchStaff();
         setShowDeleteModal(false);
       })
-      .catch(() => alert('Ошибка при удалении сотрудника'));
+      .catch(() => setErrorMessage('Ошибка при удалении сотрудника'));
   };
 
   const handleCreate = (e) => {
   e.preventDefault();
   setErrorMessage('');
+  setValidationError('');
+
+  const usernameRegex = /^[a-zA-Z0-9]+$/;
+  const passwordRegex = /^[a-zA-Z0-9]+$/;
+
+  if (!usernameRegex.test(newStaff.username)) {
+    setValidationError('Логин может содержать только латинские буквы и цифры без пробелов.');
+    return;
+  }
+
+  if (!passwordRegex.test(newStaff.password)) {
+    setValidationError('Пароль может содержать только латинские буквы и цифры без пробелов.');
+    return;
+  }
 
   API.post('/admin/staff', newStaff, { withCredentials: true })
     .then(() => {
@@ -53,7 +72,6 @@ export default function StaffManagement() {
         // 409 Conflict → логин уже существует
         setErrorMessage('Логин уже используется');
       } else {
-        console.error('Неизвестная ошибка:', err);
         setErrorMessage('Ошибка при добавлении сотрудника');
       }
     });
@@ -117,6 +135,7 @@ export default function StaffManagement() {
                 <option value="DELIVERY">Delivery</option>
               </select>
               <button type="submit" className="add-button-stuff">Добавить</button>
+              {validationError && <p className="form-error">{validationError}</p>}
             </form>
           </div>
         </div>
@@ -131,6 +150,7 @@ export default function StaffManagement() {
             <div style={{ display: 'flex', justifyContent: 'center', gap: '15px' }}>
               <button className="delete-button" onClick={() => setShowDeleteModal(false)}>Отмена</button>
               <button className="delete-button" onClick={handleDelete}>Удалить</button>
+              {errorMessage && <p className="form-error" style={{ textAlign: 'center' }}>{errorMessage}</p>}
             </div>
           </div>
         </div>

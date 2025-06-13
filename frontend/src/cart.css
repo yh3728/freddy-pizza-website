@@ -1,31 +1,30 @@
 @font-face {
-    font-family: 'handjet'; /* Название шрифта (можно любое) */
-    src: url('./assets/Handjet-VariableFont.ttf') format('truetype'); /* Путь к файлу */
-    font-weight: normal; /* Жирность (400) */
-    font-style: normal; /* Обычный стиль (не italic) */
+    font-family: 'handjet';
+    src: url('./assets/Handjet-VariableFont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
     font-display: swap;
   }
   
   @font-face {
-    font-family: 'kellyslab'; /* Название шрифта (можно любое) */
-    src: url('./assets/KellySlab-Regular.ttf') format('truetype'); /* Путь к файлу */
-    font-weight: normal; /* Жирность (400) */
-    font-style: normal; /* Обычный стиль (не italic) */
+    font-family: 'kellyslab';
+    src: url('./assets/KellySlab-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
     font-display: swap;
   }
 
-/* Корзина */
 
 .cart-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  border: 2px solid #ed1308; /* Красная рамка */
+  border: 2px solid #ed1308;
   padding: 10px;
   margin-bottom: 20px;
   margin-top: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень для объёма */
-  background-color: #FDF5C9; /* Жёлтый фон */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #FDF5C9;
   font-family: 'kellyslab', sans-serif;
   font-size: 18px;
 }
@@ -40,7 +39,7 @@
 }
 
 .product-info {
-  flex: 1; /* Занимает всю доступную ширину */
+  flex: 1;
 }
 
 .quantity-controls {
@@ -63,7 +62,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  position: relative; /* Для добавления красной линии */
+  position: relative;
 }
 
 .quantity-group button {
@@ -74,38 +73,37 @@
   background-color: white;
   cursor: pointer;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень для кнопок */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .quantity-group .quantity {
-  margin: 0 0px; /* Отступ между кнопками и цифрой */
+  margin: 0 0px;
   font-size: 20px;
   font-weight: bold;
-  color: #050505; /* Красный цвет */
+  color: #050505;
   background-color: #ed1308;
   padding: 5px 10px;
-  border: 2px solid #ed1308; /* Красная рамка */
-  border-radius: 50%; /* Круглая форма */
+  border: 2px solid #ed1308;
+  border-radius: 50%;
 }
 
-/* Красная линия, огибающая группу */
 .quantity-group::before,
 .quantity-group::after {
   content: '';
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  border-top: 2px solid #ed1308; /* Красная линия */
-  z-index: -1; /* Чтобы была под кнопками */
+  border-top: 2px solid #ed1308;
+  z-index: -1;
 }
 
 .quantity-group::before {
   left: 0;
-  right: calc(50% - 15px); /* До середины круга */
+  right: calc(50% - 15px);
 }
 
 .quantity-group::after {
-  left: calc(50% + 15px); /* После середины круга */
+  left: calc(50% + 15px);
   right: 0;
 }
 
@@ -122,7 +120,7 @@
 }
 
 .price {
-  margin-left: auto; /* Выравнивание цены справа */
+  margin-left: auto;
 }
 
 .checkout {
@@ -162,7 +160,6 @@
   font-family: 'kellyslab', sans-serif;
 }
 
-/* Форма доставки */
 .form-group {
   margin-bottom: 10px;
   font-family: 'kellyslab', sans-serif;
@@ -171,7 +168,7 @@
 
 .delivery-form {
   display: flex;
-  gap: 20px; /* Отступ между колонками */
+  gap: 20px;
 }
 
 .left-column,
