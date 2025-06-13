@@ -13,7 +13,6 @@ import Order from './components/Order';
 import OrderSearch from './components/OrderSearch';
 import AdminNavbar from './components/AdminNavbar';
 import AdminLogin from './components/AdminLogin';
-import AdminPage from './components/AdminPage';
 import StaffManagement from './components/StaffManagement';
 import ProductManagement from './components/ProductManagement';
 import OrderManagement from './components/OrderManagement';
@@ -121,7 +120,6 @@ export default function App() {
           <Route path="/admin-login" element={<AdminLogin />} />
         </Route>
         <Route element={<AdminLayout />}>
-            <Route path="/admin" element={<AdminPage />} />
             <Route path="/admin/staff" element={<StaffManagement />} />
             <Route path="/admin/products" element={<ProductManagement />} />
             <Route path="/admin/orders" element={<OrderManagement />} />

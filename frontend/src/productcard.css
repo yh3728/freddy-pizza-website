@@ -80,7 +80,7 @@
 /* Стили для кнопки "Купить" */
 .buy-button {   
     background-color: #f6fb90;
-    border: 3px solid #ed1308;
+    border: 2px solid #ed1308;
     border-radius: 5px;       /* Закругление углов кнопки */ 
     color: #000000;                         
     padding: 8px 16px;        /* Внутренние отступы (8px сверху/снизу, 16px слева/справа) */

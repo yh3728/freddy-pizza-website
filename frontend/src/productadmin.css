@@ -141,7 +141,9 @@ button {
   align-items: center;
   margin-bottom: 10px;
 }
-
+.quantity-control p {
+    margin-right: 7px;
+}
 .quantity-control input::-webkit-outer-spin-button,
 .quantity-control input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -162,13 +164,13 @@ button {
 }
 
 .quantity-control button {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   font-size: 18px;
   border: none;
   background-color: #ff7d77;
   cursor: pointer;
-  border-radius: 30%;
+  border-radius: 35%;
 }
 
 .edit-button {

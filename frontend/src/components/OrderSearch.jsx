@@ -29,7 +29,8 @@ export default function OrderSearch() {
                 style={{
                 padding: '8px',
                 fontSize: '22px',
-                marginRight: '10px'
+                marginRight: '10px',
+                border: '2px solid #ed1308'
                 }}
             />
             <button

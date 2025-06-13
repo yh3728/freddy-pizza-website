@@ -25,7 +25,7 @@ export default function AdminLogin() {
       localStorage.setItem('adminRole', role); // теперь точно ADMIN/COOK/DELIVERY
       localStorage.setItem('adminUser', username);
 
-      navigate('/admin');
+      navigate('/admin/orders');
     } catch (err) {
       console.error('Ошибка входа:', err);
       setError('Неверный логин или пароль');

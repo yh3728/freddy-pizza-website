@@ -18,9 +18,9 @@ export default function Modal({ product, onClose, onAddToCart }) {
                       <h2>{product.name}</h2>
                   </div>
                   <div class="product-description1">
-                      <p>Ингредиенты: {product.ingredients}</p>
-                      <p>Вес: {product.weight} г</p>
-                      <p>Цена: {product.price} ₽</p>
+                      <p><strong>Состав:</strong> {product.ingredients}</p>
+                      <p><strong>Вес:</strong> {product.weight} г</p>
+                      <p><strong>Цена:</strong> {product.price} ₽</p>
                   </div>
               </div>
           </div>

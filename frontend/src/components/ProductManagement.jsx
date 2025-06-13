@@ -144,6 +144,23 @@ export default function ProductManagement() {
     }
   };
 
+const handleQuantityChange = (e) => {
+  const raw = e.target.value;
+
+  if (raw === '') {
+    setQuantity('');
+    return;
+  }
+
+  const cleaned = raw.replace(/^0+(?=\d)/, '');
+
+  const num = Math.max(0, Number(cleaned));
+  if (!isNaN(num)) setQuantity(num);
+};
+
+const decQty = () => setQuantity(prev => Math.max(0, (prev || 0) - 1));
+const incQty = () => setQuantity(prev => (prev || 0) + 1);
+
   return (
     <div className="admin-container full-bg">
       <div className="staff-header">
@@ -179,18 +196,18 @@ export default function ProductManagement() {
                 <p><strong>Вес:</strong> {selected.weight} г</p>
                 <div className="quantity-control">
                   <p><strong>Количество:</strong></p>
-                  <button onClick={() => setQuantity(Math.max(0, quantity - 1))}>-</button>
+                  <button onClick={decQty}>-</button>
                   <input
                     type="number"
-                    value={quantity}
-                    onChange={e => setQuantity(Math.max(0, Number(e.target.value)))}
+                    value={quantity === '' ? '' : quantity}
+                    onChange={handleQuantityChange}
                     className="form-input-quantity"
                     style={{ appearance: 'textfield' }}
                   />
-                  <button onClick={() => setQuantity(quantity + 1)}>+</button>
+                  <button onClick={incQty}>+</button>
                 </div>
                 <p><strong>Цена:</strong> {selected.price} ₽</p>
-                <p><strong>Ингредиенты:</strong> {selected.ingredients}</p>
+                <p><strong>Состав:</strong> {selected.ingredients}</p>
                 <p><strong>Категория:</strong> {selected.category}</p>
               </div>
                <div className="product-details-right">
