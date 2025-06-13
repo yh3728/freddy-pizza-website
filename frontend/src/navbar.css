@@ -237,7 +237,7 @@
   .content-link {
     font-family: 'handjet';
     text-decoration: none;
-    color: #ffffff; /* Голубой неоновый цвет */
+    color: #ffffff;
     font-size: 33px;
     padding: 8px 12px;
     transition: all 0.3s ease;
@@ -246,7 +246,7 @@
     text-align: center;
     text-shadow: 0 0 8px #00a2ff,
                  0 0 16px #0066ff,
-                 0 0 24px #0033ff; /* Усиленное свечение */
+                 0 0 24px #0033ff;
   }
   
   .content-link:hover {
@@ -255,10 +255,9 @@
                  0 0 24px #0066ff,
                  0 0 36px #0033ff,
                  0 0 48px #00a2ff;
-    transform: scale(1.05); /* Легкое увеличение при наведении */
+    transform: scale(1.05);
   }
-  
-  /* Стили для картинки по центру */
+
   .image-wrapper {
     width: 150px;
     height: 80px;
@@ -273,8 +272,7 @@
     max-height: 100%;
     object-fit: contain;
   }
-  
-  /* Адаптивность */
+
   @media (max-width: 768px) {
     .nav-menu > div {
       flex-wrap: wrap;
@@ -318,8 +316,7 @@
     object-fit: contain;
     margin-right: 20px;
   }
-  
-  /* Анимация пульсации */
+
   @keyframes neonPulseBlue {
     0%, 100% {
       text-shadow: 0 0 10px #00a2ff,
@@ -332,8 +329,7 @@
                    0 0 80px #00a2ff;
     }
   }
-  
-  /* Применить анимацию к активному разделу */
+
   .content-link.active {
     animation: neonPulseBlue 2s infinite;
     color: #ffffff;

@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useEffect, useState } from 'react';
 import './style.css';
 import './productcard.css';
@@ -19,7 +18,7 @@ import OrderManagement from './components/OrderManagement';
 import Navbar from './components/Navbar';
 import PageNotFound from './components/PageNotFound';
 import { Routes, Route, useLocation, Outlet } from 'react-router-dom';
-import API from './api'; // ✅ импорт API
+import API from './api';
 
 function ScrollToTop() {
   const { pathname } = useLocation();

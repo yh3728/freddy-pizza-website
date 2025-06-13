@@ -101,7 +101,6 @@ button {
   cursor: pointer;
 }
 
-/* Modal */
 .modal-box.wide {
   width: 800px;
 }
@@ -133,6 +132,7 @@ button {
   width: 250px;
   object-fit: cover;
   margin-bottom: 10px;
+  margin-left: 110px;
 }
 
 .quantity-control {
@@ -179,14 +179,27 @@ button {
   color: black;
   padding: 10px;
   width: 100%;
-  font-weight: bold;
+  font-weight: 700;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 18px;
 }
 
-/* Добавление нового продукта */
+.edit-photo {
+  margin-top: 20px;
+  background-color: #ff7d77;
+  color: black;
+  padding: 10px;
+  width: 100%;
+  font-weight: 700;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  margin-left: 115px;
+}
+
 .modal-box.add-product {
   width: 600px;
 }
@@ -222,10 +235,10 @@ button {
 
 .add-product-btn {
   background-color: #ff4d4d;
-  color: white;
+  color: black;
   padding: 10px;
   width: 100%;
-  font-weight: bold;
+  font-weight: 700;
   border: none;
   border-radius: 5px;
   cursor: pointer;
