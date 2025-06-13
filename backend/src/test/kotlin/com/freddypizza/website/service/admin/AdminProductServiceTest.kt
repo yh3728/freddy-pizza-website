@@ -45,6 +45,8 @@ class AdminProductServiceTest
                     price = BigDecimal(15.0),
                     quantity = 3,
                     category = ProductCategory.PIZZA,
+                    ingredients = "example ingredients",
+                    weight = 100,
                 )
             product2 =
                 ProductEntity(
@@ -53,6 +55,8 @@ class AdminProductServiceTest
                     price = BigDecimal(10.0),
                     quantity = 5,
                     category = ProductCategory.SNACK,
+                    ingredients = "example ingredients",
+                    weight = 100,
                 )
             underTest.uploadDir = tempUploadDir.resolve("uploads/test")
         }

@@ -34,7 +34,7 @@ class SecurityConfiguration(
                 it
                     .requestMatchers(HttpMethod.OPTIONS, "/**")
                     .permitAll()
-                    .requestMatchers("/admin/staff/**")
+                    .requestMatchers("/admin/staff/**", "/admin/menu**")
                     .hasRole("ADMIN")
                     .requestMatchers("/admin/orders/**", "/admin/menu/**", "/admin/auth/me")
                     .fullyAuthenticated()

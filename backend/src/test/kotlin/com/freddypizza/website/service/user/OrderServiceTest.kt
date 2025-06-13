@@ -43,6 +43,8 @@ class OrderServiceTest
                         quantity = 10,
                         category = ProductCategory.SNACK,
                         imagePath = null,
+                        ingredients = "example ingredients",
+                        weight = 100,
                     ),
                 )
 
