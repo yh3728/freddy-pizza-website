@@ -14,11 +14,10 @@
     font-display: swap;
   }
 
-/* Верхная строка */
 .nav-image-container {
   display: flex;
   width: 100%;
-  height: 70px;
+  height: 60px;
   gap: 20px;
 }
 
@@ -51,11 +50,9 @@
   }
 
 .nav-image-scaled:hover {
-    transform: scale(1.05); /* Легкое увеличение при наведении */
+    transform: scale(1.05);
   }
-  
 
-/* Отступ справа у третьей новой картинки */
 .nav-image-scaled:last-of-type {
   margin-right: 10px;
 }
@@ -64,21 +61,20 @@
   position: relative;
   display: flex;
   width: 100%;
-  align-items: flex-end; /* Вертикальное выравнивание по центру */
-  padding: 0px 20px; /* Отступы от краёв контейнера */
+  align-items: flex-end;
+  padding: 0px 20px;
 }
 
-/* Группа ссылок (35% ширины) */
 .nav-link-group {
-  flex: 0 0 40%; /* Фиксированная ширина */
+  flex: 0 0 40%;
   display: flex;
   align-items: flex-end;
-  justify-content: space-between; /* Равные отступы между ссылками */
-  gap: 10px; /* Дополнительный отступ между ссылками */
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .nav-empty-space {
-  flex: 0 0 20%; /* Фиксированная ширина */
+  flex: 0 0 20%;
   margin: 0 10px; /* Отступы слева и справа (как у картинки) */
 }
 
@@ -92,24 +88,24 @@
     position: relative;
   }
 
-  .nav-menu-wrapper {
-    position: fixed;
-    background: url('./assets/menu-background_cleanup.png') no-repeat center center;
-    background-size: cover;
-    width: 100%;
-    z-index: var(--z-index-nav);
-    padding-bottom: 20px
-  }
+   .nav-menu-wrapper {
+       position: fixed;
+       background: url('./assets/menu-background_cleanup.png') no-repeat center center;
+       background-size: cover;
+       width: 100%;
+       height: 170px;
+       z-index: var(--z-index-nav);
+   }
   
   .divider-image {
     z-index: var(--z-index-nav);
     position: fixed;
     left: 50%;
-    top: 110px;          /* Нужная высота от верха */
+    top: 100px;
     transform: translateX(-50%);
-    width: 250px;        /* Точная ширина */
-    height: auto;        /* Автоматическая высота (пропорции сохранятся) */
-    object-fit: cover; /* Гарантирует, что изображение не исказится */
+    width: 220px;
+    height: auto;
+    object-fit: cover;
   }
   
   .logo-row {
@@ -118,7 +114,7 @@
     padding: 10px 40px; /* Увеличили padding сверху/снизу */
     gap: 40px; /* Увеличили расстояние между логотипами */
     width: calc(100% - 10px); /* Учитываем padding */
-    margin-left: 1px; /* Прижимаем к правому краю */
+    margin-left: 1px;
     margin-right: 1px;
     background-color: transparent;
   }
@@ -150,11 +146,11 @@
   .title-row {
     position: relative;
     display: flex;
-    justify-content: space-between; /* Равномерное распределение */
-    padding: 0px 30px;
-    width: calc(100% - 80px); /* Учитываем боковые отступы */
-    margin: 0 auto; /* Центрирование */
+    justify-content: space-between;
+    padding: 0px 15px;
+    width: calc(100% - 80px);
     background-color: transparent;
+    margin: -10px auto 0 auto;
   }
   
   /* Обновляем стили для .title-link */

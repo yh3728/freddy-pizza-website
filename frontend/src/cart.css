@@ -21,13 +21,12 @@
     font-style: normal;
   }
 
-/* Корзина */
-
 .cart-item {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 40px;
   border: 2px solid #ed1308;
+  border-radius: 5px;
   padding: 10px;
   margin-bottom: 20px;
   margin-top: 20px;
@@ -42,7 +41,7 @@
   height: 100px;
   object-fit: cover;
   border: 2px solid #ed1308;
-  border-radius: 0;
+  border-radius: 5px;
   flex-shrink: 0;
 }
 
@@ -188,6 +187,8 @@
 .right-column label {
   display: block;
   margin-bottom: 5px;
+  margin-bottom: 5px;
+  margin-top: 20px;
 }
 
 .left-column input,

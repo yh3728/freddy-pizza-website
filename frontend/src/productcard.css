@@ -8,30 +8,34 @@
 
 /* Основные стили карточки */
 .card {
-    width: calc(25% - 15px); /* 4 карточки в строке с учетом отступов */
-    min-width: 280px; /* Минимальная ширина карточки */
-    border: 2px solid #ed1308;  /* Красная рамка толщиной 2px */
-    border-radius: 15px;        /* Закругление углов карточки */
-    background-color: #FDF5C9;
-    padding: 15px;              /* Внутренние отступы со всех сторон */
-    font-family: Arial, sans-serif; /* Шрифт текста внутри карточки */
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box; /* Чтобы padding не влиял на ширину */
-    display: flex;              /* Добавляем flex */
-    flex-direction: column;     /* Колонка для содержимого */
-    height: 435px;              /* Занимаем всю доступную высоту */
-    position: relative;
-}
-
-/* Стили для изображения в карточке */
-.card-image {
-    width: 180px;               /* Ширина на всю доступную область */
-    height: 180px;             /* Фиксированная высота изображения */
-    object-fit: contain;
-    display: block;            /* Блочное отображение (для margin: auto) */
-    margin: 0 auto 15px;       /* Центрирование и отступ снизу 15px */
+    width: calc(25% - 15px);
+    min-width: 280px;
     border: 2px solid #ed1308;
     border-radius: 15px;
+    background-color: #FDF5C9;
+    padding: 15px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 480px;
+    position: relative;
+    overflow: hidden;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+}
+
+.card-image {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    margin: 0 auto 15px;
+    border: 2px solid #ed1308;
+    border-radius: 15px;
+    overflow: hidden;
 }
 
 /* Стили для заголовка товара */
@@ -56,6 +60,8 @@
     word-wrap: break-word;
     word-break: break-all;
     hyphens: auto;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 /* Контейнер для нижней части карточки (цена + кнопка) */
@@ -64,9 +70,9 @@
     display: flex;             /* Flex-контейнер для выравнивания элементов */
     justify-content: space-between; /* Распределение пространства между элементами */
     bottom: 15px;
-    left: 20px;
-    right: 15px;
     align-items: center;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 /* Стили для цены товара */
@@ -94,7 +100,6 @@
     font-family: 'kellyslab', sans-serif;
 }
 
-/* Контейнер для карточек */
 .cards-container {
     display: flex;
     flex-wrap: wrap;
@@ -102,5 +107,5 @@
     justify-content: flex-start;
     padding: 20px;
     max-width: 1400px;
-    margin: 0 auto;
+    margin: -20px auto 0 auto;
 }

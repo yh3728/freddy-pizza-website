@@ -92,7 +92,6 @@ export default function OrderManagement() {
   const role = localStorage.getItem('adminRole');
   const filterOptions = ['All', ...staff_status_get[role]];
 
-  // Проверка авторизации
   useEffect(() => {
       if (!localStorage.getItem('adminAccess')) {
     navigate('/admin-login');
@@ -118,10 +117,8 @@ export default function OrderManagement() {
   useEffect(() => {
     fetchData();
 
-    // Устанавливаем интервал для периодического обновления
-    const intervalId = setInterval(fetchData, 5000); // Обновление каждые 10 секунд
+    const intervalId = setInterval(fetchData, 5000);
 
-    // Очистка интервала при размонтировании компонента
     return () => clearInterval(intervalId);
   }, [selectedCategory]);
 
@@ -141,18 +138,16 @@ export default function OrderManagement() {
   if (role === "COOK")
   return (
     <>
-      {/* Выпадающий список для фильтрации */}
-      <select 
+      <select
+        className="button-select"
         value={selectedCategory}
         onChange={(e) => setSelectedCategory(e.target.value)}
-        style={{ padding: '8px', fontSize: '16px' }}
+        style={{ padding: '8px', fontSize: '16px'}}
       >
       {filterOptions.map(option => (
-        <option key={option} value={option}>{rus_status[option]}</option>
+        <option className="option-select" key={option} value={option}>{rus_status[option]}</option>
       ))}
       </select>
-
-      {/* Отображение отфильтрованного списка */}
       <div className="order-managment-card-container">
       {orders.map(item => (
         <div class="order-managment-main-container">
@@ -191,18 +186,17 @@ export default function OrderManagement() {
   else if (role === "DELIVERY")
   return (
     <>
-      {/* Выпадающий список для фильтрации */}
-      <select 
+      <select
+        className="button-select"
         value={selectedCategory}
         onChange={(e) => setSelectedCategory(e.target.value)}
         style={{ padding: '8px', fontSize: '16px' }}
       >
       {filterOptions.map(option => (
-        <option key={option} value={option}>{rus_status[option]}</option>
+        <option className="option-select" key={option} value={option}>{rus_status[option]}</option>
       ))}
       </select>
 
-      {/* Отображение отфильтрованного списка */}
       <div className="order-managment-card-container">
       {orders.map(item => (
         <div class="order-managment-main-container">
@@ -213,7 +207,7 @@ export default function OrderManagement() {
               {dateFormat(new Date(item.createdAt))}
           </div>
           <div class="order-managment-middle-container">
-            <p>Имя: {item.customerName}</p>
+            <p>Имя:{item.customerName}</p>
             <p>Адрес: {item.address}</p>
             <p>Телефон: {item.phone}</p>
             <p>Тип оплаты: {rus_payment[item.payment]}</p>
@@ -248,6 +242,5 @@ export default function OrderManagement() {
       </div>
     </>
   );
-
   return ("");
 }

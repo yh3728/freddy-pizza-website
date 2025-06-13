@@ -4,6 +4,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-left: -80px;
+  margin-right: -80px;
 }
 
 .holidays-section {
@@ -22,7 +24,26 @@
   text-align: center;
   color: #ed1308;
   margin-bottom: 15px;
+  font-size: 50px;
+
+  animation: flicker 3s infinite alternate;
+  position: relative;
 }
+
+
+@keyframes flicker {
+   0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+     opacity: 1;
+     text-shadow:
+       2px 2px 0px #8b0000,
+       4px 4px 0px rgba(0, 0, 0, 0.3);
+   }
+   20%, 24%, 55% {
+     opacity: 0.8;
+     text-shadow: none;
+   }
+}
+
 
 .event-block {
   width: 90%;
@@ -30,36 +51,85 @@
   background-color: #FDF5C9;
   border: 2px solid #ed1308;
   border-radius: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   padding: 15px;
-  gap: 20px;
+  gap: 40px;
   align-items: center;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   font-size: 20px;
-}
-
-.event-image-placeholder {
-  width: 200px;
-  height: 200px;
-  background-color: #fff8d5;
-  border: 2px dashed #ed1308;
-  border-radius: 10px;
-  font-size: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #ed1308;
+  overflow: hidden;
 }
 
 .event-content {
-  flex: 1;
+  margin-left: 50px;
+  margin-right: 80px;
+
 }
 
 .event-content h3 {
   color: #ed1308;
-  margin-bottom: 10px;
+  font-size: 40px;
+  font-weight: 700;
+  margin: 0 0 15px 0;
+  padding-bottom: 10px;
+  position: relative;
+
+  animation: flicker 3s infinite alternate;
+  border-bottom: 3px solid #ff4500;
+  position: relative;
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+    text-shadow:
+      2px 2px 0px #8b0000,
+      4px 4px 0px rgba(0, 0, 0, 0.3);
+  }
+  20%, 24%, 55% {
+    opacity: 0.8;
+    text-shadow: none;
+  }
 }
 
 .final-note p {
   text-align: center;
 }
+
+.event-image {
+  width: 450px;
+  height: 450px;
+  object-fit: cover;
+  border: 3px solid #ed1308;
+  border-radius: 10px;
+}
+
+.tagline {
+  font-style: italic;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.holidays-section h3 {
+  color: #ed1308;
+  margin-bottom: 30px;
+  text-align: center;
+  line-height: 1;
+  font-size: 2.5rem;
+  animation: flicker 3s infinite alternate;
+  position: relative;
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+    text-shadow:
+      2px 2px 0px #8b0000,
+      4px 4px 0px rgba(0, 0, 0, 0.3);
+  }
+  20%, 24%, 55% {
+    opacity: 0.8;
+    text-shadow: none;
+  }
+}
+

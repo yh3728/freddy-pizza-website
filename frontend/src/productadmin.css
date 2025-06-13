@@ -28,6 +28,7 @@ button {
 .add-button:hover {
   background-color: #e06666;
 }
+
 .product-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -39,7 +40,7 @@ button {
 
 .product-card {
   width: 250px;
-  height: 270px;
+  height: 280px;
   background-color: #fff786;
   padding-top: 10px;
   padding-bottom: 15px;
@@ -122,7 +123,6 @@ button {
 
 .modal-content-product {
   display: flex;
-  gap: 30px;
   margin-top: 30px;
   padding-left: 20px;
   padding-right: 20px;

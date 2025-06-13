@@ -1,7 +1,5 @@
 .orders-container {
-  padding-top: 70px;
   padding-right: 70px;
-  padding-bottom: 100px;
   padding-left: 70px;
 }
 
@@ -20,17 +18,17 @@
 }
 
 .orders-block.block1 {
-  font-size: 30px;
+  font-size: 35px;
 }
 
 .orders-block.block2 {
-  font-size: 50px;
+  font-size: 100px;
   font-weight: bold;
   font-family: 'handjet', sans-serif;
 }
 
 .orders-block.block3 {
-  font-size: 35px;
+  font-size: 45px;
   text-shadow: 
     -0.5px -0.5px 0 red,
     0.5px -0.5px 0 red,
@@ -39,7 +37,7 @@
 }
 
 .orders-extra-block {
-  grid-column: 1; /* Размещаем под первым блоком */
+  grid-column: 1;
   grid-row: 2;
   color: #505050;
   margin-top: -20px;
@@ -48,11 +46,11 @@
 
 .order-info1 {
   display: grid;
-  grid-template-columns: 1fr 140px 140px; /* Название растягивается, время и дата по 20% */
+  grid-template-columns: 1fr 140px 140px;
   align-items: center;
   gap: 10px;
   padding: 20px;
-  font-size: 24px;
+  font-size: 30px;
 }
 
 .order-time, .order-date {
@@ -75,7 +73,7 @@
 }
 
 .order-product-info {
-  flex: 1; /* Занимает всю доступную ширину */
+  flex: 1;
   margin-left: 10px;
 }
 
@@ -83,19 +81,19 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  position: relative; /* Для добавления красной линии */
+  position: relative;
   text-align: center;
 }
 
 .order-quantity-group .order-quantity {
-  margin: 0 0px; /* Отступ между кнопками и цифрой */
+  margin: 0 0px;
   font-size: 20px;
   font-weight: bold;
-  color: #050505; /* Красный цвет */
+  color: #050505;
   background-color: #ed1308;
   padding: 5px 10px;
-  border: 2px solid #ed1308; /* Красная рамка */
-  border-radius: 50%; /* Круглая форма */
+  border: 2px solid #ed1308;
+  border-radius: 50%;
 }
 
 .order-price {
@@ -103,13 +101,13 @@
 }
 
 .order-info2 {
-  font-size: 24px;
+  font-size: 30px;
   text-align: right;
   padding: 10px;
 }
 
 .order-info3 {
-  font-size: 24px;
+  font-size: 30px;
   text-align: left;
   padding: 20px;
   margin-top: -30px;
@@ -129,7 +127,7 @@
 }
 
 .order-info4 {
-  font-size: 24px;
+  font-size: 30px;
   text-align: right;
   padding: 20px;
   margin-top: -30px;

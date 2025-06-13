@@ -47,7 +47,8 @@
 
 .product-container1 {
     position: relative;
-    width: 1000px;
+    width: 1500px;
+    height: 55%;
     border: 3px solid #ff0000;
     background-color: white;
     padding: 20px;
@@ -59,37 +60,46 @@
 .product-content1 {
     display: flex;
     width: 100%;
+    align-items: center;
+    height: 420px;
 }
 
 .product-image1 {
     flex: 1;
     padding: 10px;
     margin-top: 30px;
+    margin-left: 20px;
 }
 
 .product-image1 img {
-    width: 90%;
-    height: auto;
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
     border: 3px solid #ed1308;
     display: block;
     margin: 0 auto;
 }
 
 .product-info1 {
-    flex: 1;
+    flex: 2;
     display: flex;
     flex-direction: column;
     padding: 0 20px;
+    margin-left: 5px;
+    margin-right: -10px;
     font-family: 'kellyslab', sans-serif;
 }
 
 .product-title1 {
     border: 3px solid #ed1308;
     background-color: #f6fb90;
-    padding: 8px 15px;
+    padding: 8px 5px;
     text-align: center;
     margin-top: 10px;
-    width: 70%;
+    width: 80%;
+    height: auto;
     align-self: center;
     font-family: 'handjet';
     font-size: 28px;
@@ -107,9 +117,9 @@
 }
 
 .product-actions1 {
-    position: absolute;
     bottom: 20px;
     left: 0;
+    padding: -15px;
     right: 0;
     display: flex;
     justify-content: center;

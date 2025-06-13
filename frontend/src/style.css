@@ -1,24 +1,25 @@
-/* Базовые стили */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  word-wrap: break-word;
+  word-break: break-all;
+  hyphens: auto;
 }
 
 :root {
-  --z-index-content: 1;      /* Основной контент */
-  --z-index-nav: 10;         /* Навигация */
-  --z-index-modal: 100;      /* Модальные окна */
+  --z-index-content: 1;
+  --z-index-nav: 10;
+  --z-index-modal: 100;
 }
 
 html {
-  scroll-padding-top: 240px; /* Высота фиксированного меню + небольшой зазор */
+  scroll-padding-top: 240px;
 }
 
-/* Main app container */
 .app {
   min-height: 100vh;
-  background-color: #f0f0f0; /* Серый фон (заменится на ваше изображение) */
+  background-color: #f0f0f0;
   background-size: 40%;
   background-position: center;
   display: flex;
@@ -28,16 +29,15 @@ html {
   z-index: var(--z-index-content);
 }
 
-/* Content box with border */
 .content-box {
-  margin-top: 200px;
+  margin-top: 170px;
   width: 85%;
   max-width: 1600px;
   min-height: 600px;
-  outline: 4px solid #1e90ff;
+  outline: 4px solid #0066ff;
   outline-offset: -20px; 
-  border-radius: 35px; /* Закругленные углы */
-  background-color: #e0e0e0; /* Серый фон контента (заменится на ваше изображение) */
+  border-radius: 35px;
+  background-color: #e0e0e0;
   background-size: cover;
   background-position: center;
   padding: 20px;
@@ -45,12 +45,10 @@ html {
   margin-right: auto;
 }
 
-/* White content area */
 .content-area {
-  margin-top: 0px;
   width: 100%;
   height: 100%;
-  background-image: inherit; /* Наследуем фон от .content-box */
+  background-image: inherit;
   background-size: cover;
   background-position: center;
   border-radius: 10px;
@@ -58,20 +56,24 @@ html {
   font-family: 'kellyslab', sans-serif;
 }
 
-/* Mobile adaptation */
-@media (max-width: 768px) {
-  .content-box {
-    width: 95%;
-    padding: 15px;
-  }
+.content-area h2{
+  font-size: 40px;
 }
 
+.content-area h2{
+  font-size: 40px;
+}
 
+.empty-cart{
+  font-size: 30px;
+  margin-bottom: 60px;
+  margin-top: 10px;
+}
 
 .card {
-  width: calc(25% - 15px); /* 4 карточки в строке с учетом отступов */
+  width: calc(25% - 15px);
   min-width: 220px;
-  border: 2px solid #ed1308; /* Красная рамка */
+  border: 2px solid #ed1308;
   border-radius: 15px;
   background-color: #FDF5C9;
   padding: 15px;
@@ -155,10 +157,15 @@ html {
 
 .category-title {
   margin-top: 50px;
-  margin-bottom: 10px;
-  margin-left: 80px;
+  margin-bottom: 20px;
+  margin-left: 90px;
   text-align: left;
-  font-size: 24px;
+  font-size: 30px;
+
+}
+
+.category-title:first-of-type {
+  margin-top: -10px;
 }
 
 .remove-btn {
@@ -230,8 +237,6 @@ html {
   background-size: 40%;
   z-index: -2;
 }
-
-/* Корзина */
 
 .cart-item {
   display: flex;
@@ -405,9 +410,8 @@ html {
 
 .order-search{
   display: grid;
-  place-items: center; /* Центрирует и по горизонтали, и по вертикали */
+  place-items: center;
   height: 200px;
   font-size: 22px;
   margin-top: 70px;
 }
-

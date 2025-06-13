@@ -151,7 +151,7 @@ export default function CartPage() {
           </div>
         ))
       ) : (
-        <p>Корзина пуста</p>
+        <p className="empty-cart">Корзина пуста</p>
       )}
 
       {cartItems.length >= 20 && (

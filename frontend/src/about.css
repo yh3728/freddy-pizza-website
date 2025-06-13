@@ -3,10 +3,14 @@
 .about-layout {
   display: flex;
   justify-content: space-between;
-  gap: 40px;
-  padding: 40px;
+  gap: 30px;
+  margin: -90px;
+  padding: 80px;
   align-items: flex-start;
   flex-wrap: wrap;
+  margin-left: -60px;
+  margin-right: -60px;
+   margin-bottom: -40px;
 }
 
 .about-left {
@@ -30,7 +34,6 @@
   border: 3px solid #ed1308;
 }
 
-/* Стили рамки */
 .about-section {
   background-color: #FDF5C9;
   border: 3px solid #ed1308;
@@ -45,7 +48,23 @@
   margin-bottom: 20px;
   text-align: center;
   color: #ed1308;
-  font-size: 28px;
+  font-size: 50px;
+  line-height: 1.2;
+  animation: flicker 3s infinite alternate;
+  position: relative;
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+    text-shadow:
+      2px 2px 0px #8b0000,
+      4px 4px 0px rgba(0, 0, 0, 0.3);
+  }
+  20%, 24%, 55% {
+    opacity: 0.8;
+    text-shadow: none;
+  }
 }
 
 .about-section ul {
