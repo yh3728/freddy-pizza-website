@@ -6,6 +6,7 @@ import com.freddypizza.website.exception.InvalidRefreshTokenException
 import com.freddypizza.website.request.auth.AuthRequest
 import com.freddypizza.website.response.auth.AuthResponse
 import jakarta.servlet.http.Cookie
+import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -48,16 +49,26 @@ class AuthService(
         )
     }
 
-    fun refreshAccessToken(token: String): AuthResponse {
-        if (tokenService.isExpired(token)) {
-            throw InvalidRefreshTokenException()
-        }
+    fun refreshAccessToken(
+        request: HttpServletRequest,
+        response: HttpServletResponse,
+    ): AuthResponse {
+        val refreshToken =
+            request.cookies?.firstOrNull { it.name == "refresh_token" }?.value
+                ?: throw InvalidRefreshTokenException()
 
-        val extractedUsername = tokenService.extractUsername(token) ?: throw InvalidRefreshTokenException()
-        val currentUserDetails = userDetailsService.loadUserByUsername(extractedUsername)
+        if (tokenService.isExpired(refreshToken)) throw InvalidRefreshTokenException()
 
-        val accessToken = getAccessToken(currentUserDetails)
-        return AuthResponse(accessToken, token)
+        val username = tokenService.extractUsername(refreshToken) ?: throw InvalidRefreshTokenException()
+        val userDetails = userDetailsService.loadUserByUsername(username)
+
+        val newAccessToken = getAccessToken(userDetails)
+        val newRefreshToken = getRefreshToken(userDetails)
+
+        response.addCookie(createCookie("access_token", newAccessToken, jwtProperties.accessTokenExpiration.toInt()))
+        response.addCookie(createCookie("refresh_token", newRefreshToken, jwtProperties.refreshTokenExpiration.toInt()))
+
+        return AuthResponse(newAccessToken, newRefreshToken)
     }
 
     private fun getRefreshToken(user: UserDetails) =

@@ -60,7 +60,7 @@ export default function OrderManagement() {
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
 
-  const role = localStorage.getItem('adminRole'); 
+  const role = localStorage.getItem('adminRole');
   const filterOptions = ['All', ...staff_status_get[role]];
 
   // Проверка авторизации

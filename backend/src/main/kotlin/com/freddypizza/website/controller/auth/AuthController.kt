@@ -3,7 +3,6 @@ package com.freddypizza.website.controller.auth
 import com.freddypizza.website.detail.CustomStaffUserDetails
 import com.freddypizza.website.exception.ErrorResponse
 import com.freddypizza.website.request.auth.AuthRequest
-import com.freddypizza.website.request.auth.RefreshTokenRequest
 import com.freddypizza.website.response.auth.AuthResponse
 import com.freddypizza.website.service.auth.AuthService
 import io.swagger.v3.oas.annotations.Operation
@@ -11,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
+import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
@@ -53,12 +53,10 @@ class AuthController(
             ),
         ],
     )
-    fun refreshTokens(
-        @RequestBody refreshRequest: RefreshTokenRequest,
-    ): ResponseEntity<AuthResponse> {
-        val authResponse = authService.refreshAccessToken(refreshRequest.refreshToken)
-        return ResponseEntity.ok(authResponse)
-    }
+    fun refreshToken(
+        request: HttpServletRequest,
+        response: HttpServletResponse,
+    ): AuthResponse = authService.refreshAccessToken(request, response)
 
     @PostMapping("/logout")
     @Operation(summary = "Выйти из системы")

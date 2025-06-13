@@ -28,7 +28,7 @@ export default function StaffManagement() {
   if (allowed === false) return <AccessDenied />;
 
   const fetchStaff = () => {
-    API.get('/admin/staff')
+    API.get('/admin/staff', { withCredentials: true })
       .then(res => setStaffList(res.data))
       .catch(err => console.error('Ошибка загрузки сотрудников:', err));
   };

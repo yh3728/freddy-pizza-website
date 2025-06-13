@@ -29,6 +29,7 @@ class SecurityConfiguration(
         jwtAuthenticationFilter: JwtAuthenticationFilter,
     ): DefaultSecurityFilterChain =
         http
+            .cors {}
             .csrf { it.disable() }
             .authorizeHttpRequests {
                 it
@@ -75,7 +76,7 @@ class SecurityConfiguration(
     fun corsFilter(): CorsFilter {
         val configuration =
             CorsConfiguration().apply {
-                allowedOrigins = listOf("http://localhost:3000")
+                allowedOriginPatterns = listOf("http://localhost:3000")
                 allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
                 allowedHeaders = listOf("*")
                 allowCredentials = true

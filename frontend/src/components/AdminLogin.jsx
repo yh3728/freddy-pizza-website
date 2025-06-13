@@ -14,15 +14,20 @@ export default function AdminLogin() {
     setError('');
 
     try {
-      // 1. Вход по логину/паролю
-      await API.post('/admin/auth', { username: login, password }, { withCredentials: true });
+        const res = await API.post(
+          '/admin/auth',
+          { username: login, password },
+          { withCredentials: true }
+        );
 
-      // 2. Получение информации о текущем пользователе
-      const res = await API.get('/admin/auth/me', { withCredentials: true });
-      const { role, id, username } = res.data;
+        const { accessToken, refreshToken } = res.data;
 
-      localStorage.setItem('adminAccess', 'true'); // маркер авторизации
-      localStorage.setItem('adminRole', role); // теперь точно ADMIN/COOK/DELIVERY
+        const res2 = await API.get('/admin/auth/me', { withCredentials: true });
+        const { role, id, username } = res2.data;
+
+      localStorage.setItem('adminAccess', accessToken)
+      localStorage.setItem('adminRefresh', refreshToken);
+      localStorage.setItem('adminRole', role);
       localStorage.setItem('adminUser', username);
 
       navigate('/admin/orders');

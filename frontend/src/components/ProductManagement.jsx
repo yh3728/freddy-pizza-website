@@ -45,13 +45,15 @@ export default function ProductManagement() {
 
   if (allowed === false) return <AccessDenied />;
 
-  const fetchProducts = () => {
-    API.get('/admin/menu').then(res => {
-      setProducts(res.data);
-      const cats = Array.from(new Set(res.data.map(p => p.category)));
-      setCategories(cats);
-    });
-  };
+    const fetchProducts = () => {
+      API.get('/admin/menu', { withCredentials: true })
+        .then(res => {
+          setProducts(res.data);
+          const cats = Array.from(new Set(res.data.map(p => p.category)));
+          setCategories(cats);
+        })
+        .catch(err => console.error('Ошибка загрузки меню:', err));
+    };
 
   const openModal = (product) => {
     setSelected(product);
@@ -331,27 +333,28 @@ const incQty = () => setQuantity(prev => (prev || 0) + 1);
             <button className="modal-close" onClick={() => setShowEditModal(false)}>×</button>
             <h3 className="modal-title">Редактировать</h3>
             <form className="form-grid">
-              {[
-                ['Название:', 'name'],
-                ['Описание:', 'description'],
-                ['Вес:', 'weight'],
-                ['Количество:', 'quantity'],
-                ['Цена:', 'price'],
-                ['Состав:', 'ingredients']
-              ].map(([label, key]) => (
-                <div className="form-row" key={key}>
-                  <label>{label}</label>
-                  <input
-                    type="text"
-                    inputMode={['weight','quantity','price'].includes(key) ? 'numeric' : undefined}
-                    value={editProduct[key]}
-                    onChange={e => handleEditChange(key, e.target.value)}
-                    className="form-input wide"
-                    required
-                  />
-                  {errors[key] && <p className="form-error">{errors[key]}</p>}
-                </div>
-              ))}
+                {[
+                  ['Название:', 'name', 25],
+                  ['Описание:', 'description', 140],
+                  ['Вес:', 'weight', 4],
+                  ['Количество:', 'quantity', 4],
+                  ['Цена:', 'price', 7],
+                  ['Состав:', 'ingredients', 70]
+                ].map(([label, key, maxLen]) => (
+                  <div className="form-row" key={key}>
+                    <label>{label}</label>
+                    <input
+                      type="text"
+                      inputMode={['weight','quantity','price'].includes(key) ? 'numeric' : undefined}
+                      maxLength={maxLen}
+                      value={editProduct[key]}
+                      onChange={e => handleEditChange(key, e.target.value)}
+                      className="form-input wide"
+                      required
+                    />
+                    {errors[key] && <p className="form-error">{errors[key]}</p>}
+                  </div>
+                ))}
               <div className="form-row">
                 <label>Категория:</label>
                 <select
@@ -369,7 +372,6 @@ const incQty = () => setQuantity(prev => (prev || 0) + 1);
               <div style={{ display: 'flex', gap: '15px', marginTop: '20px' }}>
                 {formError && <p className="form-error">{formError}</p>}
                 <button type="button" className="edit-button" onClick={handleSaveEdit}>Сохранить</button>
-                <button type="button" className="edit-button" onClick={() => setShowEditModal(false)}>Отменить</button>
               </div>
             </form>
           </div>
@@ -382,31 +384,33 @@ const incQty = () => setQuantity(prev => (prev || 0) + 1);
             <button className="modal-close" onClick={() => setShowAddModal(false)}>×</button>
             <h3 className="modal-title">Добавление продукта</h3>
             <form onSubmit={handleAddProduct} className="form-grid">
-              {[
-                ['Название:', 'name'],
-                ['Описание:', 'description'],
-                ['Вес:', 'weight'],
-                ['Количество:', 'quantity'],
-                ['Цена:', 'price'],
-                ['Состав:', 'ingredients']
-              ].map(([label, key]) => (
-                <div className="form-row" key={key}>
-                  <label>{label}</label>
-                  <input
-                    type="text"
-                    inputMode={['weight','quantity','price'].includes(key) ? 'numeric' : undefined}
-                    value={newProduct[key]}
-                    onChange={e => {
-                      const v = e.target.value;
-                      if (['weight','quantity','price'].includes(key) && !/^\d*$/.test(v)) return;
-                      setNewProduct(prev => ({ ...prev, [key]: v }));
-                    }}
-                    className="form-input wide"
-                    required
-                  />
-                  {errors[key] && <p className="form-error">{errors[key]}</p>}
-                </div>
-              ))}
+                {[
+                  ['Название:', 'name', 25],
+                  ['Описание:', 'description', 140],
+                  ['Вес:', 'weight', 4],
+                  ['Количество:', 'quantity', 4],
+                  ['Цена:', 'price', 7],
+                  ['Состав:', 'ingredients', 70]
+                ].map(([label, key, maxLen]) => (
+                  <div className="form-row" key={key}>
+                    <label>{label}</label>
+                    <input
+                      type="text"
+                      inputMode={['weight','quantity','price'].includes(key) ? 'numeric' : undefined}
+                      maxLength={maxLen}
+                      value={newProduct[key]}
+                      onChange={e => {
+                        const v = e.target.value;
+                        if (['weight','quantity'].includes(key) && !/^\d*$/.test(v)) return;
+                        if (key === 'price' && !/^\d*\.?\d*$/.test(v)) return;
+                        setNewProduct(prev => ({ ...prev, [key]: v }));
+                      }}
+                      className="form-input wide"
+                      required
+                    />
+                    {errors[key] && <p className="form-error">{errors[key]}</p>}
+                  </div>
+                ))}
               <div className="form-row">
                 <label>Категория:</label>
                 <select
