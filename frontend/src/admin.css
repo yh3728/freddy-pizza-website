@@ -43,13 +43,15 @@
 
 .admin-login-form label {
   font-size: 18px;
+  font-weight: bold;
+
 }
 
 .admin-login-form input {
   padding: 8px;
   font-size: 16px;
   border: 2px solid #ff7d77;
-  border-radius: 5px;
+  border-radius: 0px;
   background-color: #FDF5C9;
 }
 
@@ -86,11 +88,13 @@
   padding: 8px;
   margin-top: 10px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
   font-size: 20px;
 }
 
+.add-button-stuff:hover {
+  background-color: #e06666;
+}
 
 .staff-grid {
   display: grid;
@@ -106,7 +110,6 @@
   height: 220px;
   background-color: #fff786;
   padding: 20px;
-  border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.15);
   display: flex;
   flex-direction: column;
@@ -129,10 +132,13 @@
   padding: 8px;
   margin-top: 10px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
   font-weight: 700;
+}
+
+.delete-button:hover {
+  background-color: #e06666;
 }
 
 .modal-overlay {
@@ -158,8 +164,8 @@
 }
 
 .modal-title {
-  margin-bottom: 20px;
-  font-size: 40px;
+  margin-bottom: 35px;
+  font-size: 37px;
   font-weight: 900px;
   text-align: center;
 }

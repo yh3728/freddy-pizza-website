@@ -146,7 +146,7 @@ export default function StaffManagement() {
           <div className="modal-box" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setShowDeleteModal(false)}>×</button>
             <h3 className="modal-title">Подтвердите удаление</h3>
-            <p style={{ textAlign: 'center', marginBottom: '20px' }}>Вы уверены, что хотите удалить этого сотрудника?</p>
+            <p style={{ textAlign: 'center', marginBottom: '20px', fontSize: '20px' }}>Вы уверены, что хотите удалить этого сотрудника?</p>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '15px' }}>
               <button className="delete-button" onClick={() => setShowDeleteModal(false)}>Отмена</button>
               <button className="delete-button" onClick={handleDelete}>Удалить</button>

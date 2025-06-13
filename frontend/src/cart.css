@@ -42,7 +42,7 @@
   height: 100px;
   object-fit: cover;
   border: 2px solid #ed1308;
-  border-radius: 10px;
+  border-radius: 0;
   flex-shrink: 0;
 }
 

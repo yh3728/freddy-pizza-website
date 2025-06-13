@@ -17,6 +17,7 @@
 
 .admin-navbar-header h1 {
   margin: 0;
+  margin-left: 20px;
   font-size: 35px;
   color: black;
 }
@@ -37,7 +38,6 @@
   color: black;
   border: none;
   padding: 6px 12px;
-  border-radius: 5px;
   cursor: pointer;
 }
 
