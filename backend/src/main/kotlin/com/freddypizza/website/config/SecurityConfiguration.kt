@@ -3,6 +3,7 @@ package com.freddypizza.website.config
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.freddypizza.website.exception.ErrorResponse
 import jakarta.servlet.http.HttpServletResponse
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -23,6 +24,8 @@ import org.springframework.web.filter.CorsFilter
 class SecurityConfiguration(
     private val authenticationProvider: AuthenticationProvider,
 ) {
+    @Value("\${frontend.url}")
+    private lateinit var allowedOriginsVar: String
     @Bean
     fun securityFilterChain(
         http: HttpSecurity,
@@ -75,7 +78,7 @@ class SecurityConfiguration(
     fun corsFilter(): CorsFilter {
         val configuration =
             CorsConfiguration().apply {
-                allowedOrigins = listOf("http://localhost:3000")
+                allowedOrigins = listOf(allowedOriginsVar)
                 allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
                 allowedHeaders = listOf("*")
                 allowCredentials = true
