@@ -17,6 +17,35 @@ class GlobalExceptionHandler {
             ),
             HttpStatus.CONFLICT,
         )
+    @ExceptionHandler(BadUsernameException::class)
+    fun handleBadUsernameException(ex: BadUsernameException): ResponseEntity<ErrorResponse> =
+        ResponseEntity(
+            ErrorResponse(
+                error = HttpStatus.BAD_REQUEST.name,
+                message = ex.message ?: "Некорректное имя",
+            ),
+            HttpStatus.BAD_REQUEST,
+        )
+
+    @ExceptionHandler(BadPasswordException::class)
+    fun handleBadPasswordException(ex: BadPasswordException): ResponseEntity<ErrorResponse> =
+        ResponseEntity(
+            ErrorResponse(
+                error = HttpStatus.BAD_REQUEST.name,
+                message = ex.message ?: "Некорректный пароль",
+            ),
+            HttpStatus.BAD_REQUEST,
+        )
+
+    @ExceptionHandler(BadPictureExtensionException::class)
+    fun handleBadPictureExtensionException(ex: BadPictureExtensionException): ResponseEntity<ErrorResponse> =
+        ResponseEntity(
+            ErrorResponse(
+                error = HttpStatus.BAD_REQUEST.name,
+                message = ex.message ?: "Некорректное расширение картинки",
+            ),
+            HttpStatus.BAD_REQUEST,
+        )
 
     @ExceptionHandler(ProductNotFoundException::class)
     fun handleProductNotFound(ex: ProductNotFoundException): ResponseEntity<ErrorResponse> =

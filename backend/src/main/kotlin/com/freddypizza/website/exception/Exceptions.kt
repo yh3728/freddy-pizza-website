@@ -2,7 +2,6 @@ package com.freddypizza.website.exception
 
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ResponseStatus
-
 @ResponseStatus(HttpStatus.FORBIDDEN)
 class InvalidRefreshTokenException(
     message: String = "Неверный токен обновления",
@@ -12,6 +11,21 @@ class InvalidRefreshTokenException(
 class UsernameAlreadyExistsException(
     message: String = "Пользователь с таким именем уже существует",
 ) : Exception(message)
+
+@ResponseStatus(HttpStatus.BAD_REQUEST)
+class BadUsernameException(
+    message: String = "Некорректное имя",
+) : Exception(message)
+
+@ResponseStatus(HttpStatus.BAD_REQUEST)
+class BadPasswordException(
+    message: String = "Некорректный пароль",
+) : Exception(message)
+
+@ResponseStatus(HttpStatus.BAD_REQUEST)
+class BadPictureExtensionException(
+    message: String = "Некорректное расширение картинки",
+): Exception(message)
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
 class ProductNotFoundException(

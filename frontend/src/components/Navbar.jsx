@@ -1,4 +1,3 @@
-// src/components/Navbar.jsx
 import React from 'react';
 import '../navbar.css';
 import { useEffect } from 'react';
@@ -10,21 +9,18 @@ const SmartAnchorLink = ({ anchor, children, onClick }) => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    onClick?.(); // Позволяет передать дополнительный обработчик
+    onClick?.();
 
     if (pathname === '/') {
-      // Если уже на главной - плавный скролл
       const element = document.getElementById(anchor);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     } else {
-      // Если не на главной - переход на главную с якорем
       navigate(`/#${anchor}`);
     }
   };
 
-  // Автоскролл при загрузке страницы с якорем
   useEffect(() => {
     if (pathname === '/' && hash === `#${anchor}`) {
       const element = document.getElementById(anchor);
@@ -53,21 +49,21 @@ export default function Navbar() {
       <div className="nav-menu">
       
         <div className="nav-image-container">
-          <img src={require("../assets/uzor11.png")} class="nav-image-first" />
+          <img src={require("../assets/uzor11.png")} className="nav-image-first" />
 
-          <div class="nav-image-middle-tiled"></div>
+          <div className="nav-image-middle-tiled"></div>
           
           <a href="/" target="_blank" className="nav-image-scaled-link">
-            <img src={require("../assets/telegram.png")} class="nav-image-scaled" />
+            <img src={require("../assets/telegram.png")} className="nav-image-scaled" />
+          </a>
+          <a href="http://109.73.194.68:5056/" target="_blank" className="nav-image-scaled-link">
+            <img src={require("../assets/friendly.png")} className="nav-image-scaled" />
           </a>
           <a href="/" target="_blank" className="nav-image-scaled-link">
-            <img src={require("../assets/whatsapp.png")} class="nav-image-scaled" />
-          </a>
-          <a href="/" target="_blank" className="nav-image-scaled-link">
-            <img src={require("../assets/vkontakte.png")} class="nav-image-scaled" />
+            <img src={require("../assets/vkontakte.png")} className="nav-image-scaled" />
           </a>
 
-          <img src={require("../assets/uzor13.png")} class="nav-image-last" />
+          <img src={require("../assets/uzor13.png")} className="nav-image-last" />
         </div>
       
         <div className="title-row">
@@ -82,9 +78,9 @@ export default function Navbar() {
           </Link>
         </div>
 
-        <div class="nav-links-container">
+        <div className="nav-links-container">
 
-          <div class="nav-link-group">
+          <div className="nav-link-group">
             <SmartAnchorLink anchor="pizza">
               Пицца
             </SmartAnchorLink>
@@ -99,9 +95,9 @@ export default function Navbar() {
             </SmartAnchorLink>
           </div>
 
-          <div class="nav-empty-space"></div>
+          <div className="nav-empty-space"></div>
 
-          <div class="nav-link-group">
+          <div className="nav-link-group">
             <SmartAnchorLink anchor="dessert">
               Десерты
             </SmartAnchorLink>

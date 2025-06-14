@@ -1,24 +1,23 @@
 @font-face {
-    font-family: 'handjet'; /* Название шрифта (можно любое) */
-    src: url('./assets/Handjet-VariableFont.ttf') format('truetype'); /* Путь к файлу */
-    font-weight: normal; /* Жирность (400) */
-    font-style: normal; /* Обычный стиль (не italic) */
+    font-family: 'handjet';
+    src: url('./assets/Handjet-VariableFont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
     font-display: swap;
   }
   
   @font-face {
-    font-family: 'kellyslab'; /* Название шрифта (можно любое) */
-    src: url('./assets/KellySlab-Regular.ttf') format('truetype'); /* Путь к файлу */
-    font-weight: normal; /* Жирность (400) */
-    font-style: normal; /* Обычный стиль (не italic) */
+    font-family: 'kellyslab';
+    src: url('./assets/KellySlab-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
     font-display: swap;
   }
 
-/* Верхная строка */
 .nav-image-container {
   display: flex;
   width: 100%;
-  height: 70px;
+  height: 60px;
   gap: 20px;
 }
 
@@ -33,8 +32,8 @@
 .nav-image-middle-tiled {
   flex-grow: 1;
   background-image: url('./assets/uzor12.png');
-  background-size: auto 100%; /* Высота 100%, ширина автоматическая */
-  background-repeat: repeat-x; /* Повторяется по горизонтали */
+  background-size: auto 100%;
+  background-repeat: repeat-x;
   margin-left: -20px;
 }
 
@@ -51,11 +50,9 @@
   }
 
 .nav-image-scaled:hover {
-    transform: scale(1.05); /* Легкое увеличение при наведении */
+    transform: scale(1.05);
   }
-  
 
-/* Отступ справа у третьей новой картинки */
 .nav-image-scaled:last-of-type {
   margin-right: 10px;
 }
@@ -64,25 +61,22 @@
   position: relative;
   display: flex;
   width: 100%;
-  align-items: flex-end; /* Вертикальное выравнивание по центру */
-  padding: 0px 20px; /* Отступы от краёв контейнера */
+  align-items: flex-end;
+  padding: 0px 20px;
 }
 
-/* Группа ссылок (35% ширины) */
 .nav-link-group {
-  flex: 0 0 40%; /* Фиксированная ширина */
+  flex: 0 0 40%;
   display: flex;
   align-items: flex-end;
-  justify-content: space-between; /* Равные отступы между ссылками */
-  gap: 10px; /* Дополнительный отступ между ссылками */
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .nav-empty-space {
-  flex: 0 0 20%; /* Фиксированная ширина */
-  margin: 0 10px; /* Отступы слева и справа (как у картинки) */
+  flex: 0 0 20%;
+  margin: 0 10px;
 }
-
-/* Основной контейнер */
 
 .nav-menu {
     display: flex;
@@ -92,33 +86,33 @@
     position: relative;
   }
 
-  .nav-menu-wrapper {
-    position: fixed;
-    background: url('./assets/menu-background_cleanup.png') no-repeat center center;
-    background-size: cover;
-    width: 100%;
-    z-index: var(--z-index-nav);
-    padding-bottom: 20px
-  }
+   .nav-menu-wrapper {
+       position: fixed;
+       background: url('./assets/menu-background_cleanup.png') no-repeat center center;
+       background-size: cover;
+       width: 100%;
+       height: 170px;
+       z-index: var(--z-index-nav);
+   }
   
   .divider-image {
     z-index: var(--z-index-nav);
     position: fixed;
     left: 50%;
-    top: 110px;          /* Нужная высота от верха */
+    top: 100px;
     transform: translateX(-50%);
-    width: 250px;        /* Точная ширина */
-    height: auto;        /* Автоматическая высота (пропорции сохранятся) */
-    object-fit: cover; /* Гарантирует, что изображение не исказится */
+    width: 220px;
+    height: auto;
+    object-fit: cover;
   }
   
   .logo-row {
     position: relative;
     display: flex;
-    padding: 10px 40px; /* Увеличили padding сверху/снизу */
-    gap: 40px; /* Увеличили расстояние между логотипами */
-    width: calc(100% - 10px); /* Учитываем padding */
-    margin-left: 1px; /* Прижимаем к правому краю */
+    padding: 10px 40px;
+    gap: 40px;
+    width: calc(100% - 10px);
+    margin-left: 1px;
     margin-right: 1px;
     background-color: transparent;
   }
@@ -137,33 +131,32 @@
   
   .logo {
     width: calc(9% - 5px);
-    max-width: 120px; /* Добавили ограничение по ширине */
+    max-width: 120px;
     object-fit: contain;
-    transition: transform 0.3s ease; /* Добавили анимацию при наведении */
+    transition: transform 0.3s ease;
   }
   
   
   .logo:hover {
-    transform: scale(1.05); /* Легкое увеличение при наведении */
+    transform: scale(1.05);
   }
   
   .title-row {
     position: relative;
     display: flex;
-    justify-content: space-between; /* Равномерное распределение */
-    padding: 0px 30px;
-    width: calc(100% - 80px); /* Учитываем боковые отступы */
-    margin: 0 auto; /* Центрирование */
+    justify-content: space-between;
+    padding: 0px 15px;
+    width: calc(100% - 80px);
     background-color: transparent;
+    margin: -10px auto 0 auto;
   }
-  
-  /* Обновляем стили для .title-link */
+
   .title-link {
     font-family: 'kellyslab';
     text-decoration: none;
-    color: #ffffff; /* Яркий розово-красный цвет текста */
+    color: #ffffff;
     font-weight: 600;
-    font-size: 24px;
+    font-size: 33px;
     padding: 8px 16px;
     transition: all 0.3s ease;
     flex: 1;
@@ -173,20 +166,19 @@
     text-shadow: 0 0 8px #ff0000, 
                  0 0 16px #ff3333,
                  0 0 24px #ff6666,
-                 0 0 32px #ff0000; /* Усиленное свечение */
+                 0 0 32px #ff0000;
   }
   
-  /* Эффекты при наведении */
+
   .title-link:hover {
     color: #ffffff;
     text-shadow: 0 0 12px #ff0000,
                  0 0 24px #ff3333,
                  0 0 36px #ff6666,
                  0 0 48px #ff0000;
-    transform: scale(1.05); /* Легкое увеличение при наведении */
+    transform: scale(1.05);
   }
-  
-  /* Строка с контентом */
+
   .content-row {
     position: relative;
     display: flex;
@@ -201,21 +193,20 @@
   
   .link-group {
     display: flex;
-    gap: 40px; /* Расстояние между разделами в группе */
+    gap: 40px;
     position: relative;
     z-index: 5;
-    background-color: rgba(0, 0, 20, 0.7); /* Фон для перекрытия выступающей части */
+    background-color: rgba(0, 0, 20, 0.7);
     padding: 0 15px;
     border-radius: 4px;
   }
   
   .center-gap {
     flex: 1;
-    max-width: 16%; /* Ширина центрального промежутка */
+    max-width: 16%;
     min-width: 50px;
   }
-  
-  /* Для мобильной версии */
+
   @media (max-width: 768px) {
     .content-row {
       flex-direction: column;
@@ -237,8 +228,8 @@
   .content-link {
     font-family: 'handjet';
     text-decoration: none;
-    color: #ffffff; /* Голубой неоновый цвет */
-    font-size: 24px;
+    color: #ffffff;
+    font-size: 33px;
     padding: 8px 12px;
     transition: all 0.3s ease;
     flex: 1;
@@ -246,7 +237,7 @@
     text-align: center;
     text-shadow: 0 0 8px #00a2ff,
                  0 0 16px #0066ff,
-                 0 0 24px #0033ff; /* Усиленное свечение */
+                 0 0 24px #0033ff;
   }
   
   .content-link:hover {
@@ -255,10 +246,9 @@
                  0 0 24px #0066ff,
                  0 0 36px #0033ff,
                  0 0 48px #00a2ff;
-    transform: scale(1.05); /* Легкое увеличение при наведении */
+    transform: scale(1.05);
   }
-  
-  /* Стили для картинки по центру */
+
   .image-wrapper {
     width: 150px;
     height: 80px;
@@ -273,8 +263,7 @@
     max-height: 100%;
     object-fit: contain;
   }
-  
-  /* Адаптивность */
+
   @media (max-width: 768px) {
     .nav-menu > div {
       flex-wrap: wrap;
@@ -318,8 +307,7 @@
     object-fit: contain;
     margin-right: 20px;
   }
-  
-  /* Анимация пульсации */
+
   @keyframes neonPulseBlue {
     0%, 100% {
       text-shadow: 0 0 10px #00a2ff,
@@ -332,8 +320,7 @@
                    0 0 80px #00a2ff;
     }
   }
-  
-  /* Применить анимацию к активному разделу */
+
   .content-link.active {
     animation: neonPulseBlue 2s infinite;
     color: #ffffff;

@@ -355,6 +355,9 @@ class AdminOrderServiceTest
                         quantity = 10,
                         category = ProductCategory.PIZZA,
                         price = BigDecimal.TEN,
+                        description = "example description",
+                        ingredients = "example ingredients",
+                        weight = 100,
                     ),
                 )
 

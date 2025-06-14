@@ -7,9 +7,7 @@ export default function OrderSearch() {
 
     const handleInputChange = (e) => {
         const value = e.target.value.toUpperCase();
-        // Фильтруем ввод, оставляя только разрешенные символы
         const filteredValue = value.replace(/[^0-9A-Z]/gi, '');
-        // Обрезаем до 6 символов
         const truncatedValue = filteredValue.slice(0, 6);
         setInputValue(truncatedValue);
     };
@@ -20,7 +18,7 @@ export default function OrderSearch() {
   
     return (
         <div className="order-search">
-            <h2>Введите номер заказа:</h2>
+            <h4>Введите номер заказа:</h4>
             <input
                 type="text"
                 value={inputValue}
@@ -29,7 +27,8 @@ export default function OrderSearch() {
                 style={{
                 padding: '8px',
                 fontSize: '22px',
-                marginRight: '10px'
+                marginRight: '10px',
+                border: '2px solid #ed1308'
                 }}
             />
             <button
@@ -38,7 +37,8 @@ export default function OrderSearch() {
                 padding: '8px 16px',
                 fontSize: '22px',
                 backgroundColor: '#ed1308',
-                color: 'white',
+                color: 'black',
+                fontWeight: 700,
                 border: 'none',
                 borderRadius: '4px',
                 cursor: 'pointer'

@@ -5,7 +5,7 @@ import java.math.BigDecimal
 
 data class ProductResponse(
     val name: String,
-    val description: String? = null,
+    val description: String,
     val price: BigDecimal,
     val imagePath: String? = "/uploads/products/image_placeholder.png",
     val category: ProductCategory,

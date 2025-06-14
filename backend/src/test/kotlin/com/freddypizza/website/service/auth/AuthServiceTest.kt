@@ -6,6 +6,7 @@ import com.freddypizza.website.enums.StaffRole
 import com.freddypizza.website.exception.InvalidRefreshTokenException
 import com.freddypizza.website.repository.StaffRepository
 import com.freddypizza.website.request.auth.AuthRequest
+import jakarta.servlet.http.Cookie
 import jakarta.transaction.Transactional
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.mock.web.MockHttpServletRequest
 import org.springframework.mock.web.MockHttpServletResponse
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -105,10 +107,21 @@ class AuthServiceTest
          */
         @Test
         fun `should refresh access token successfully`() {
-            val result = underTest.refreshAccessToken(validRefreshToken)
+            val request = MockHttpServletRequest()
+            request.setCookies(Cookie("refresh_token", validRefreshToken))
+            val response = MockHttpServletResponse()
 
-            assertThat(result.accessToken).isNotBlank()
-            assertThat(result.refreshToken).isEqualTo(validRefreshToken)
+            val result = underTest.refreshAccessToken(request, response)
+
+            assertThat(result.accessToken).isNotBlank
+            assertThat(result.refreshToken).isNotBlank
+            val newAccessCookie = response.cookies.find { it.name == "access_token" }
+            val newRefreshCookie = response.cookies.find { it.name == "refresh_token" }
+
+            assertThat(newAccessCookie).isNotNull
+            assertThat(newRefreshCookie).isNotNull
+            assertThat(newAccessCookie!!.value).isNotBlank
+            assertThat(newRefreshCookie!!.value).isNotBlank
         }
 
         /**
@@ -117,8 +130,12 @@ class AuthServiceTest
          */
         @Test
         fun `should throw InvalidRefreshTokenException when refresh token is expired`() {
+            val request = MockHttpServletRequest()
+            request.setCookies(Cookie("refresh_token", expiredRefreshToken))
+            val response = MockHttpServletResponse()
+
             assertThrows<InvalidRefreshTokenException> {
-                underTest.refreshAccessToken(expiredRefreshToken)
+                underTest.refreshAccessToken(request, response)
             }
         }
 

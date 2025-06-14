@@ -1,4 +1,3 @@
-/* src/admin.css */
 .admin-container {
   padding: 30px;
   font-family: 'roboto slab', sans-serif;
@@ -42,14 +41,25 @@
 }
 
 .admin-login-form label {
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.login-button {
+    padding: 10px 20px;
+    background-color: #ff7d77;
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 700;
 }
 
 .admin-login-form input {
   padding: 8px;
-  font-size: 16px;
-  border: 2px solid #ed1308;
-  border-radius: 5px;
+  font-size: 20px;
+  border: 2px solid #ff7d77;
+  border-radius: 0px;
   background-color: #FDF5C9;
 }
 
@@ -65,6 +75,7 @@
   margin-bottom: 20px;
   font-size: 28px;
   font-weight: 700;
+  padding-left: 90px;
 }
 
 .add-button {
@@ -74,21 +85,23 @@
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  border-radius: 5px;
   color: black;
   font-size: 28px;
 }
 
 .add-button-stuff {
   background-color: #ff7d77;
-  color: white;
+  color: black;
   padding: 8px;
   margin-top: 10px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
+  font-size: 20px;
 }
 
+.add-button-stuff:hover {
+  background-color: #e06666;
+}
 
 .staff-grid {
   display: grid;
@@ -96,14 +109,14 @@
   gap: 20px;
   justify-items: center;
   width: 100%;
+  padding: 0 80px;
 }
 
 .staff-card {
   width: 200px;
-  height: 200px;
+  height: 220px;
   background-color: #fff786;
   padding: 20px;
-  border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.15);
   display: flex;
   flex-direction: column;
@@ -115,7 +128,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Центрирование по вертикали */
+  justify-content: center;
   gap: 5px;
   font-size: 19px;
 }
@@ -123,13 +136,16 @@
 .delete-button {
   background-color: #ff7d77;
   color: black;
-  padding: 8px;
-  margin-top: 10px;
+  padding: 10px;
+  margin-top: 5px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
+}
+
+.delete-button:hover {
+  background-color: #e06666;
 }
 
 .modal-overlay {
@@ -149,26 +165,26 @@
   background-color: #fff4d3;
   padding: 30px;
   position: relative;
-  border-radius: 10px;
-  width: 600px;
+  border-radius: 7px;
+  width: 650px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 .modal-title {
-  margin-bottom: 20px;
-  font-size: 20px;
-  font-weight: bold;
+  margin-bottom: 35px;
+  font-size: 37px;
+  font-weight: 900px;
   text-align: center;
 }
 
 .modal-close {
   position: absolute;
   top: 10px;
-  right: 15px;
-  color: #ed1308;
+  right: 30px;
+  color: #ff2b2b;
   background: none;
   border: none;
-  font-size: 20px;
+  font-size: 36px;
   cursor: pointer;
 }
 
@@ -180,20 +196,62 @@
   background-color: #FDF5C9;
 }
 
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-text-fill-color: black !important;
+}
+
 .form-select {
   padding: 8px;
   font-size: 16px;
-  border: 2px solid #ed1308;
-  border-radius: 5px;
-  background-color: #FDF5C9;
+  border: 2px solid #ff7d77;
+  background-color: white;
 }
 
 .form-error {
   color: red;
-  font-size: 14px;
+  font-size: 18px;
   margin-top: 5px;
 }
 
 .input-error {
   border-color: red;
+}
+
+.admin-login-container{
+  display: grid;
+  place-items: center;
+  font-size: 25px;
+  margin-top: 250px;
+  gap: 30px;
+  font-family: 'roboto slab', sans-serif;
+}
+
+.admin-login-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-login-label {
+  width: 100px;
+  text-align: left;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.admin-login-input {
+  flex: 1;
+  padding: 8px;
+  font-size: 20px;
+  border: 2px solid #ff7d77;
+  background-color: #FDF5C9;
+  border-radius: 0;
+  margin-left: 0;
+}
+
+.None{
+ font-size: 25px;
+ font-weight: bold;
+ text-align: center;
 }
