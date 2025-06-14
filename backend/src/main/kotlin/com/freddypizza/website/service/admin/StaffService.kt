@@ -1,6 +1,8 @@
 package com.freddypizza.website.service.admin
 
 import com.freddypizza.website.entity.StaffEntity
+import com.freddypizza.website.exception.BadPasswordException
+import com.freddypizza.website.exception.BadUsernameException
 import com.freddypizza.website.exception.StaffNotFoundException
 import com.freddypizza.website.exception.UsernameAlreadyExistsException
 import com.freddypizza.website.repository.StaffRepository
@@ -18,6 +20,12 @@ class StaffService(
         if (found != null) {
             throw UsernameAlreadyExistsException()
         }
+        if (!checkLogin(staff.username)){
+            throw BadUsernameException()
+        }
+        if (!checkPassword(staff.password)){
+            throw BadPasswordException()
+        }
         val updated = staff.copy(password = encoder.encode(staff.password))
         return staffRepository.save(updated)
     }
@@ -32,4 +40,15 @@ class StaffService(
         staffRepository.findById(id).orElseThrow { StaffNotFoundException() }
         staffRepository.deleteById(id)
     }
+    private fun checkLogin(login: String): Boolean{
+        val loginPattern = Regex("^[a-zA-Z0-9]{3,10}$")
+        return loginPattern.matches(login)
+    }
+
+    private fun checkPassword(password: String): Boolean{
+        val passwordPattern = Regex("^[a-zA-Z0-9]{3,30}$")
+        return passwordPattern.matches(password)
+    }
 }
+
+

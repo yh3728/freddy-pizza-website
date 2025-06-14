@@ -1,6 +1,7 @@
 package com.freddypizza.website.service.admin
 
 import com.freddypizza.website.entity.ProductEntity
+import com.freddypizza.website.exception.BadPictureExtensionException
 import com.freddypizza.website.exception.ProductNotFoundException
 import com.freddypizza.website.repository.ProductRepository
 import com.freddypizza.website.request.admin.AdminProductImageRequest
@@ -65,7 +66,9 @@ class AdminProductService(
         if (!Files.exists(uploadDir)) {
             Files.createDirectories(uploadDir)
         }
-
+        if (!checkImage(image.originalFilename)){
+            throw BadPictureExtensionException()
+        }
         val extension = image.originalFilename?.substringAfterLast('.', "") ?: "jpg"
         val filename = "product_${UUID.randomUUID()}.$extension"
         val filePath = uploadDir.resolve(filename)
@@ -74,5 +77,11 @@ class AdminProductService(
 
         val updatedProduct = product.copy(imagePath = "/uploads/products/$filename")
         return productRepository.save(updatedProduct)
+    }
+
+    private fun checkImage(filename: String?): Boolean{
+        val allowedExtensions = setOf("jpg", "jpeg", "png")
+        val ext = filename?.substringAfterLast('.', "")?.lowercase()
+        return ext in allowedExtensions
     }
 }
