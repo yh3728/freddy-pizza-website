@@ -79,7 +79,7 @@ export default function ProductManagement() {
     const nameTrim = product.name.trim();
 
     if (!nameTrim || nameTrim.length > 25) {
-      errs.name = 'Название не должно превышать 25 символов.';
+      errs.name = 'Название не должно превышать 25 символов или быть пустым.';
     } else {
       const conflict = products.find(p => p.name.toLowerCase() === nameTrim.toLowerCase());
       if (conflict && (!editing || conflict.id !== product.id)) {
@@ -94,7 +94,11 @@ export default function ProductManagement() {
     if (isNaN(quantity) || quantity < 0 || quantity > 9999) errs.quantity = 'Количество должно быть от 0 до 9999';
     const price = parseFloat(product.price);
     if (isNaN(price) || price <= 0 || price > 99999) errs.price = 'Цена должна быть числом от 1 до 99999';
-    if (product.ingredients.length > 70) errs.ingredients = 'Ингредиенты не должны превышать 70 символов';
+    const ing = product.ingredients.trim();
+    if (!ing) {errs.ingredients = 'Поле Состав не должны быть пустым';
+    } else if (ing.length > 70) {
+      errs.ingredients = 'Состав не должен превышать 70 символов';
+    }
 
     setErrors(errs);
     return Object.keys(errs).length === 0;
@@ -111,7 +115,7 @@ export default function ProductManagement() {
         weight: parseInt(newProduct.weight),
         quantity: parseInt(newProduct.quantity),
         price: parseFloat(newProduct.price),
-        ingredients: newProduct.ingredients.trim() || null,
+        ingredients: newProduct.ingredients.trim(),
         category: newProduct.category.trim()
       };
 
@@ -153,7 +157,7 @@ export default function ProductManagement() {
           weight: parseInt(editProduct.weight),
           quantity: parseInt(editProduct.quantity),
           price: parseFloat(editProduct.price),
-          ingredients: editProduct.ingredients.trim() || null,
+          ingredients: editProduct.ingredients.trim(),
           category: editProduct.category
         };
 
@@ -360,7 +364,7 @@ export default function ProductManagement() {
                   ['Описание:', 'description', 140],
                   ['Вес:', 'weight', 4],
                   ['Количество:', 'quantity', 4],
-                  ['Цена:', 'price', 7],
+                  ['Цена:', 'price', 5],
                   ['Состав:', 'ingredients', 70]
                 ].map(([label, key, maxLen]) => (
                   <div className="form-row" key={key}>
@@ -386,9 +390,9 @@ export default function ProductManagement() {
                   required
                 >
                   <option value="">Выберите категорию</option>
-                  {categories.map(cat => (
-                    <option key={cat} value={cat}>{categoryNames[cat] || cat}</option>
-                  ))}
+                    {Object.entries(categoryNames).map(([code, name]) => (
+                    <option key={code} value={code}>{name}</option>
+                    ))}
                 </select>
               </div>
               <div style={{ display: 'flex', gap: '15px', marginTop: '20px' }}>
@@ -411,7 +415,7 @@ export default function ProductManagement() {
                   ['Описание:', 'description', 140],
                   ['Вес:', 'weight', 4],
                   ['Количество:', 'quantity', 4],
-                  ['Цена:', 'price', 7],
+                  ['Цена:', 'price', 5],
                   ['Состав:', 'ingredients', 70]
                 ].map(([label, key, maxLen]) => (
                   <div className="form-row" key={key}>
@@ -442,9 +446,9 @@ export default function ProductManagement() {
                   required
                 >
                   <option value="">Выберите категорию</option>
-                  {categories.map(cat => (
-                    <option key={cat} value={cat}>{categoryNames[cat] || cat}</option>
-                  ))}
+                        {Object.entries(categoryNames).map(([code, name]) => (
+                     <option key={code} value={code}>{name}</option>
+                 ))}
                 </select>
               </div>
               {formError && <p className="form-error">{formError}</p>}
