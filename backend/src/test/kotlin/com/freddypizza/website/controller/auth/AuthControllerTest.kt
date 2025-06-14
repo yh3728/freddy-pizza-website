@@ -6,12 +6,12 @@ import com.freddypizza.website.entity.StaffEntity
 import com.freddypizza.website.enums.StaffRole
 import com.freddypizza.website.exception.InvalidRefreshTokenException
 import com.freddypizza.website.request.auth.AuthRequest
-import com.freddypizza.website.request.auth.RefreshTokenRequest
 import com.freddypizza.website.response.auth.AuthResponse
 import com.freddypizza.website.service.auth.AuthService
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
 import io.mockk.verify
+import jakarta.servlet.http.Cookie
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -37,18 +37,14 @@ class AuthControllerTest
         private val authRequest = AuthRequest("admin", "password")
         private val authResponse = AuthResponse("access_token", "refresh_token")
         private val invalidAuthRequest = AuthRequest("invalid_user", "wrong_password")
-        private val refreshTokenRequest = RefreshTokenRequest("refresh_token")
         private val expectedTokenResponse = AuthResponse("new_access_token", "new_refresh_token")
-
-        private val invalidRefreshToken = RefreshTokenRequest("invalid_refresh_token")
 
         @BeforeEach
         fun setUp() {
             every { authService.authentication(authRequest, any()) } returns authResponse
-            every { authService.refreshAccessToken("refresh_token") } returns expectedTokenResponse
-            every { authService.refreshAccessToken("invalid_refresh_token") } throws InvalidRefreshTokenException()
-            every { authService.logout(any()) } returns Unit
             every { authService.authentication(invalidAuthRequest, any()) } throws BadCredentialsException("Неверные учетные данные")
+            every { authService.refreshAccessToken(any(), any()) } returns expectedTokenResponse
+            every { authService.logout(any()) } returns Unit
         }
 
         /**
@@ -79,13 +75,12 @@ class AuthControllerTest
             mockMvc
                 .perform(
                     post("/admin/auth/refresh")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(jacksonObjectMapper().writeValueAsString(refreshTokenRequest)),
+                        .cookie(Cookie("refreshToken", "refresh_token")),
                 ).andExpect(status().isOk)
                 .andExpect(jsonPath("$.accessToken").value("new_access_token"))
                 .andExpect(jsonPath("$.refreshToken").value("new_refresh_token"))
 
-            verify { authService.refreshAccessToken("refresh_token") }
+            verify { authService.refreshAccessToken(any(), any()) }
         }
 
         /**
@@ -93,11 +88,11 @@ class AuthControllerTest
          */
         @Test
         fun `should return forbidden when refresh token is invalid`() {
+            every { authService.refreshAccessToken(any(), any()) } throws InvalidRefreshTokenException()
             mockMvc
                 .perform(
                     post("/admin/auth/refresh")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(jacksonObjectMapper().writeValueAsString(invalidRefreshToken)),
+                        .cookie(Cookie("refreshToken", "invalid_refresh_token")),
                 ).andExpect(status().isForbidden)
                 .andExpect(jsonPath("$.error").value("FORBIDDEN"))
                 .andExpect(jsonPath("$.message").value("Неверный токен обновления"))
