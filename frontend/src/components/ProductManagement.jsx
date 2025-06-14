@@ -241,7 +241,7 @@ export default function ProductManagement() {
       </div>
 
       {categories.length === 0 ? (
-        <p>Нет доступных товаров</p>
+        <p className="None">Нет доступных товаров</p>
       ) : categories.map(cat => (
         <div key={cat}>
           <h3 style={{ marginTop: '50px', fontSize: '30px', marginLeft: '90px', marginBottom: '20px' }}>{categoryNames[cat] || cat}</h3>

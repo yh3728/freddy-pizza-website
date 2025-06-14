@@ -98,11 +98,10 @@ body {
   border: none;
   margin-top: 30px;
   padding: 10px 15px;
-  font-size: 16px;
+  font-size: 24px;
   font-weight: bold;
   cursor: pointer;
-  font-size: 30px;
-  margin-left: 1650px;
+  font-size: 24px;
 }
 
 .button-select:hover {
@@ -129,7 +128,6 @@ body {
   min-height: 100vh;
   background-color: #fff4d3;
 }
-
 
 .order-managment-button {
   border: none;
@@ -187,9 +185,9 @@ body {
 }
 
 .treck-kod{
- font-weight: bold;
- font-size: 40px;
- margin-top: 5px;
+   font-weight: bold;
+   font-size: 40px;
+   margin-top: 5px;
 }
 
 .order-managment-modal-container p{
@@ -223,6 +221,7 @@ body {
 .order-managment-modal-down-content{
     position: absolute;
     right: 40px;
+    margin-bottom: 10px;
     display: flex;
     gap: 5px;
 }

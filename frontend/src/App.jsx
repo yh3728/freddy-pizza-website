@@ -95,7 +95,7 @@ export default function App() {
             element={categories.map(category => (
                 <React.Fragment key={category}>
                 <div className="category-title" id={category.toLowerCase()}>
-                    <h2>{rus_category[category]}</h2>
+                    <h2 className="category1">{rus_category[category]}</h2>
                 </div>
                 <div className="cards-container">
                     {products

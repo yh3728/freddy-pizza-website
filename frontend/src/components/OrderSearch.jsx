@@ -18,7 +18,7 @@ export default function OrderSearch() {
   
     return (
         <div className="order-search">
-            <h2>Введите номер заказа:</h2>
+            <h4>Введите номер заказа:</h4>
             <input
                 type="text"
                 value={inputValue}

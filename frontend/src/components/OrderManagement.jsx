@@ -174,7 +174,7 @@ export default function OrderManagement() {
           className="button-select"
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
-          style={{ padding: '8px', fontSize: '16px' }}
+          style={{  marginLeft: '1450px', width: '330px' }}
         >
             {filterOptions.map(option => (
             <option className="option-select" key={option} value={option}>
@@ -244,7 +244,7 @@ export default function OrderManagement() {
           className="button-select"
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
-          style={{ padding: '8px', fontSize: '16px' }}
+          style={{  marginLeft: '1450px', width: '330px' }}
         >
           {filterOptions.map(option => (
             <option className="option-select" key={option} value={option}>
@@ -322,7 +322,7 @@ export default function OrderManagement() {
               className="button-select"
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                style={{ padding: '8px', fontSize: '16px' }}
+                style={{  marginLeft: '1450px', width: '330px' }}
               >
                 {filterOptions.map(option => (
                   <option key={option} value={option}>{rus_status[option]}</option>

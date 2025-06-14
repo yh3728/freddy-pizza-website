@@ -3,12 +3,12 @@
   justify-content: space-between;
   gap: 30px;
   margin: -90px;
-  padding: 80px;
+  padding: 100px;
   align-items: flex-start;
   flex-wrap: wrap;
   margin-left: -60px;
   margin-right: -60px;
-   margin-bottom: -40px;
+  margin-bottom: -40px;
 }
 
 .about-left {
@@ -44,9 +44,10 @@
 
 .about-section h2 {
   margin-bottom: 20px;
+  width: 100%;
   text-align: center;
   color: #ed1308;
-  font-size: 50px;
+  font-size: 46px;
   line-height: 1.2;
   animation: flicker 3s infinite alternate;
   position: relative;

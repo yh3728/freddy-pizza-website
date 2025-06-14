@@ -86,7 +86,6 @@
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  border-radius: 5px;
   color: black;
   font-size: 28px;
 }
@@ -251,4 +250,10 @@ input:-webkit-autofill {
   background-color: #FDF5C9;
   border-radius: 0;
   margin-left: 0;
+}
+
+.None{
+ font-size: 25px;
+ font-weight: bold;
+ text-align: center;
 }

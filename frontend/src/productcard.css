@@ -6,7 +6,6 @@
     font-display: swap;
   }
 
-/* Основные стили карточки */
 .card {
     width: calc(25% - 15px);
     min-width: 280px;

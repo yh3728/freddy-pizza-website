@@ -35,7 +35,7 @@ html {
   max-width: 1600px;
   min-height: 600px;
   outline: 4px solid #0066ff;
-  outline-offset: -20px; 
+  outline-offset: -20px;
   border-radius: 35px;
   background-color: #e0e0e0;
   background-size: cover;
@@ -56,15 +56,12 @@ html {
   font-family: 'kellyslab', sans-serif;
 }
 
-.content-area h2{
-  font-size: 40px;
+.content-area h2 {
+  font-size: 45px;
+  box-sizing: border-box;
 }
 
-.content-area h2{
-  font-size: 40px;
-}
-
-.empty-cart{
+.empty-cart {
   font-size: 30px;
   margin-bottom: 60px;
   margin-top: 10px;
@@ -413,4 +410,18 @@ html {
   height: 200px;
   font-size: 22px;
   margin-top: 70px;
+}
+
+.order-search h4 {
+  font-size: 45px;
+  text-align: center;
+}
+
+.category1 {
+  margin-top: 40px;
+  border-bottom: 5px solid #ff4500;
+  width: 90%;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+
 }
