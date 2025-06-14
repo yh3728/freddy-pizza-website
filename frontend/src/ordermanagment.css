@@ -3,6 +3,12 @@
 
 }
 
+body {
+  background-color: rgb(253, 245, 201);
+  margin: 0;
+  min-height: 100vh;
+}
+
 .order-managment-title{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -105,8 +111,25 @@
 }
 
 .option-select {
-   background-color: #e06666;
+  background-color: #e06666;
 }
+
+.loading-text {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 50px;
+  text-align: center;
+  padding: 20px 40px;
+  z-index: 1000;
+}
+
+.order-management-page-container{
+  min-height: 100vh;
+  background-color: #fff4d3;
+}
+
 
 .order-managment-button {
   border: none;
@@ -143,22 +166,38 @@
     align-items: center;
 }
 
-.order-managment-modal-container{
+.order-managment-modal-container {
     background-color: #fdf5c9;
-    padding-top: 60px;
-    padding-left: 60px;
-    padding-bottom: 20px;
-    padding-right: 60px;
+    padding: 60px 60px 20px 60px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    width: 80%;
+    width: 850px;
+    height: 610px;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
     text-align: left;
     position: relative;
     font-size: 25px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.treck-kod{
+ font-weight: bold;
+ font-size: 40px;
+ margin-top: 5px;
 }
 
 .order-managment-modal-container p{
     margin: 15px 0;
+    margin-top: 30px;
+}
+.order-managment-modal-container p:first-child {
+    margin-top: 10px;
 }
 
 .order-managment-modal-right-content{
@@ -183,10 +222,15 @@
 
 .order-managment-modal-down-content{
     position: absolute;
-    bottom: 20px;
     right: 40px;
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
     gap: 5px;
+}
+
+.order-managment-modal-down-content2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
 }

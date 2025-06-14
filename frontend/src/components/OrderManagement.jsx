@@ -164,10 +164,11 @@ export default function OrderManagement() {
     setItemModal(new_item);
   }
   if (error) return <div className="error-style">{error}</div>;
-   if (loading) return <h2 className="loading-text">Загрузка...</h2>;
+  if (loading) return <h2 className="loading-text">Загрузка...</h2>;
 
     if (role === "COOK")
     return (
+    <div className="order-management-page-container">
       <>
         <select
           className="button-select"
@@ -232,10 +233,12 @@ export default function OrderManagement() {
           ))}
         </div>
       </>
+    </div>
     );
 
     else if (role === "DELIVERY")
     return (
+    <div className="order-management-page-container">
       <>
         <select
           className="button-select"
@@ -308,10 +311,12 @@ export default function OrderManagement() {
           ))}
         </div>
       </>
-    );
+    </div>
+   );
 
         else if (role === "ADMIN")
           return (
+          <div className="order-management-page-container">
             <>
               <select
               className="button-select"
@@ -388,7 +393,7 @@ export default function OrderManagement() {
                         <select
                           value={itemModal.status}
                           onChange={(e) => adminUpdateStatus(e)}
-                          style={{ padding: '8px', fontSize: '16px' }}
+                          style={{ padding: '8px',  marginTop: '10px', backgroundColor: '#ff7d77',  border: 0, fontWeight: 'bold',  fontSize: '16px', marginLeft: '15px' }}
                         >
                           {adminOptions.map(option => (
                             <option key={option} value={option}>{rus_status[option]}</option>
@@ -401,7 +406,7 @@ export default function OrderManagement() {
                     </div>
 
                     <div className="order-managment-modal-left-content">
-                      <span>{itemModal.trackingCode}</span>
+                      <span className="treck-kod">{itemModal.trackingCode}</span>
                     </div>
 
                     <p className="order-managment-customer-name"><strong>Имя:</strong> {itemModal.customerName}</p>
@@ -417,15 +422,18 @@ export default function OrderManagement() {
                         </div>
                       </>
                     )}
-
+                    <div className="order-managment-modal-down-content2">
                     <p className="order-managment-total"><strong>Итого:</strong> {itemModal.totalPrice} ₽</p>
                     <div className="order-managment-modal-down-content">
                       {dateFormat(new Date(itemModal.createdAt))}
                     </div>
+                   </div>
                   </div>
                 </div>
+
               )}
             </>
+          </div>
           );
 
   return ("");

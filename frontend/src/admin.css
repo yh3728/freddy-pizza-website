@@ -50,7 +50,6 @@
     background-color: #ff7d77;
     color: black;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     font-size: 20px;
     font-weight: 700;
@@ -139,11 +138,11 @@
 .delete-button {
   background-color: #ff7d77;
   color: black;
-  padding: 8px;
-  margin-top: 10px;
+  padding: 10px;
+  margin-top: 5px;
   border: none;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
 }
 
