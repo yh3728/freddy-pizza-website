@@ -49,21 +49,21 @@ export default function Navbar() {
       <div className="nav-menu">
       
         <div className="nav-image-container">
-          <img src={require("../assets/uzor11.png")} class="nav-image-first" />
+          <img src={require("../assets/uzor11.png")} className="nav-image-first" />
 
-          <div class="nav-image-middle-tiled"></div>
+          <div className="nav-image-middle-tiled"></div>
           
           <a href="/" target="_blank" className="nav-image-scaled-link">
-            <img src={require("../assets/telegram.png")} class="nav-image-scaled" />
+            <img src={require("../assets/telegram.png")} className="nav-image-scaled" />
           </a>
           <a href="/" target="_blank" className="nav-image-scaled-link">
-            <img src={require("../assets/whatsapp.png")} class="nav-image-scaled" />
+            <img src={require("../assets/whatsapp.png")} className="nav-image-scaled" />
           </a>
           <a href="/" target="_blank" className="nav-image-scaled-link">
-            <img src={require("../assets/vkontakte.png")} class="nav-image-scaled" />
+            <img src={require("../assets/vkontakte.png")} className="nav-image-scaled" />
           </a>
 
-          <img src={require("../assets/uzor13.png")} class="nav-image-last" />
+          <img src={require("../assets/uzor13.png")} className="nav-image-last" />
         </div>
       
         <div className="title-row">
@@ -78,9 +78,9 @@ export default function Navbar() {
           </Link>
         </div>
 
-        <div class="nav-links-container">
+        <div className="nav-links-container">
 
-          <div class="nav-link-group">
+          <div className="nav-link-group">
             <SmartAnchorLink anchor="pizza">
               Пицца
             </SmartAnchorLink>
@@ -95,9 +95,9 @@ export default function Navbar() {
             </SmartAnchorLink>
           </div>
 
-          <div class="nav-empty-space"></div>
+          <div className="nav-empty-space"></div>
 
-          <div class="nav-link-group">
+          <div className="nav-link-group">
             <SmartAnchorLink anchor="dessert">
               Десерты
             </SmartAnchorLink>
