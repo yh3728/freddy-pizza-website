@@ -90,6 +90,7 @@ export default function OrderManagement() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const [statusError, setStatusError] = useState('');
 
   const role = localStorage.getItem('adminRole');
   const filterOptions = ['All', ...staff_status_get[role]];
@@ -135,13 +136,21 @@ export default function OrderManagement() {
 
     const updateStatus = async (id, status) => {
       try {
+          setStatusError('');
         await API.patch(`/admin/orders/${id}/status`, { status }, { withCredentials: true });
 
-        setOrders(prev =>
-          prev.map(o => (o.id === id ? { ...o, status } : o))
-        );
+
+        setOrders(prev => {
+          const updated = prev.map(o =>
+            o.id === id ? { ...o, status } : o
+          );
+
+          const allowed = new Set(staff_status_get[role]);
+
+          return updated.filter(o => allowed.has(o.status));
+        });
       } catch (err) {
-        setError('Ошибка при изменении статуса');
+         setStatusError('Ошибка при изменении статуса');
       }
     };
 
@@ -400,6 +409,12 @@ export default function OrderManagement() {
                             <option key={option} value={option}>{rus_status[option]}</option>
                           ))}
                         </select>
+
+                        {statusError && (
+                          <div className="error-style" style={{ color: 'red', marginTop: '6px', fontSize: '14px' }}>
+                            {statusError}
+                          </div>
+                        )}
                       </span>
                       {itemModal.assignedDelivery && (
                         <span>Доставщик: {itemModal.assignedDelivery.username}</span>

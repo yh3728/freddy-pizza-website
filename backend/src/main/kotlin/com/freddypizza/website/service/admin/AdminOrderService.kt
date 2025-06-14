@@ -6,7 +6,6 @@ import com.freddypizza.website.enums.OrderStatus
 import com.freddypizza.website.enums.StaffRole
 import com.freddypizza.website.exception.InvalidOrderStatusException
 import com.freddypizza.website.exception.OrderNotFoundException
-import com.freddypizza.website.exception.ProductNotFoundException
 import com.freddypizza.website.repository.OrderRepository
 import com.freddypizza.website.request.admin.AdminOrderStatusRequest
 import com.freddypizza.website.request.admin.AdminProductQuantityRequest
@@ -110,8 +109,8 @@ class AdminOrderService(
 
     private fun cancelOrder(order: OrderEntity): OrderEntity {
         order.items.forEach { item ->
-            val product = productService.getProductById(item.id) ?: throw ProductNotFoundException()
-            val newQuantity = product.quantity + item.quantity
+            val product = productService.getProductById(item.id)
+            val newQuantity = (product?.quantity ?: 0) + item.quantity
             productService.updateQuantity(item.product.id, AdminProductQuantityRequest(newQuantity))
         }
         val cancelledOrder = order.copy(status = OrderStatus.CANCELLED)
