@@ -23,8 +23,6 @@ export default function Order() {
     
     const { tracking_code } = useParams();
 
-    console.log(tracking_code);
-
     useEffect(() => {
         if (!tracking_code)
             return;
@@ -70,18 +68,18 @@ export default function Order() {
     }).replace(/\//g, '.');
 
     return (
-        <div class="orders-container">
-            <div class="orders-info-container">
-                <div class="orders-block block1">
+        <div className="orders-container">
+            <div className="orders-info-container">
+                <div className="orders-block block1">
                     Трек-номер:
                 </div>
-                <div class="orders-block block2">
+                <div className="orders-block block2">
                     {tracking_code}
                 </div>
-                <div class="orders-block block3">
+                <div className="orders-block block3">
                     {rus_status[order.status]}
                 </div>
-                <div class="orders-extra-block">Для отслеживания статуса заказа введите номер в разделе "Заказ"</div>
+                <div className="orders-extra-block">Для отслеживания статуса заказа введите номер в разделе "Заказ"</div>
             </div>
             <div className="order-info1">
                 <p>Заказ:</p>
@@ -92,27 +90,34 @@ export default function Order() {
                     {dateString}
                 </span>
             </div>
-            {order.items.map(item => (
-                <div className="order-cart-item">
-                    <div className="order-product-info">
-                        <p>{item.productName}</p>
-                    </div>
-                    <div className="order-quantity-group">
-                        <span className="order-quantity">{item.quantity}</span>
-                    </div>
-                    <div className="order-price">{item.quantity * item.price} ₽</div>
+            {order.items.map((item, idx) => (
+              <div
+                key={item.id ?? item.productId ?? `${item.productName}-${idx}`}
+                className="order-cart-item"
+              >
+                <div className="order-product-info">
+                  <p>{item.productName}</p>
                 </div>
+                <div className="order-quantity-group">
+                  <span className="order-quantity">{item.quantity}</span>
+                </div>
+                <div className="order-price">{item.quantity * item.price} ₽</div>
+              </div>
             ))}
             
             <div className="order-info2">
                 Тип оплаты: {rus_payment[order.payment]}
             </div>
-            <div className="order-info3">
-                Комментарий:
-            </div>
-            <div className="order-comment">
-                {order.comment}
-            </div>
+            {order.comment && order.comment.trim() !== '' && (
+              <>
+                <div className="order-info3">
+                  Комментарий:
+                </div>
+                <div className="order-comment">
+                  {order.comment}
+                </div>
+              </>
+            )}
             <div className="order-info4">
                 Итого: {order.totalPrice} ₽
             </div>
