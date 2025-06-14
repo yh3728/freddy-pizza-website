@@ -132,3 +132,12 @@
   padding: 20px;
   margin-top: -30px;
 }
+
+.order-managment-main-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-managment-end-header-container {
+  margin-top: auto;
+}

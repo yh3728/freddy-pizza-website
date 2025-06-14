@@ -153,13 +153,15 @@ export default function OrderManagement() {
 
         <div className="order-managment-card-container">
           {orders.map(item => (
-            <div className="order-managment-main-container">
+            <div className="order-managment-main-container" key={item.id}>
               <div
                 className="order-managment-header-container"
                 style={{ backgroundColor: info[item.status].color }}
               >
                 <div className="order-managment-info1">{item.trackingCode}</div>
-                <div className="order-managment-date">{dateFormat(new Date(item.createdAt))}</div>
+                <div className="order-managment-date">
+                  {dateFormat(new Date(item.createdAt))}
+                </div>
               </div>
 
               <div className="order-managment-middle-container">
@@ -170,24 +172,30 @@ export default function OrderManagement() {
                 ))}
               </div>
 
-              <div className="order-managment-footer-container" style={{ marginTop: "auto" }}>
-                <p className="order-managment-comment">{item.comment}</p>
-              </div>
+              <div style={{ marginTop: "auto", width: "100%" }}>
+                {item.comment?.trim() && (
+                  <div className="order-managment-footer-container">
+                    <p className="order-managment-comment">{item.comment}</p>
+                  </div>
+                )}
 
-              <div className="order-managment-divider"></div>
+                <div className="order-managment-divider"></div>
 
-              <div className="order-managment-end-header-container">
-                <p className="order-managment-status"><strong>Статус:</strong> {rus_status[item.status]}</p>
-                <button
-                  className="order-managment-button"
-                  style={{
-                    width: "120px",
-                    backgroundColor: info[item.status].color,
-                  }}
-                  onClick={() => updateStatus(item.id, info[item.status].next_status)}
-                >
-                  <strong>{info[item.status].button_text}</strong>
-                </button>
+                <div className="order-managment-end-header-container">
+                  <p className="order-managment-status">
+                    <strong>Статус:</strong> {rus_status[item.status]}
+                  </p>
+                  <button
+                    className="order-managment-button"
+                    style={{
+                      width: "120px",
+                      backgroundColor: info[item.status].color,
+                    }}
+                    onClick={() => updateStatus(item.id, info[item.status].next_status)}
+                  >
+                    <strong>{info[item.status].button_text}</strong>
+                  </button>
+                </div>
               </div>
             </div>
           ))}
@@ -227,12 +235,16 @@ export default function OrderManagement() {
                 <p className="order-managment-address"><strong>Адрес:</strong> {item.address}</p>
                 <p className="order-managment-phone"><strong>Телефон:</strong> {item.phone}</p>
                 <p className="order-managment-payment"><strong>Тип оплаты:</strong> {rus_payment[item.payment]}</p>
-                <p className="order-managment-comment-label"><strong>Комментарий:</strong></p>
+                {item.comment?.trim() && (
+                        <p className="order-managment-comment-label"><strong>Комментарий:</strong></p>
+                )}
               </div>
 
-              <div className="order-managment-footer-container">
-                <p className="order-managment-comment">{item.comment}</p>
-              </div>
+                {item.comment?.trim() && (
+                  <div className="order-managment-footer-container">
+                    <p className="order-managment-comment">{item.comment}</p>
+                  </div>
+                )}
 
               <div className="order-managment-middle-container">
                 <p className="order-managment-products-label"><strong>Заказ:</strong></p>
