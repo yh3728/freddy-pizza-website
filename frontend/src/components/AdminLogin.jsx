@@ -33,7 +33,7 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="content-area">
+    <div className="admin-login-container">
       <h2>Вход в админ-панель</h2>
       <form onSubmit={handleLogin} className="admin-login-form">
         <label>

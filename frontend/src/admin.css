@@ -50,12 +50,12 @@
 }
 
 .admin-login-form label {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .admin-login-form input {
   padding: 8px;
-  font-size: 16px;
+  font-size: 20px;
   border: 2px solid #ed1308;
   border-radius: 5px;
   background-color: #FDF5C9;
@@ -199,10 +199,19 @@
 
 .form-error {
   color: red;
-  font-size: 14px;
+  font-size: 18px;
   margin-top: 5px;
 }
 
 .input-error {
   border-color: red;
+}
+
+.admin-login-container{
+  display: grid;
+  place-items: center; /* Центрирует и по горизонтали, и по вертикали */
+  font-size: 25px;
+  margin-top: 250px;
+  gap: 30px;
+  font-family: 'roboto slab', sans-serif;
 }
