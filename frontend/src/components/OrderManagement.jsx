@@ -176,7 +176,7 @@ export default function OrderManagement() {
           onChange={(e) => setSelectedCategory(e.target.value)}
           style={{ padding: '8px', fontSize: '16px' }}
         >
-          {filterOptions.map(option => (
+            {filterOptions.map(option => (
             <option className="option-select" key={option} value={option}>
               {rus_status[option]}
             </option>
@@ -250,7 +250,6 @@ export default function OrderManagement() {
             </option>
           ))}
         </select>
-
         <div className="order-managment-card-container">
           {orders.map(item => (
             <div className="order-managment-main-container">
@@ -312,100 +311,124 @@ export default function OrderManagement() {
       </>
     );
 
-    else
-      return (
-        <>
-          {/* Выпадающий список для фильтрации */}
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-            style={{ padding: '8px', fontSize: '16px' }}
-          >
-          {filterOptions.map(option => (
-            <option key={option} value={option}>{rus_status[option]}</option>
-          ))}
-          </select>
-
-          {/* Отображение отфильтрованного списка */}
-          <div className="order-managment-card-container">
-          {orders.map(item => (
-            <div class="order-managment-main-container">
-              <div class="order-managment-header-container" style={{ backgroundColor: info[item.status].color }}>
-                <div class="order-managment-info1">
-                  {item.trackingCode}
-                </div>
-                  {dateFormat(new Date(item.createdAt))}
-              </div>
-              <div class="order-managment-footer-container"
-                style={{display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center"}}>
-                <p>{item.customerName}</p>
-              </div>
-              <div class="order-managment-middle-container">
-                {item.items.map(product => (
-                  <p>{product.quantity}  {product.productName}</p>
+        else if (role === "ADMIN")
+          return (
+            <>
+              <select
+              className="button-select"
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                style={{ padding: '8px', fontSize: '16px' }}
+              >
+                {filterOptions.map(option => (
+                  <option key={option} value={option}>{rus_status[option]}</option>
                 ))}
-    	        </div>
-              <div class="order-managment-footer-container" style={{marginTop: "auto",}}>
-                {item.comment}
-    	        </div>
-              <div class="order-managment-divider"></div>
-              <div class="order-managment-end-header-container">
-                <p>Статус: {rus_status[item.status]}</p>
-                <button
-                  style={{
-                    width: "120px",
-                    backgroundColor: info[item.status].color,
-                  }}
-                  onClick={() => getOrderById(item.id)}>
-                    Подробнее
-                </button>
-              </div>
-            </div>
-          ))}
-          </div>
+              </select>
 
-          {showModal && (
-            <div className="order-managment-modal-overlay" onClick={() => {setShowModal(false); setItemModal('')}}>
-              <div className="order-managment-modal-container" onClick={(e) => e.stopPropagation()}>
-                <div className="order-managment-modal-right-content">
-                  <span>
-                    Статус:
-                    <select
-                      value={itemModal.status}
-                      onChange={(e) => adminUpdateStatus(e)}
-                      style={{ padding: '8px', fontSize: '16px' }}
+              <div className="order-managment-card-container">
+                {orders.map(item => (
+                  <div className="order-managment-main-container">
+                    <div
+                      className="order-managment-header-container"
+                      style={{ backgroundColor: info[item.status].color }}
                     >
-                    {adminOptions.map(option => (
-                      <option key={option} value={option}>{rus_status[option]}</option>
-                    ))}
-                    </select>
-                  </span>
-                  {itemModal.assignedDelivery && (
-                    <span>Доставщик: {itemModal.assignedDelivery.username} </span>
-                  )}
-                </div>
-                <div className="order-managment-modal-left-content">
-                  <span>{itemModal.trackingCode}</span>
-                </div>
-                <p>Имя: {itemModal.customerName}</p>
-                <p>Адрес: {itemModal.address}</p>
-                <p>Телефон: {itemModal.phone}</p>
-                <p>Тип оплаты: {rus_payment[itemModal.payment]}</p>
-                <p>Комментарий:</p>
-                <div className="order-managment-footer-container">
-                  {itemModal.comment}
-                </div>
-                <p>Итого: {itemModal.totalPrice}₽</p>
-                <div className="order-managment-modal-down-content">
-                  {dateFormat(new Date(itemModal.createdAt))}
-                </div>
-              </div>
-            </div>
-          )}
+                      <div className="order-managment-info1">{item.trackingCode}</div>
+                      <div className="order-managment-date">{dateFormat(new Date(item.createdAt))}</div>
+                    </div>
 
-        </>
-      );
+                    <div
+                      className="order-managment-footer-container"
+                      style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+                    >
+                      <p className="order-managment-customer-name"><strong>Имя:</strong> {item.customerName}</p>
+                    </div>
+
+                    <div className="order-managment-middle-container">
+                      {item.items.map((product, index) => (
+                        <p className="order-managment-product" key={index}>
+                          {product.quantity} {product.productName}
+                        </p>
+                      ))}
+                    </div>
+
+                    <div style={{ marginTop: "auto", width: "100%" }}>
+                      {item.comment?.trim() && (
+                        <div className="order-managment-footer-container">
+                          <p className="order-managment-comment">{item.comment}</p>
+                        </div>
+                      )}
+
+                      <div className="order-managment-divider"></div>
+
+                      <div className="order-managment-end-header-container">
+                        <p className="order-managment-status">
+                          <strong>Статус:</strong> {rus_status[item.status]}
+                        </p>
+                        <button
+                          className="order-managment-button"
+                          style={{
+                            width: "120px",
+                            backgroundColor: info[item.status].color,
+                          }}
+                          onClick={() => getOrderById(item.id)}
+                        >
+                          Подробнее
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {showModal && (
+                <div className="order-managment-modal-overlay" onClick={() => { setShowModal(false); setItemModal(''); }}>
+                  <div className="order-managment-modal-container" onClick={(e) => e.stopPropagation()}>
+                    <div className="order-managment-modal-right-content">
+                      <span>
+                        Статус:
+                        <select
+                          value={itemModal.status}
+                          onChange={(e) => adminUpdateStatus(e)}
+                          style={{ padding: '8px', fontSize: '16px' }}
+                        >
+                          {adminOptions.map(option => (
+                            <option key={option} value={option}>{rus_status[option]}</option>
+                          ))}
+                        </select>
+                      </span>
+                      {itemModal.assignedDelivery && (
+                        <span>Доставщик: {itemModal.assignedDelivery.username}</span>
+                      )}
+                    </div>
+
+                    <div className="order-managment-modal-left-content">
+                      <span>{itemModal.trackingCode}</span>
+                    </div>
+
+                    <p className="order-managment-customer-name"><strong>Имя:</strong> {itemModal.customerName}</p>
+                    <p className="order-managment-address"><strong>Адрес:</strong> {itemModal.address}</p>
+                    <p className="order-managment-phone"><strong>Телефон:</strong> {itemModal.phone}</p>
+                    <p className="order-managment-payment"><strong>Тип оплаты:</strong> {rus_payment[itemModal.payment]}</p>
+
+                    {itemModal.comment?.trim() && (
+                      <>
+                        <p className="order-managment-comment-label"><strong>Комментарий:</strong></p>
+                        <div className="order-managment-footer-container">
+                          <p className="order-managment-comment">{itemModal.comment}</p>
+                        </div>
+                      </>
+                    )}
+
+                    <p className="order-managment-total"><strong>Итого:</strong> {itemModal.totalPrice} ₽</p>
+                    <div className="order-managment-modal-down-content">
+                      {dateFormat(new Date(itemModal.createdAt))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </>
+          );
+
+  return ("");
 
 }
