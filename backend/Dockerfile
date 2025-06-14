@@ -1,7 +1,7 @@
 FROM gradle:jdk21 AS build
 WORKDIR /workspace
 COPY . .
-RUN gradle clean build -x test --no-daemon
+RUN gradle clean build -x test --no-daemon --stacktrace
 FROM eclipse-temurin:21
 WORKDIR /app
 COPY --from=build /workspace/build/libs/*.jar app.jar
