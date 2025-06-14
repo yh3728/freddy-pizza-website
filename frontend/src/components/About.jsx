@@ -5,7 +5,6 @@ export default function About() {
   const leftRef = useRef(null);
   const [leftHeight, setLeftHeight] = useState(0);
 
-  // при загрузке компонента запоминаем высоту левой части
   useEffect(() => {
     const updateHeight = () => {
       if (leftRef.current) {
@@ -13,7 +12,7 @@ export default function About() {
       }
     };
 
-    updateHeight(); // первичный замер
+    updateHeight();
 
     window.addEventListener('resize', updateHeight);
     return () => window.removeEventListener('resize', updateHeight);

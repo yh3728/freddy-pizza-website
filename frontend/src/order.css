@@ -5,7 +5,7 @@
 
 .orders-info-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* 3 колонки */
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
   align-items: end;
   margin-bottom: 30px;
@@ -14,7 +14,7 @@
 
 .orders-block, .orders-extra-block {
   padding: 10px;
-  text-align: center; /* Выравниваем текст по центру во всех блоках */
+  text-align: center;
 }
 
 .orders-block.block1 {
@@ -62,9 +62,9 @@
   grid-template-columns: 1fr 60px 120px; 
   align-items: center;
   gap: 10px;
-  border: 3px solid #ed1308; /* Красная рамка */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень для объёма */
-  background-color: #FDF5C9; /* Жёлтый фон */
+  border: 3px solid #ed1308;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #FDF5C9;
   font-family: 'kellyslab', sans-serif;
   font-size: 20px;
   border-radius: 15px;
@@ -114,9 +114,9 @@
 }
 
 .order-comment {
-  border: 3px solid #ed1308; /* Красная рамка */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень для объёма */
-  background-color: #FDF5C9; /* Жёлтый фон */
+  border: 3px solid #ed1308;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #FDF5C9;
   font-family: 'kellyslab', sans-serif;
   font-size: 20px;
   border-radius: 15px;

@@ -30,7 +30,7 @@ export default function StaffManagement() {
   const fetchStaff = () => {
     API.get('/admin/staff', { withCredentials: true })
       .then(res => setStaffList(res.data))
-      .catch(err => console.error('Ошибка загрузки сотрудников:', err));
+      .catch(err => console.error('Ошибка загрузки работников:', err));
   };
 
   const handleDelete = () => {
@@ -40,7 +40,7 @@ export default function StaffManagement() {
         fetchStaff();
         setShowDeleteModal(false);
       })
-      .catch(() => setErrorMessage('Ошибка при удалении сотрудника'));
+      .catch(() => setErrorMessage('Ошибка при удалении работника'));
   };
 
   const handleCreate = (e) => {
@@ -69,10 +69,9 @@ export default function StaffManagement() {
     })
     .catch(err => {
       if (err.response?.status === 409) {
-        // 409 Conflict → логин уже существует
         setErrorMessage('Логин уже используется');
       } else {
-        setErrorMessage('Ошибка при добавлении сотрудника');
+        setErrorMessage('Ошибка при добавлении работника');
       }
     });
 };
@@ -93,7 +92,7 @@ export default function StaffManagement() {
             </div>
             {user.role !== 'ADMIN' && (
               <button onClick={() => { setDeleteId(user.id); setShowDeleteModal(true); }} className="delete-button">
-                Удалить пользователя
+                Удалить работника
               </button>
             )}
           </div>
@@ -146,7 +145,7 @@ export default function StaffManagement() {
           <div className="modal-box" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setShowDeleteModal(false)}>×</button>
             <h3 className="modal-title">Подтвердите удаление</h3>
-            <p style={{ textAlign: 'center', marginBottom: '20px', fontSize: '20px' }}>Вы уверены, что хотите удалить этого сотрудника?</p>
+            <p style={{ textAlign: 'center', marginBottom: '20px', fontSize: '20px' }}>Вы уверены, что хотите удалить этого работника?</p>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '15px' }}>
               <button className="delete-button" onClick={() => setShowDeleteModal(false)}>Отмена</button>
               <button className="delete-button" onClick={handleDelete}>Удалить</button>

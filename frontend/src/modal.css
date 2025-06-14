@@ -4,7 +4,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный фон */
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,7 +12,7 @@
 }
 
 .modal-content {
-  background-image: url('./assets/content.jpeg');; /* Наследует фон от .content-box */
+  background-image: url('./assets/content.jpeg');;
   background-size: cover;
   background-position: center;
   color: white;

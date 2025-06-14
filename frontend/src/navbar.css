@@ -1,16 +1,16 @@
 @font-face {
-    font-family: 'handjet'; /* Название шрифта (можно любое) */
-    src: url('./assets/Handjet-VariableFont.ttf') format('truetype'); /* Путь к файлу */
-    font-weight: normal; /* Жирность (400) */
-    font-style: normal; /* Обычный стиль (не italic) */
+    font-family: 'handjet';
+    src: url('./assets/Handjet-VariableFont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
     font-display: swap;
   }
   
   @font-face {
-    font-family: 'kellyslab'; /* Название шрифта (можно любое) */
-    src: url('./assets/KellySlab-Regular.ttf') format('truetype'); /* Путь к файлу */
-    font-weight: normal; /* Жирность (400) */
-    font-style: normal; /* Обычный стиль (не italic) */
+    font-family: 'kellyslab';
+    src: url('./assets/KellySlab-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
     font-display: swap;
   }
 
@@ -32,8 +32,8 @@
 .nav-image-middle-tiled {
   flex-grow: 1;
   background-image: url('./assets/uzor12.png');
-  background-size: auto 100%; /* Высота 100%, ширина автоматическая */
-  background-repeat: repeat-x; /* Повторяется по горизонтали */
+  background-size: auto 100%;
+  background-repeat: repeat-x;
   margin-left: -20px;
 }
 
@@ -75,10 +75,8 @@
 
 .nav-empty-space {
   flex: 0 0 20%;
-  margin: 0 10px; /* Отступы слева и справа (как у картинки) */
+  margin: 0 10px;
 }
-
-/* Основной контейнер */
 
 .nav-menu {
     display: flex;
@@ -111,9 +109,9 @@
   .logo-row {
     position: relative;
     display: flex;
-    padding: 10px 40px; /* Увеличили padding сверху/снизу */
-    gap: 40px; /* Увеличили расстояние между логотипами */
-    width: calc(100% - 10px); /* Учитываем padding */
+    padding: 10px 40px;
+    gap: 40px;
+    width: calc(100% - 10px);
     margin-left: 1px;
     margin-right: 1px;
     background-color: transparent;
@@ -133,14 +131,14 @@
   
   .logo {
     width: calc(9% - 5px);
-    max-width: 120px; /* Добавили ограничение по ширине */
+    max-width: 120px;
     object-fit: contain;
-    transition: transform 0.3s ease; /* Добавили анимацию при наведении */
+    transition: transform 0.3s ease;
   }
   
   
   .logo:hover {
-    transform: scale(1.05); /* Легкое увеличение при наведении */
+    transform: scale(1.05);
   }
   
   .title-row {
@@ -152,12 +150,11 @@
     background-color: transparent;
     margin: -10px auto 0 auto;
   }
-  
-  /* Обновляем стили для .title-link */
+
   .title-link {
     font-family: 'kellyslab';
     text-decoration: none;
-    color: #ffffff; /* Яркий розово-красный цвет текста */
+    color: #ffffff;
     font-weight: 600;
     font-size: 33px;
     padding: 8px 16px;
@@ -169,20 +166,19 @@
     text-shadow: 0 0 8px #ff0000, 
                  0 0 16px #ff3333,
                  0 0 24px #ff6666,
-                 0 0 32px #ff0000; /* Усиленное свечение */
+                 0 0 32px #ff0000;
   }
   
-  /* Эффекты при наведении */
+
   .title-link:hover {
     color: #ffffff;
     text-shadow: 0 0 12px #ff0000,
                  0 0 24px #ff3333,
                  0 0 36px #ff6666,
                  0 0 48px #ff0000;
-    transform: scale(1.05); /* Легкое увеличение при наведении */
+    transform: scale(1.05);
   }
-  
-  /* Строка с контентом */
+
   .content-row {
     position: relative;
     display: flex;
@@ -197,21 +193,20 @@
   
   .link-group {
     display: flex;
-    gap: 40px; /* Расстояние между разделами в группе */
+    gap: 40px;
     position: relative;
     z-index: 5;
-    background-color: rgba(0, 0, 20, 0.7); /* Фон для перекрытия выступающей части */
+    background-color: rgba(0, 0, 20, 0.7);
     padding: 0 15px;
     border-radius: 4px;
   }
   
   .center-gap {
     flex: 1;
-    max-width: 16%; /* Ширина центрального промежутка */
+    max-width: 16%;
     min-width: 50px;
   }
-  
-  /* Для мобильной версии */
+
   @media (max-width: 768px) {
     .content-row {
       flex-direction: column;

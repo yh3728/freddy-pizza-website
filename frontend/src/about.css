@@ -1,5 +1,3 @@
-/* src/about.css */
-
 .about-layout {
   display: flex;
   justify-content: space-between;
@@ -71,20 +69,4 @@
   padding-left: 25px;
   margin-bottom: 25px;
   list-style-type: disc;
-}
-
-/* Адаптив: на узких экранах — в столбик */
-@media (max-width: 768px) {
-  .about-layout {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .about-left, .about-right {
-    width: 100%;
-  }
-
-  .about-image {
-    width: 100%;
-  }
 }

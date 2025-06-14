@@ -1,8 +1,8 @@
 @font-face {
-    font-family: 'handjet'; /* Название шрифта (можно любое) */
-    src: url('./assets/Handjet-VariableFont.ttf') format('truetype'); /* Путь к файлу */
-    font-weight: normal; /* Жирность (400) */
-    font-style: normal; /* Обычный стиль (не italic) */
+    font-family: 'handjet';
+    src: url('./assets/Handjet-VariableFont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
     font-display: swap;
   }
 
@@ -38,22 +38,21 @@
     overflow: hidden;
 }
 
-/* Стили для заголовка товара */
 .card-title {
-    text-align: center;        /* Выравнивание текста по центру */
-    font-size: 25px;           /* Размер шрифта */
-    font-weight: bold;        /* Жирное начертание */
-    margin-bottom: 10px;      /* Отступ снизу */
-    color: #000000;              /* Темно-серый цвет текста */
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #000000;
     font-family: 'kellyslab', sans-serif;
 }
 
-/* Стили для описания товара */
+
 .card-description {
-    text-align: justify;        /* Выравнивание текста по центру */
-    font-size: 18px;          /* Размер шрифта */
-    color: #000000;              /* Серый цвет текста */
-    margin-bottom: 20px;      /* Отступ снизу */
+    text-align: justify;
+    font-size: 18px;
+    color: #000000;
+    margin-bottom: 20px;
     margin-left: 4px;
     flex-grow: 1; 
     font-family: 'kellyslab', sans-serif;
@@ -64,39 +63,36 @@
     margin-right: 15px;
 }
 
-/* Контейнер для нижней части карточки (цена + кнопка) */
 .card-footer {
     position: absolute;
-    display: flex;             /* Flex-контейнер для выравнивания элементов */
-    justify-content: space-between; /* Распределение пространства между элементами */
+    display: flex;
+    justify-content: space-between;
     bottom: 15px;
     align-items: center;
     margin-left: 15px;
     margin-right: 15px;
 }
 
-/* Стили для цены товара */
 .card-price {
-    font-size: 18px;          /* Размер шрифта */
-    font-weight: bold;        /* Жирное начертание */
-    color: #000000;           /* Красный цвет текста */
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
     font-family: 'kellyslab', sans-serif;
 }
 
-/* Стили для кнопки "Купить" */
 .buy-button {   
     background-color: #f6fb90;
     border: 2px solid #ed1308;
-    border-radius: 5px;       /* Закругление углов кнопки */ 
+    border-radius: 5px;
     color: #000000;                         
-    padding: 8px 16px;        /* Внутренние отступы (8px сверху/снизу, 16px слева/справа) */
-    text-align: center;       /* Выравнивание текста по центру */
-    text-decoration: none;    /* Убираем подчеркивание */
-    display: inline-block;    /* Строчно-блочный элемент */
-    font-size: 18px;          /* Размер шрифта */
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
     font-weight: bold;
-    cursor: pointer;          /* Курсор-указатель при наведении */
-    transition: background-color 0.3s; /* Плавное изменение цвета при наведении */
+    cursor: pointer;
+    transition: background-color 0.3s;
     font-family: 'kellyslab', sans-serif;
 }
 

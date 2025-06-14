@@ -1,6 +1,5 @@
-// src/components/Modal.jsx
 import React, { useState } from 'react';
-import API from '../api'; // ✅ импорт API
+import API from '../api';
 
 export default function Modal({ product, onClose, onAddToCart }) {
   const [count, setCount] = useState(1);
@@ -40,15 +39,8 @@ export default function Modal({ product, onClose, onAddToCart }) {
             <button 
                 class="add-to-cart1"
                 onClick={() => {
-                  /*
-                  const maxAvailable = product.quantity;
-                  if (count > maxAvailable) {
-                    alert(`Недостаточное количество товара на складе (доступно: ${maxAvailable} шт.)`);
-                    return;
-                    }
-                  */
                   for (let i = 0; i < count; i++) {
-                    onAddToCart(); // Добавляем нужное количество товаров
+                    onAddToCart();
                     }
                     onClose();
                 }}

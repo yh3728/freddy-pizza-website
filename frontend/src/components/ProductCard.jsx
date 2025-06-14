@@ -1,4 +1,3 @@
-// src/components/ProductCard.jsx
 import React, { useState } from 'react';
 import Modal from './Modal';
 import { useCart } from '../CartContext';

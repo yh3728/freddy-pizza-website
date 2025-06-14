@@ -28,7 +28,6 @@ export default function Order() {
     useEffect(() => {
         if (!tracking_code)
             return;
-        // Функция для получения данных
         const fetchData = async () => {
         try {
             const response = await API.get(`/orders/${tracking_code}`);
@@ -44,13 +43,10 @@ export default function Order() {
         }
         };
 
-        // Вызываем сразу при монтировании
         fetchData();
 
-        // Устанавливаем интервал для периодического обновления
-        const intervalId = setInterval(fetchData, 10000); // Обновление каждые 10 секунд
+        const intervalId = setInterval(fetchData, 10000);
 
-        // Очистка интервала при размонтировании компонента
         return () => clearInterval(intervalId);
     }, [tracking_code]);
 

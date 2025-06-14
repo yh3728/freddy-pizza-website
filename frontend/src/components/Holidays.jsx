@@ -9,7 +9,6 @@ import weddingImage from '../assets/picture.jpg';
 export default function Holidays() {
   return (
     <div className="holidays-content">
-      {/* ВВОДНАЯ ЧАСТЬ (ВЕРНУЛ ОБРАТНО) */}
       <div className="holidays-section intro">
         <h2>Праздники в Freddy's Pizza</h2>
         <p className="tagline">
@@ -22,7 +21,6 @@ export default function Holidays() {
         </p>
       </div>
 
-      {/* ТОЛЬКО 5 ПРАЗДНИКОВ (КАК ВЫ ПРОСИЛИ) */}
       <div className="event-block">
         <div className="event-content">
           <h3>День Рождения с Фредди</h3>

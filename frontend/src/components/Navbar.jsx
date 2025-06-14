@@ -1,4 +1,3 @@
-// src/components/Navbar.jsx
 import React from 'react';
 import '../navbar.css';
 import { useEffect } from 'react';
@@ -10,21 +9,18 @@ const SmartAnchorLink = ({ anchor, children, onClick }) => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    onClick?.(); // Позволяет передать дополнительный обработчик
+    onClick?.();
 
     if (pathname === '/') {
-      // Если уже на главной - плавный скролл
       const element = document.getElementById(anchor);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     } else {
-      // Если не на главной - переход на главную с якорем
       navigate(`/#${anchor}`);
     }
   };
 
-  // Автоскролл при загрузке страницы с якорем
   useEffect(() => {
     if (pathname === '/' && hash === `#${anchor}`) {
       const element = document.getElementById(anchor);

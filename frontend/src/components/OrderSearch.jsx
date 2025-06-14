@@ -7,9 +7,7 @@ export default function OrderSearch() {
 
     const handleInputChange = (e) => {
         const value = e.target.value.toUpperCase();
-        // Фильтруем ввод, оставляя только разрешенные символы
         const filteredValue = value.replace(/[^0-9A-Z]/gi, '');
-        // Обрезаем до 6 символов
         const truncatedValue = filteredValue.slice(0, 6);
         setInputValue(truncatedValue);
     };

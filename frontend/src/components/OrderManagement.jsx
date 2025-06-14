@@ -132,115 +132,141 @@ export default function OrderManagement() {
     }
   };
 
-  if (error) return <div className="error-style">{error}</div>;
-  if (loading) return <h2>Загрузка...</h2>;
+    if (error) return <div className="error-style">{error}</div>;
+    if (loading) return <h2 className="loading-text">Загрузка...</h2>;
 
-  if (role === "COOK")
-  return (
-    <>
-      <select
-        className="button-select"
-        value={selectedCategory}
-        onChange={(e) => setSelectedCategory(e.target.value)}
-        style={{ padding: '8px', fontSize: '16px'}}
-      >
-      {filterOptions.map(option => (
-        <option className="option-select" key={option} value={option}>{rus_status[option]}</option>
-      ))}
-      </select>
-      <div className="order-managment-card-container">
-      {orders.map(item => (
-        <div class="order-managment-main-container">
-          <div class="order-managment-header-container" style={{ backgroundColor: info[item.status].color }}>
-            <div class="order-managment-info1">
-              {item.trackingCode}
+    if (role === "COOK")
+    return (
+      <>
+        <select
+          className="button-select"
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+          style={{ padding: '8px', fontSize: '16px' }}
+        >
+          {filterOptions.map(option => (
+            <option className="option-select" key={option} value={option}>
+              {rus_status[option]}
+            </option>
+          ))}
+        </select>
+
+        <div className="order-managment-card-container">
+          {orders.map(item => (
+            <div className="order-managment-main-container">
+              <div
+                className="order-managment-header-container"
+                style={{ backgroundColor: info[item.status].color }}
+              >
+                <div className="order-managment-info1">{item.trackingCode}</div>
+                <div className="order-managment-date">{dateFormat(new Date(item.createdAt))}</div>
+              </div>
+
+              <div className="order-managment-middle-container">
+                {item.items.map((product, index) => (
+                  <p className="order-managment-product" key={index}>
+                    {product.quantity} {product.productName}
+                  </p>
+                ))}
+              </div>
+
+              <div className="order-managment-footer-container" style={{ marginTop: "auto" }}>
+                <p className="order-managment-comment">{item.comment}</p>
+              </div>
+
+              <div className="order-managment-divider"></div>
+
+              <div className="order-managment-end-header-container">
+                <p className="order-managment-status"><strong>Статус:</strong> {rus_status[item.status]}</p>
+                <button
+                  className="order-managment-button"
+                  style={{
+                    width: "120px",
+                    backgroundColor: info[item.status].color,
+                  }}
+                  onClick={() => updateStatus(item.id, info[item.status].next_status)}
+                >
+                  <strong>{info[item.status].button_text}</strong>
+                </button>
+              </div>
             </div>
-              {dateFormat(new Date(item.createdAt))}
-          </div>
-          <div class="order-managment-middle-container">
-            {item.items.map(product => (
-              <p>{product.quantity}  {product.productName}</p>
-            ))}
-	        </div>
-          <div class="order-managment-footer-container" style={{marginTop: "auto",}}>
-            {item.comment}
-	        </div>
-          <div class="order-managment-divider"></div>
-          <div class="order-managment-end-header-container">
-            <p>Статус: {rus_status[item.status]}</p>
-            <button 
-              style={{
-                width: "120px", 
-                backgroundColor: info[item.status].color,
-              }}
-              onClick={() => updateStatus(item.id, info[item.status].next_status)}>
-                {info[item.status].button_text}
-            </button>
-          </div>
+          ))}
         </div>
-      ))}
-      </div>
-    </>
-  );
+      </>
+    );
 
-  else if (role === "DELIVERY")
-  return (
-    <>
-      <select
-        className="button-select"
-        value={selectedCategory}
-        onChange={(e) => setSelectedCategory(e.target.value)}
-        style={{ padding: '8px', fontSize: '16px' }}
-      >
-      {filterOptions.map(option => (
-        <option className="option-select" key={option} value={option}>{rus_status[option]}</option>
-      ))}
-      </select>
+    else if (role === "DELIVERY")
+    return (
+      <>
+        <select
+          className="button-select"
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+          style={{ padding: '8px', fontSize: '16px' }}
+        >
+          {filterOptions.map(option => (
+            <option className="option-select" key={option} value={option}>
+              {rus_status[option]}
+            </option>
+          ))}
+        </select>
 
-      <div className="order-managment-card-container">
-      {orders.map(item => (
-        <div class="order-managment-main-container">
-          <div class="order-managment-header-container" style={{ backgroundColor: info[item.status].color }}>
-            <div class="order-managment-info1">
-              {item.trackingCode}
+        <div className="order-managment-card-container">
+          {orders.map(item => (
+            <div className="order-managment-main-container">
+              <div
+                className="order-managment-header-container"
+                style={{ backgroundColor: info[item.status].color }}
+              >
+                <div className="order-managment-info1">{item.trackingCode}</div>
+                <div className="order-managment-date">{dateFormat(new Date(item.createdAt))}</div>
+              </div>
+
+              <div className="order-managment-middle-container">
+                <p className="order-managment-customer-name"><strong>Имя:</strong> {item.customerName}</p>
+                <p className="order-managment-address"><strong>Адрес:</strong> {item.address}</p>
+                <p className="order-managment-phone"><strong>Телефон:</strong> {item.phone}</p>
+                <p className="order-managment-payment"><strong>Тип оплаты:</strong> {rus_payment[item.payment]}</p>
+                <p className="order-managment-comment-label"><strong>Комментарий:</strong></p>
+              </div>
+
+              <div className="order-managment-footer-container">
+                <p className="order-managment-comment">{item.comment}</p>
+              </div>
+
+              <div className="order-managment-middle-container">
+                <p className="order-managment-products-label"><strong>Заказ:</strong></p>
+                {item.items.map((product, index) => (
+                  <p className="order-managment-product" key={index}>
+                    {product.quantity} {product.productName}
+                  </p>
+                ))}
+              </div>
+
+              <div className="order-managment-middle-container" style={{ marginTop: "auto" }}>
+                <p className="order-managment-total"><strong>Итого:</strong> {item.totalPrice} ₽</p>
+              </div>
+
+              <div className="order-managment-divider"></div>
+
+              <div className="order-managment-end-header-container">
+                <p className="order-managment-status"><strong>Статус:</strong> {rus_status[item.status]}</p>
+                <button
+                  className="order-managment-button"
+                  style={{
+                    width: "120px",
+                    backgroundColor: info[item.status].color,
+                  }}
+                  onClick={() => updateStatus(item.id, info[item.status].next_status)}
+                >
+                  {info[item.status].button_text}
+                </button>
+              </div>
             </div>
-              {dateFormat(new Date(item.createdAt))}
-          </div>
-          <div class="order-managment-middle-container">
-            <p>Имя:{item.customerName}</p>
-            <p>Адрес: {item.address}</p>
-            <p>Телефон: {item.phone}</p>
-            <p>Тип оплаты: {rus_payment[item.payment]}</p>
-            <p>Комментарий:</p>
-	        </div>
-          <div class="order-managment-footer-container">
-            {item.comment}
-	        </div>
-          <div class="order-managment-middle-container">
-            <p>Заказ:</p>
-            {item.items.map(product => (
-              <p>{product.quantity}  {product.productName}</p>
-            ))}
-          </div>
-          <div class="order-managment-middle-container" style={{marginTop: "auto",}}>
-            <p>Итого: {item.totalPrice}</p>
-          </div>
-          <div class="order-managment-divider"></div>
-          <div class="order-managment-end-header-container">
-            <p>Статус: {rus_status[item.status]}</p>
-            <button 
-              style={{
-                width: "120px", 
-                backgroundColor: info[item.status].color,
-              }}
-              onClick={() => updateStatus(item.id, info[item.status].next_status)}>
-                {info[item.status].button_text}
-            </button>
-          </div>
+          ))}
         </div>
-      ))}
-      </div>
-    </>
-  );
-  return ("");
+      </>
+    );
+
+    return ("");
 }
