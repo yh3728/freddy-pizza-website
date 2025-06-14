@@ -2,9 +2,9 @@ import React from 'react';
 import '../holidays.css';
 import birthdayImage from '../assets/party1.jpg';
 import nightImage from '../assets/party2.jpg';
-import halloweenImage from '../assets/party3.jpg';
+import halloweenImage from '../assets/party5.jpg';
 import graduationImage from '../assets/party4.jpg';
-import weddingImage from '../assets/picture.jpg';
+import weddingImage from '../assets/party3.jpg';
 
 export default function Holidays() {
   return (
