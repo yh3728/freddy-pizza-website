@@ -83,6 +83,8 @@ function dateFormat(date){
 }
 
 export default function OrderManagement() {
+  const [showModal, setShowModal] = useState(false);
+  const [itemModal, setItemModal] = useState('');
   const [orders, setOrders] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [loading, setLoading] = useState(true);
@@ -92,6 +94,16 @@ export default function OrderManagement() {
   const role = localStorage.getItem('adminRole');
   const filterOptions = ['All', ...staff_status_get[role]];
 
+  const adminOptions = [
+      "NEW",
+      "IN_PROGRESS",
+      "OUT_FOR_DELIVERY",
+      "READY_FOR_DELIVERY",
+      "DELIVERED",
+      "CANCELLED",
+  ];
+
+  // Проверка авторизации
   useEffect(() => {
       if (!localStorage.getItem('adminAccess')) {
     navigate('/admin-login');
@@ -132,8 +144,28 @@ export default function OrderManagement() {
     }
   };
 
-    if (error) return <div className="error-style">{error}</div>;
-    if (loading) return <h2 className="loading-text">Загрузка...</h2>;
+    const getOrderById = async (id) => {
+    try {
+      const response = await API.get(`/admin/orders/${id}`);
+      setShowModal(true);
+      setItemModal(response.data);
+      console.log(response.data);
+    } catch (err) {
+      setError('Ошибка при получении данных о заказе');
+      console.error('Ошибка:', err);
+    }
+  };
+
+  const adminUpdateStatus = async(e) => {
+    e.stopPropagation();
+    const status = e.target.value;
+    updateStatus(itemModal.id, status);
+    let new_item = itemModal;
+    new_item.status = status;
+    setItemModal(new_item);
+  }
+  if (error) return <div className="error-style">{error}</div>;
+   if (loading) return <h2 className="loading-text">Загрузка...</h2>;
 
     if (role === "COOK")
     return (
@@ -280,5 +312,100 @@ export default function OrderManagement() {
       </>
     );
 
-    return ("");
+    else
+      return (
+        <>
+          {/* Выпадающий список для фильтрации */}
+          <select
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+            style={{ padding: '8px', fontSize: '16px' }}
+          >
+          {filterOptions.map(option => (
+            <option key={option} value={option}>{rus_status[option]}</option>
+          ))}
+          </select>
+
+          {/* Отображение отфильтрованного списка */}
+          <div className="order-managment-card-container">
+          {orders.map(item => (
+            <div class="order-managment-main-container">
+              <div class="order-managment-header-container" style={{ backgroundColor: info[item.status].color }}>
+                <div class="order-managment-info1">
+                  {item.trackingCode}
+                </div>
+                  {dateFormat(new Date(item.createdAt))}
+              </div>
+              <div class="order-managment-footer-container"
+                style={{display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"}}>
+                <p>{item.customerName}</p>
+              </div>
+              <div class="order-managment-middle-container">
+                {item.items.map(product => (
+                  <p>{product.quantity}  {product.productName}</p>
+                ))}
+    	        </div>
+              <div class="order-managment-footer-container" style={{marginTop: "auto",}}>
+                {item.comment}
+    	        </div>
+              <div class="order-managment-divider"></div>
+              <div class="order-managment-end-header-container">
+                <p>Статус: {rus_status[item.status]}</p>
+                <button
+                  style={{
+                    width: "120px",
+                    backgroundColor: info[item.status].color,
+                  }}
+                  onClick={() => getOrderById(item.id)}>
+                    Подробнее
+                </button>
+              </div>
+            </div>
+          ))}
+          </div>
+
+          {showModal && (
+            <div className="order-managment-modal-overlay" onClick={() => {setShowModal(false); setItemModal('')}}>
+              <div className="order-managment-modal-container" onClick={(e) => e.stopPropagation()}>
+                <div className="order-managment-modal-right-content">
+                  <span>
+                    Статус:
+                    <select
+                      value={itemModal.status}
+                      onChange={(e) => adminUpdateStatus(e)}
+                      style={{ padding: '8px', fontSize: '16px' }}
+                    >
+                    {adminOptions.map(option => (
+                      <option key={option} value={option}>{rus_status[option]}</option>
+                    ))}
+                    </select>
+                  </span>
+                  {itemModal.assignedDelivery && (
+                    <span>Доставщик: {itemModal.assignedDelivery.username} </span>
+                  )}
+                </div>
+                <div className="order-managment-modal-left-content">
+                  <span>{itemModal.trackingCode}</span>
+                </div>
+                <p>Имя: {itemModal.customerName}</p>
+                <p>Адрес: {itemModal.address}</p>
+                <p>Телефон: {itemModal.phone}</p>
+                <p>Тип оплаты: {rus_payment[itemModal.payment]}</p>
+                <p>Комментарий:</p>
+                <div className="order-managment-footer-container">
+                  {itemModal.comment}
+                </div>
+                <p>Итого: {itemModal.totalPrice}₽</p>
+                <div className="order-managment-modal-down-content">
+                  {dateFormat(new Date(itemModal.createdAt))}
+                </div>
+              </div>
+            </div>
+          )}
+
+        </>
+      );
+
 }
