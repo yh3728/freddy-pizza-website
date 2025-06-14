@@ -4,6 +4,7 @@ import '../productadmin.css';
 import '../adminnavbar.css';
 import '../admin.css';
 import AccessDenied from './AccessDenied';
+import { useNavigate } from 'react-router-dom';
 
 const categoryNames = {
   PIZZA: 'Пицца',
@@ -34,9 +35,14 @@ export default function ProductManagement() {
   const [formError, setFormError] = useState('');
   const [role, setRole] = useState('');
   const [allowed, setAllowed] = useState(null);
+  const navigate = useNavigate();
 
 
    useEffect(() => {
+   if (!localStorage.getItem('adminAccess')) {
+       navigate('/admin-login');
+       return;
+   }
     const userRole = localStorage.getItem('adminRole');
     setRole(userRole);
     setAllowed(userRole === 'ADMIN');

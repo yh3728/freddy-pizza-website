@@ -18,12 +18,17 @@ export default function StaffManagement() {
   const [role, setRole] = useState('');
   const [allowed, setAllowed] = useState(null);
 
-  useEffect(() => {
-    const userRole = localStorage.getItem('adminRole');
-    setRole(userRole);
-    setAllowed(userRole === 'ADMIN');
-    fetchStaff()
-  }, []);
+    useEffect(() => {
+      if (!localStorage.getItem('adminAccess')) {
+        navigate('/admin-login');
+        return;
+      }
+
+      const userRole = localStorage.getItem('adminRole');
+      setRole(userRole);
+      setAllowed(userRole === 'ADMIN');
+      fetchStaff();
+    }, [navigate]);
 
   if (allowed === false) return <AccessDenied />;
 

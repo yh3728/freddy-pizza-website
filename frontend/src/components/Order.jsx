@@ -107,12 +107,16 @@ export default function Order() {
             <div className="order-info2">
                 Тип оплаты: {rus_payment[order.payment]}
             </div>
-            <div className="order-info3">
-                Комментарий:
-            </div>
-            <div className="order-comment">
-                {order.comment}
-            </div>
+            {order.comment && order.comment.trim() !== '' && (
+              <>
+                <div className="order-info3">
+                  Комментарий:
+                </div>
+                <div className="order-comment">
+                  {order.comment}
+                </div>
+              </>
+            )}
             <div className="order-info4">
                 Итого: {order.totalPrice} ₽
             </div>
