@@ -9,7 +9,7 @@
 .card {
     width: calc(25% - 15px);
     min-width: 280px;
-    border: 2px solid #ed1308;
+    border: 3px solid #ed1308;
     border-radius: 15px;
     background-color: #FDF5C9;
     padding: 15px;
@@ -32,7 +32,7 @@
     object-position: center;
     display: block;
     margin: 0 auto 15px;
-    border: 2px solid #ed1308;
+    border: 3px solid #ed1308;
     border-radius: 15px;
     overflow: hidden;
 }
@@ -81,7 +81,7 @@
 
 .buy-button {   
     background-color: #f6fb90;
-    border: 2px solid #ed1308;
+    border: 3px solid #ed1308;
     border-radius: 5px;
     color: #000000;                         
     padding: 8px 16px;

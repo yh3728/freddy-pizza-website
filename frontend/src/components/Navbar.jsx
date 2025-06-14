@@ -56,8 +56,8 @@ export default function Navbar() {
           <a href="/" target="_blank" className="nav-image-scaled-link">
             <img src={require("../assets/telegram.png")} className="nav-image-scaled" />
           </a>
-          <a href="/" target="_blank" className="nav-image-scaled-link">
-            <img src={require("../assets/whatsapp.png")} className="nav-image-scaled" />
+          <a href="http://109.73.194.68:5056/" target="_blank" className="nav-image-scaled-link">
+            <img src={require("../assets/friendly.png")} className="nav-image-scaled" />
           </a>
           <a href="/" target="_blank" className="nav-image-scaled-link">
             <img src={require("../assets/vkontakte.png")} className="nav-image-scaled" />

@@ -49,7 +49,7 @@ export default function Order() {
     }, [tracking_code]);
 
     if (error) return <div className="error-style">{error}</div>;
-    if (loading) return <h2>Загрузка...</h2>;
+    if (loading) return <h2 className="loading">Загрузка...</h2>;
 
     const order = data;
 

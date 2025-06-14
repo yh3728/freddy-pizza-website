@@ -1,22 +1,37 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../about.css';
 
-export default function About() {
+export default function AboutPage() {
   const leftRef = useRef(null);
   const [leftHeight, setLeftHeight] = useState(0);
+  const [showScreamer, setShowScreamer] = useState(false);
 
   useEffect(() => {
-    const updateHeight = () => {
-      if (leftRef.current) {
-        setLeftHeight(leftRef.current.offsetHeight);
+    if (leftRef.current) {
+      setLeftHeight(leftRef.current.clientHeight);
+    }
+  }, []);
+
+  // Закрытие по Esc
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setShowScreamer(false);
       }
     };
-
-    updateHeight();
-
-    window.addEventListener('resize', updateHeight);
-    return () => window.removeEventListener('resize', updateHeight);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
+
+  const handleScreamer = () => {
+    const audio = new Audio(require('../assets/screamer.mp3'));
+    audio.play();
+    setShowScreamer(true);
+
+    setTimeout(() => {
+      setShowScreamer(false);
+    }, 2500); // Закроется через 2.5 сек
+  };
 
  return (
      <div className="about-layout">
@@ -85,12 +100,27 @@ export default function About() {
        </div>
 
        <div className="about-right">
-         <img
-           src={require('../assets/freddy-pizzeria.png')}
-           alt="Интерьер Freddy's Pizza"
-           className="about-image"
-           style={{ height: `${leftHeight}px` }}
-         />
-       </div>
-     </div>
-   );}
+      <div className="freddy-nose" onClick={handleScreamer}></div>
+
+             <img
+               src={require('../assets/freddy-pizzeria.png')}
+               alt="Интерьер Freddy's Pizza"
+               className="about-image"
+               style={{ height: `${leftHeight}px` }}
+             />
+           </div>
+
+           {showScreamer && (
+             <div className="modal-overlay2" onClick={() => setShowScreamer(false)}>
+               <div className="modal-content1">
+                 <img
+                   src={require('../assets/screamer.gif')}
+                   alt="Screamer"
+                   className="screamer-image"
+                 />
+               </div>
+             </div>
+           )}
+         </div>
+       );
+     }

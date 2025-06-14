@@ -3,6 +3,18 @@
   padding-left: 70px;
 }
 
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 50px;
+  text-align: center;
+  padding: 20px 40px;
+  z-index: 1000;
+}
+
+
 .orders-info-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -41,6 +53,7 @@
   grid-row: 2;
   color: #505050;
   margin-top: -20px;
+  font-size: 19.5px;
   
 }
 

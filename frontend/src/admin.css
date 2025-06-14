@@ -61,7 +61,6 @@
   border: 2px solid #ff7d77;
   border-radius: 0px;
   background-color: #FDF5C9;
-  margin-left: 8px;
 }
 
 .full-bg {
@@ -206,7 +205,6 @@ input:-webkit-autofill {
   padding: 8px;
   font-size: 16px;
   border: 2px solid #ff7d77;
-  border-radius: 5px;
   background-color: white;
 }
 
