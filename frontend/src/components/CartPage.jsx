@@ -212,7 +212,11 @@ export default function CartPage() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="comments">Комментарии</label>
+        <label
+          htmlFor="comments"
+          style={{ height: '100px' }} >
+          Комментарии
+        </label>
           <textarea
             id="comments"
             value={comment}

@@ -172,7 +172,6 @@ body {
     height: 610px;
     max-width: 90vw;
     max-height: 90vh;
-    overflow-y: auto;
     text-align: left;
     position: relative;
     font-size: 25px;
