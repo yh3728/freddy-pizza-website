@@ -144,7 +144,7 @@ export default function OrderManagement() {
           onChange={(e) => setSelectedCategory(e.target.value)}
           style={{ padding: '8px', fontSize: '16px' }}
         >
-          {filterOptions.map(option => (
+            {filterOptions.map(option => (
             <option className="option-select" key={option} value={option}>
               {rus_status[option]}
             </option>
@@ -218,7 +218,6 @@ export default function OrderManagement() {
             </option>
           ))}
         </select>
-
         <div className="order-managment-card-container">
           {orders.map(item => (
             <div className="order-managment-main-container">

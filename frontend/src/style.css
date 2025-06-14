@@ -348,14 +348,13 @@ html {
   background-color: #ff0000;
 }
 
-/* Форма доставки */
 .form-group {
   margin-bottom: 10px;
 }
 
 .delivery-form {
   display: flex;
-  gap: 20px; /* Отступ между колонками */
+  gap: 20px;
 }
 
 .left-column,
@@ -379,18 +378,18 @@ html {
   border-radius: 5px;
   font-size: 14px;
   margin-bottom: 5px;
-  background-color: #FDF5C9; /* Жёлтый фон */
+  background-color: #FDF5C9;
 }
 
 .form-group textarea {
   display: flex;
   align-items: center;
   gap: 10px;
-  border: 2px solid #ed1308; /* Красная рамка */
+  border: 2px solid #ed1308;
   padding: 10px;
   margin-bottom: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень для объёма */
-  background-color: #FDF5C9; /* Жёлтый фон */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #FDF5C9;
 }
 
 .item-container-order {
