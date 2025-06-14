@@ -63,3 +63,64 @@
     gap: 10px;
     
 }
+
+.order-managment-modal-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-managment-modal-container{
+    background-color: #fdf5c9;
+    padding-top: 60px;
+    padding-left: 60px;
+    padding-bottom: 20px;
+    padding-right: 60px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 80%;
+    text-align: left;
+    position: relative;
+    font-size: 25px;
+}
+
+.order-managment-modal-container p{
+    margin: 15px 0;
+}
+
+.order-managment-modal-right-content{
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.order-managment-modal-left-content{
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.order-managment-modal-down-content{
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
