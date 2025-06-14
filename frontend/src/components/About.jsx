@@ -12,7 +12,6 @@ export default function AboutPage() {
     }
   }, []);
 
-  // Закрытие по Esc
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
@@ -30,7 +29,7 @@ export default function AboutPage() {
 
     setTimeout(() => {
       setShowScreamer(false);
-    }, 2500); // Закроется через 2.5 сек
+    }, 2500);
   };
 
  return (
