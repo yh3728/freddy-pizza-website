@@ -1,3 +1,8 @@
+button {
+    font-family: 'roboto slab', sans-serif;
+    font-weight: 700;
+}
+
 .product-header {
   display: flex;
   justify-content: space-between;
@@ -14,51 +19,89 @@
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 0;
   color: black;
-  font-size: 28px;
+  font-size: 24px;
+  margin-right: 90px;
+}
+
+.add-button:hover {
+  background-color: #e06666;
 }
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(6, 1fr);
   gap: 20px;
   width: 100%;
+  margin: 0 auto;
+  padding: 0 80px;
 }
 
 .product-card {
-  width: 220px;
-  height: 280px; /* увеличено для размещения кнопки */
+  width: 250px;
+  height: 280px;
   background-color: #fff786;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  padding-top: 10px;
+  padding-bottom: 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
   text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06);
+  overflow: hidden;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .product-card .product-image {
-  height: 100px;
-  width: 100px;
+  height: 130px;
+  width: 130px;
   object-fit: cover;
+  margin: 0 auto;
+  border: none;
+  margin-top: 15px;
 }
 
 .product-name {
   font-size: 18px;
   font-weight: bold;
   margin: 5px 0;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .product-button {
   background-color: #ff7d77;
-  color: white;
+  color: black;
   border: none;
   padding: 6px 10px;
-  border-radius: 5px;
   cursor: pointer;
+  flex-shrink: 0;
+}
+
+.product-button:hover {
+  background-color: #e06666;
+}
+
+.product-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2px;
+  margin-left: 10px;
+  margin-right: 2px;
+}
+
+.product-availability {
+  margin: 0;
+  font-size: 14px;
+  flex-shrink: 0;
+  text-align: left;
+  font-weight: 700;
 }
 
 .product-close {
@@ -67,25 +110,27 @@
   right: 10px;
   background: none;
   border: none;
-  font-size: 20px;
+  font-size: 32px;
   color: red;
   cursor: pointer;
+  line-height: 1;
+  padding: 0 8px;
 }
 
-/* Modal */
 .modal-box.wide {
   width: 800px;
 }
 
 .modal-content-product {
   display: flex;
-  gap: 30px;
-  margin-top: 20px;
+  margin-top: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .product-details-left {
   flex: 1;
-  font-size: 16px;
+  font-size: 20px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -94,23 +139,27 @@
 
 .product-details-right {
   flex: 1;
-  text-align: center;
+  text-align: right;
 }
 
 .modal-product-image {
   width: 70%;
   height: 100%;
-  max-height: 200px;
-  border: 2px solid #ed1308;
+  height: 250px;
+  width: 250px;
   object-fit: cover;
   margin-bottom: 10px;
+  margin-left: 110px;
 }
 
 .quantity-control {
   display: flex;
-  gap: 10px;
+  gap: 0px;
   align-items: center;
-  margin-bottom: 10px;
+}
+
+.quantity-control p {
+    margin-right: 7px;
 }
 
 .quantity-control input::-webkit-outer-spin-button,
@@ -120,41 +169,58 @@
 }
 
 .quantity-control input[type="number"] {
-  border: 2px solid #ed1308;
-  width: 60px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   text-align: center;
   font-size: 18px;
   font-weight: bold;
-  border-radius: 50%;
-  background-color: #ed1308;
-  color: white;
-  padding: 5px;
+  background-color:  white;
+  color: black;
+  padding: 0;
+  appearance: textfield;
 }
 
 .quantity-control button {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   font-size: 18px;
   border: none;
-  background-color: white;
+  background-color: #ff7d77;
   cursor: pointer;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 35%;
 }
 
 .edit-button {
   margin-top: 20px;
   background-color: #ff7d77;
-  color: white;
+  color: black;
   padding: 10px;
   width: 100%;
-  font-weight: bold;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.edit-button:hover {
+  background-color: #e06666;
+}
+
+.edit-photo {
+  margin-top: 20px;
+  background-color: #ff7d77;
+  color: black;
+  padding: 10px;
+  width: 100%;
+  font-weight: 700;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 18px;
+  margin-left: 115px;
 }
 
-/* Добавление нового продукта */
 .modal-box.add-product {
   width: 600px;
 }
@@ -190,10 +256,10 @@
 
 .add-product-btn {
   background-color: #ff4d4d;
-  color: white;
+  color: black;
   padding: 10px;
   width: 100%;
-  font-weight: bold;
+  font-weight: 700;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -211,12 +277,14 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  margin-top: 5px;
   justify-content: space-between;
 }
 
 .form-row label {
   min-width: 120px;
-  font-weight: bold;
+  font-weight: bolder;
+  font-size: 19px;
 }
 
 .form-input.wide,
@@ -224,8 +292,8 @@
   flex: 1;
   padding: 8px;
   font-size: 16px;
-  border: 2px solid #ed1308;
-  border-radius: 5px;
+  border: 2px solid #ff7d77;
+  border-radius: 0px;
   background-color: white;
 }
 
@@ -237,11 +305,30 @@
   background-color: white;
   cursor: pointer;
   border-radius: 5px;
-  box-shadow: 0 2px 4px
 }
 
 .form-error {
   color: red;
   font-size: 14px;
   margin-top: 5px;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-label {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 8px 20px;
+  background-color: #ff7d77;
+  color: black;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+.file-label:hover {
+  background-color: #e06666;
 }

@@ -12,12 +12,12 @@ data class ProductEntity(
     val id: Long = 0,
     @Column(nullable = false)
     val name: String,
-    @Column(columnDefinition = "TEXT",nullable = false)
-    val description: String? = null,
+    @Column(columnDefinition = "TEXT", nullable = false)
+    val description: String,
     @Column(nullable = false)
-    val weight: Int? = null,
+    val weight: Int,
     @Column(nullable = false)
-    val ingredients: String? = null,
+    val ingredients: String,
     @Column(nullable = false)
     val price: BigDecimal,
     @Column(name = "quantity", nullable = false)

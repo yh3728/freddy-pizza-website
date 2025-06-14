@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useEffect, useState } from 'react';
 import './style.css';
 import './productcard.css';
@@ -13,14 +12,13 @@ import Order from './components/Order';
 import OrderSearch from './components/OrderSearch';
 import AdminNavbar from './components/AdminNavbar';
 import AdminLogin from './components/AdminLogin';
-import AdminPage from './components/AdminPage';
 import StaffManagement from './components/StaffManagement';
 import ProductManagement from './components/ProductManagement';
 import OrderManagement from './components/OrderManagement';
 import Navbar from './components/Navbar';
 import PageNotFound from './components/PageNotFound';
 import { Routes, Route, useLocation, Outlet } from 'react-router-dom';
-import API from './api'; // ✅ импорт API
+import API from './api';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -97,7 +95,7 @@ export default function App() {
             element={categories.map(category => (
                 <React.Fragment key={category}>
                 <div className="category-title" id={category.toLowerCase()}>
-                    <h2>{rus_category[category]}</h2>
+                    <h2 className="category1">{rus_category[category]}</h2>
                 </div>
                 <div className="cards-container">
                     {products
@@ -121,7 +119,6 @@ export default function App() {
           <Route path="/admin-login" element={<AdminLogin />} />
         </Route>
         <Route element={<AdminLayout />}>
-            <Route path="/admin" element={<AdminPage />} />
             <Route path="/admin/staff" element={<StaffManagement />} />
             <Route path="/admin/products" element={<ProductManagement />} />
             <Route path="/admin/orders" element={<OrderManagement />} />

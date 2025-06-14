@@ -33,6 +33,8 @@ class ProductControllerTest
                 price = BigDecimal(10.99),
                 quantity = 1,
                 category = ProductCategory.PIZZA,
+                ingredients = "example ingredients",
+                weight = 100,
             )
 
         @BeforeEach

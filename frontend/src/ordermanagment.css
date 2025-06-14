@@ -1,0 +1,233 @@
+* {
+  font-family: 'roboto slab', sans-serif;
+
+}
+
+body {
+  background-color: rgb(253, 245, 201);
+  margin: 0;
+}
+
+.order-managment-title{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+    width: 100%;
+}
+
+.order-managment-card-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+    padding: 20px;
+    margin-top: 30px;
+
+}
+
+.order-managment-comment{
+  display: inline-block;
+  width: 100%;
+  min-height: 80px;
+  max-height: 120px;
+  padding: 10px;
+  margin: 5px 0;
+  font-size: 15px;
+  line-height: 1.4;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  resize: none;
+}
+
+.order-managment-main-container {
+    width: calc(25% - 15px);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff786;
+    line-height: 1.6;
+    height: auto;
+    min-height: fit-content;
+}
+
+.order-managment-header-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    font-weight: bold;
+    gap: 10px;
+    font-size: 24px;
+    width: 100%;
+}
+
+.order-managment-middle-container {
+    margin: 20px;
+}
+
+.order-managment-info1 {
+    margin-left: 20px;
+}
+
+.order-managment-footer-container {
+    margin: 10px;
+    padding: 2px 10px;
+    background-color: white;
+}
+
+.order-managment-divider {
+    height: 0.5px;
+    background-color: #000;
+    width: 99%;
+    margin: 3px 0;
+}
+
+.order-managment-end-header-container{
+    margin: 5px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+.button-select {
+  background-color: #ff7d77;
+  border: none;
+  margin-top: 30px;
+  padding: 10px 15px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.button-select:hover {
+  background-color: #e06666;
+  border: none;
+}
+
+.option-select {
+  background-color: #e06666;
+}
+
+.loading-text {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 50px;
+  text-align: center;
+  padding: 20px 40px;
+  z-index: 1000;
+}
+
+.order-management-page-container{
+  min-height: 100vh;
+  background-color: #fff4d3;
+}
+
+.order-managment-button {
+  border: none;
+  outline: none;
+  background-color: #ff7d77;
+  color: #000000;
+  cursor: pointer;
+  padding: 12px 24px;
+  font-size: 17px;
+  min-width: 190px;
+  transition: background-color 0.3s ease;
+  margin: 0;
+}
+
+.order-managment-button:hover {
+  background-color: #e06666;
+}
+
+.order-managment-status{
+  width: 100px;
+  min-width: 210px;
+}
+
+.order-managment-modal-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-managment-modal-container {
+    background-color: #fdf5c9;
+    padding: 60px 60px 20px 60px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 850px;
+    height: 610px;
+    max-width: 90vw;
+    max-height: 90vh;
+    text-align: left;
+    position: relative;
+    font-size: 25px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.treck-kod{
+   font-weight: bold;
+   font-size: 40px;
+   margin-top: 5px;
+}
+
+.order-managment-modal-container p{
+    margin: 15px 0;
+    margin-top: 30px;
+}
+.order-managment-modal-container p:first-child {
+    margin-top: 10px;
+}
+
+.order-managment-modal-right-content{
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.order-managment-modal-left-content{
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.order-managment-modal-down-content{
+    position: absolute;
+    right: 40px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.order-managment-modal-down-content2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}

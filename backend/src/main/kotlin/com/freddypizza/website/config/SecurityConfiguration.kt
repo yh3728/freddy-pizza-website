@@ -29,12 +29,13 @@ class SecurityConfiguration(
         jwtAuthenticationFilter: JwtAuthenticationFilter,
     ): DefaultSecurityFilterChain =
         http
+            .cors {}
             .csrf { it.disable() }
             .authorizeHttpRequests {
                 it
                     .requestMatchers(HttpMethod.OPTIONS, "/**")
                     .permitAll()
-                    .requestMatchers("/admin/staff/**")
+                    .requestMatchers("/admin/staff/**", "/admin/menu**")
                     .hasRole("ADMIN")
                     .requestMatchers("/admin/orders/**", "/admin/menu/**", "/admin/auth/me")
                     .fullyAuthenticated()
@@ -75,7 +76,7 @@ class SecurityConfiguration(
     fun corsFilter(): CorsFilter {
         val configuration =
             CorsConfiguration().apply {
-                allowedOrigins = listOf("http://localhost:3000")
+                allowedOriginPatterns = listOf("http://localhost:3000")
                 allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
                 allowedHeaders = listOf("*")
                 allowCredentials = true

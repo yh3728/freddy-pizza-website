@@ -1,24 +1,25 @@
-/* Базовые стили */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  word-wrap: break-word;
+  word-break: break-all;
+  hyphens: auto;
 }
 
 :root {
-  --z-index-content: 1;      /* Основной контент */
-  --z-index-nav: 10;         /* Навигация */
-  --z-index-modal: 100;      /* Модальные окна */
+  --z-index-content: 1;
+  --z-index-nav: 10;
+  --z-index-modal: 100;
 }
 
 html {
-  scroll-padding-top: 240px; /* Высота фиксированного меню + небольшой зазор */
+  scroll-padding-top: 240px;
 }
 
-/* Main app container */
 .app {
   min-height: 100vh;
-  background-color: #f0f0f0; /* Серый фон (заменится на ваше изображение) */
+  background-color: #f0f0f0;
   background-size: 40%;
   background-position: center;
   display: flex;
@@ -28,16 +29,15 @@ html {
   z-index: var(--z-index-content);
 }
 
-/* Content box with border */
 .content-box {
-  margin-top: 200px;
+  margin-top: 170px;
   width: 85%;
   max-width: 1600px;
   min-height: 600px;
-  outline: 4px solid #1e90ff;
-  outline-offset: -20px; 
-  border-radius: 35px; /* Закругленные углы */
-  background-color: #e0e0e0; /* Серый фон контента (заменится на ваше изображение) */
+  outline: 4px solid #0066ff;
+  outline-offset: -20px;
+  border-radius: 35px;
+  background-color: #e0e0e0;
   background-size: cover;
   background-position: center;
   padding: 20px;
@@ -45,12 +45,10 @@ html {
   margin-right: auto;
 }
 
-/* White content area */
 .content-area {
-  margin-top: 0px;
   width: 100%;
   height: 100%;
-  background-image: inherit; /* Наследуем фон от .content-box */
+  background-image: inherit;
   background-size: cover;
   background-position: center;
   border-radius: 10px;
@@ -58,30 +56,21 @@ html {
   font-family: 'kellyslab', sans-serif;
 }
 
-/* Mobile adaptation */
-@media (max-width: 768px) {
-  .content-box {
-    width: 95%;
-    padding: 15px;
-  }
+.content-area h2 {
+  font-size: 45px;
+  box-sizing: border-box;
 }
 
-
-
-/* Карточка товара в меню и корзине */
-.product-card {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  align-items: center;
-  padding: 15px 0;
-  border-bottom: 1px solid #000;
+.empty-cart {
+  font-size: 30px;
+  margin-bottom: 60px;
+  margin-top: 10px;
 }
 
 .card {
-  width: calc(25% - 15px); /* 4 карточки в строке с учетом отступов */
+  width: calc(25% - 15px);
   min-width: 220px;
-  border: 2px solid #ed1308; /* Красная рамка */
+  border: 2px solid #ed1308;
   border-radius: 15px;
   background-color: #FDF5C9;
   padding: 15px;
@@ -165,10 +154,15 @@ html {
 
 .category-title {
   margin-top: 50px;
-  margin-bottom: 10px;
-  margin-left: 50px;
+  margin-bottom: 20px;
+  margin-left: 90px;
   text-align: left;
-  font-size: 24px;
+  font-size: 30px;
+
+}
+
+.category-title:first-of-type {
+  margin-top: -10px;
 }
 
 .remove-btn {
@@ -241,17 +235,15 @@ html {
   z-index: -2;
 }
 
-/* Корзина */
-
 .cart-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  border: 2px solid #ed1308; /* Красная рамка */
+  border: 2px solid #ed1308;
   padding: 10px;
   margin-bottom: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень для объёма */
-  background-color: #FDF5C9; /* Жёлтый фон */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #FDF5C9;
 }
 
 .product-image {
@@ -264,14 +256,14 @@ html {
 }
 
 .product-info {
-  flex: 1; /* Занимает всю доступную ширину */
+  flex: 1;
 }
 
 .quantity-group {
   display: flex;
   align-items: center;
   gap: 5px;
-  position: relative; /* Для добавления красной линии */
+  position: relative;
 }
 
 .quantity-group button {
@@ -282,38 +274,37 @@ html {
   background-color: white;
   cursor: pointer;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень для кнопок */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .quantity-group .quantity {
-  margin: 0 0px; /* Отступ между кнопками и цифрой */
+  margin: 0 0px;
   font-size: 18px;
   font-weight: bold;
-  color: #050505; /* Красный цвет */
+  color: #050505;
   background-color: #ed1308;
   padding: 5px 10px;
-  border: 2px solid #ed1308; /* Красная рамка */
-  border-radius: 50%; /* Круглая форма */
+  border: 2px solid #ed1308;
+  border-radius: 50%;
 }
 
-/* Красная линия, огибающая группу */
 .quantity-group::before,
 .quantity-group::after {
   content: '';
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  border-top: 2px solid #ed1308; /* Красная линия */
-  z-index: -1; /* Чтобы была под кнопками */
+  border-top: 2px solid #ed1308;
+  z-index: -1;
 }
 
 .quantity-group::before {
   left: 0;
-  right: calc(50% - 15px); /* До середины круга */
+  right: calc(50% - 15px);
 }
 
 .quantity-group::after {
-  left: calc(50% + 15px); /* После середины круга */
+  left: calc(50% + 15px);
   right: 0;
 }
 
@@ -330,7 +321,7 @@ html {
 }
 
 .price {
-  margin-left: auto; /* Выравнивание цены справа */
+  margin-left: auto;
 }
 
 .checkout {
@@ -353,14 +344,13 @@ html {
   background-color: #ff0000;
 }
 
-/* Форма доставки */
 .form-group {
   margin-bottom: 10px;
 }
 
 .delivery-form {
   display: flex;
-  gap: 20px; /* Отступ между колонками */
+  gap: 20px;
 }
 
 .left-column,
@@ -384,18 +374,18 @@ html {
   border-radius: 5px;
   font-size: 14px;
   margin-bottom: 5px;
-  background-color: #FDF5C9; /* Жёлтый фон */
+  background-color: #FDF5C9;
 }
 
 .form-group textarea {
   display: flex;
   align-items: center;
   gap: 10px;
-  border: 2px solid #ed1308; /* Красная рамка */
+  border: 2px solid #ed1308;
   padding: 10px;
   margin-bottom: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень для объёма */
-  background-color: #FDF5C9; /* Жёлтый фон */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #FDF5C9;
 }
 
 .item-container-order {
@@ -415,8 +405,22 @@ html {
 
 .order-search{
   display: grid;
-  place-items: center; /* Центрирует и по горизонтали, и по вертикали */
+  place-items: center;
   height: 200px;
   font-size: 22px;
   margin-top: 70px;
+}
+
+.order-search h4 {
+  font-size: 45px;
+  text-align: center;
+}
+
+.category1 {
+  margin-top: 40px;
+  border-bottom: 5px solid #ff4500;
+  width: 90%;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+
 }

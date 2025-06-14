@@ -45,6 +45,9 @@ class AdminOrderControllerTest
                 name = "Test Pizza",
                 price = BigDecimal("10.99"),
                 category = ProductCategory.PIZZA,
+                description = "example description",
+                ingredients = "example ingredients",
+                weight = 100,
             )
 
         private var testOrder =

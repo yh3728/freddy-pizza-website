@@ -1,4 +1,3 @@
-// src/components/CartPage.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../cart.css';
@@ -151,7 +150,7 @@ export default function CartPage() {
           </div>
         ))
       ) : (
-        <p>Корзина пуста</p>
+        <p className="empty-cart">Корзина пуста</p>
       )}
 
       {cartItems.length >= 20 && (
@@ -165,7 +164,7 @@ export default function CartPage() {
         <div className="form-group delivery-form">
           <div className="left-column">
             <label htmlFor="name">Ваше имя</label>
-            <input type="text" id="name" value={name} onChange={e => setName(e.target.value)} />
+            <input type="text" id="name" value={name} maxLength={20} onChange={e => setName(e.target.value)} />
             {errors.name && <p className="form-error">{errors.name}</p>}
 
             <label htmlFor="phone">Телефон</label>
@@ -213,7 +212,11 @@ export default function CartPage() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="comments">Комментарии</label>
+        <label
+          htmlFor="comments"
+          style={{ height: '100px' }} >
+          Комментарии
+        </label>
           <textarea
             id="comments"
             value={comment}

@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import API from '../api';
 import '../admin.css';
 import '../adminnavbar.css';
+import AccessDenied from './AccessDenied';
 import { useNavigate } from 'react-router-dom';
+
 
 export default function StaffManagement() {
   const navigate = useNavigate();
@@ -11,36 +13,58 @@ export default function StaffManagement() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
+  const [validationError, setValidationError] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [role, setRole] = useState('');
+  const [allowed, setAllowed] = useState(null);
 
-  useEffect(() => {
-    const role = localStorage.getItem('adminRole');
-    if (role !== 'ADMIN') {
-      alert('Доступ запрещён. Только для администраторов.');
-      navigate('/admin');
-    } else {
+    useEffect(() => {
+      if (!localStorage.getItem('adminAccess')) {
+        navigate('/admin-login');
+        return;
+      }
+
+      const userRole = localStorage.getItem('adminRole');
+      setRole(userRole);
+      setAllowed(userRole === 'ADMIN');
       fetchStaff();
-    }
-  }, []);
+    }, [navigate]);
+
+  if (allowed === false) return <AccessDenied />;
 
   const fetchStaff = () => {
-    API.get('/admin/staff')
+    API.get('/admin/staff', { withCredentials: true })
       .then(res => setStaffList(res.data))
-      .catch(err => console.error('Ошибка загрузки сотрудников:', err));
+      .catch(err => console.error('Ошибка загрузки работников:', err));
   };
 
   const handleDelete = () => {
+    setErrorMessage('');
     API.delete(`/admin/staff/${deleteId}`)
       .then(() => {
         fetchStaff();
         setShowDeleteModal(false);
       })
-      .catch(() => alert('Ошибка при удалении сотрудника'));
+      .catch(() => setErrorMessage('Ошибка при удалении работника'));
   };
 
   const handleCreate = (e) => {
   e.preventDefault();
   setErrorMessage('');
+  setValidationError('');
+
+  const usernameRegex = /^[a-zA-Z0-9]+$/;
+  const passwordRegex = /^[a-zA-Z0-9]+$/;
+
+  if (!usernameRegex.test(newStaff.username)) {
+    setValidationError('Логин может содержать только латинские буквы и цифры без пробелов.');
+    return;
+  }
+
+  if (!passwordRegex.test(newStaff.password)) {
+    setValidationError('Пароль может содержать только латинские буквы и цифры без пробелов.');
+    return;
+  }
 
   API.post('/admin/staff', newStaff, { withCredentials: true })
     .then(() => {
@@ -50,11 +74,9 @@ export default function StaffManagement() {
     })
     .catch(err => {
       if (err.response?.status === 409) {
-        // 409 Conflict → логин уже существует
         setErrorMessage('Логин уже используется');
       } else {
-        console.error('Неизвестная ошибка:', err);
-        setErrorMessage('Ошибка при добавлении сотрудника');
+        setErrorMessage('Ошибка при добавлении работника');
       }
     });
 };
@@ -75,7 +97,7 @@ export default function StaffManagement() {
             </div>
             {user.role !== 'ADMIN' && (
               <button onClick={() => { setDeleteId(user.id); setShowDeleteModal(true); }} className="delete-button">
-                Удалить пользователя
+                Удалить работника
               </button>
             )}
           </div>
@@ -105,6 +127,7 @@ export default function StaffManagement() {
                 onChange={(e) => setNewStaff({ ...newStaff, password: e.target.value })}
                 className="form-input"
                 required
+                maxLength={30}
               />
               <label>Роль:</label>
               <select
@@ -117,6 +140,7 @@ export default function StaffManagement() {
                 <option value="DELIVERY">Delivery</option>
               </select>
               <button type="submit" className="add-button-stuff">Добавить</button>
+              {validationError && <p className="form-error">{validationError}</p>}
             </form>
           </div>
         </div>
@@ -127,10 +151,11 @@ export default function StaffManagement() {
           <div className="modal-box" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setShowDeleteModal(false)}>×</button>
             <h3 className="modal-title">Подтвердите удаление</h3>
-            <p style={{ textAlign: 'center', marginBottom: '20px' }}>Вы уверены, что хотите удалить этого сотрудника?</p>
+            <p style={{ textAlign: 'center', marginBottom: '20px', fontSize: '20px' }}>Вы уверены, что хотите удалить этого работника?</p>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '15px' }}>
               <button className="delete-button" onClick={() => setShowDeleteModal(false)}>Отмена</button>
               <button className="delete-button" onClick={handleDelete}>Удалить</button>
+              {errorMessage && <p className="form-error" style={{ textAlign: 'center' }}>{errorMessage}</p>}
             </div>
           </div>
         </div>

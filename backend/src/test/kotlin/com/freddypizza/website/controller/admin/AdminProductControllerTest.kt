@@ -41,6 +41,8 @@ class AdminProductControllerTest
                 price = BigDecimal(10.99),
                 quantity = 3,
                 category = ProductCategory.PIZZA,
+                ingredients = "example ingredients",
+                weight = 100,
             )
 
         private val productUpdateRequest =
@@ -57,6 +59,8 @@ class AdminProductControllerTest
                 price = BigDecimal(10.99),
                 quantity = 1,
                 category = ProductCategory.PIZZA,
+                ingredients = "example ingredients",
+                weight = 100,
             )
 
         @BeforeEach
