@@ -122,6 +122,7 @@ export default function StaffManagement() {
                 onChange={(e) => setNewStaff({ ...newStaff, password: e.target.value })}
                 className="form-input"
                 required
+                maxLength={30}
               />
               <label>Роль:</label>
               <select

@@ -38,19 +38,34 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="content-area">
+    <div className="admin-login-container">
       <h2>Вход в админ-панель</h2>
       <form onSubmit={handleLogin} className="admin-login-form">
-        <label>
-          Логин:
-          <input type="text" value={login} onChange={(e) => setLogin(e.target.value)} required />
+        <label className="admin-login-row">
+          <span className="admin-login-label">Логин:</span>
+          <input
+            type="text"
+            value={login}
+            onChange={(e) => setLogin(e.target.value)}
+            required
+            className="admin-login-input"
+          />
         </label>
-        <label>
-          Пароль:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+
+        <label className="admin-login-row">
+          <span className="admin-login-label">Пароль:</span>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="admin-login-input"
+          />
         </label>
+
         {error && <p className="form-error">{error}</p>}
-        <button type="submit" className="order-btn">Войти</button>
+
+        <button type="submit" className="login-button">Войти</button>
       </form>
     </div>
   );

@@ -13,8 +13,8 @@ const rus_status = {
     "All": "Все",
     "NEW": "Новый",
     "IN_PROGRESS":"В процессе",
-    "OUT_FOR_DELIVERY":"На доставке",
     "READY_FOR_DELIVERY":"Готово к доставке",
+    "OUT_FOR_DELIVERY":"На доставке",
     "DELIVERED":"Доставлено",
     "CANCELLED":"Отменён"
 }
@@ -22,9 +22,9 @@ const rus_status = {
 const staff_status_get = {
     "ADMIN": [
         "NEW", 
-        "IN_PROGRESS", 
-        "OUT_FOR_DELIVERY", 
-        "READY_FOR_DELIVERY", 
+        "IN_PROGRESS",
+        "READY_FOR_DELIVERY",
+        "OUT_FOR_DELIVERY",
         "DELIVERED",
         "CANCELLED",
     ],
@@ -33,17 +33,17 @@ const staff_status_get = {
         "IN_PROGRESS",
     ],
     "DELIVERY": [
-        "OUT_FOR_DELIVERY", 
         "READY_FOR_DELIVERY",
+        "OUT_FOR_DELIVERY",
     ]
 }
 
 const staff_status_post = {
     "ADMIN": [
         "NEW", 
-        "IN_PROGRESS", 
-        "OUT_FOR_DELIVERY", 
-        "READY_FOR_DELIVERY", 
+        "IN_PROGRESS",
+        "READY_FOR_DELIVERY",
+        "OUT_FOR_DELIVERY",
         "DELIVERED",
         "CANCELLED",
     ],
@@ -97,13 +97,12 @@ export default function OrderManagement() {
   const adminOptions = [
       "NEW",
       "IN_PROGRESS",
-      "OUT_FOR_DELIVERY",
       "READY_FOR_DELIVERY",
+      "OUT_FOR_DELIVERY",
       "DELIVERED",
       "CANCELLED",
   ];
 
-  // Проверка авторизации
   useEffect(() => {
       if (!localStorage.getItem('adminAccess')) {
     navigate('/admin-login');
@@ -116,7 +115,7 @@ export default function OrderManagement() {
       if (selectedCategory !== "All"){
         data_url += `?status=${selectedCategory}`;
       }
-      const response = await API.get(data_url);
+      const response = await API.get(data_url, { withCredentials: true });
       setOrders(response.data);
       setError(null);
     } catch (err) {
@@ -129,7 +128,7 @@ export default function OrderManagement() {
   useEffect(() => {
     fetchData();
 
-    const intervalId = setInterval(fetchData, 5000);
+    const intervalId = setInterval(fetchData, 60000);
 
     return () => clearInterval(intervalId);
   }, [selectedCategory]);
@@ -146,7 +145,7 @@ export default function OrderManagement() {
 
     const getOrderById = async (id) => {
     try {
-      const response = await API.get(`/admin/orders/${id}`);
+      const response = await API.get(`/admin/orders/${id}`, { withCredentials: true });
       setShowModal(true);
       setItemModal(response.data);
       console.log(response.data);
