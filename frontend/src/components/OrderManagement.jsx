@@ -133,36 +133,37 @@ export default function OrderManagement() {
     return () => clearInterval(intervalId);
   }, [selectedCategory]);
 
-  const updateStatus = async (id, status) => {
-    try {
-      API.patch(`/admin/orders/${id}/status`, { status }, { withCredentials: true });
-      fetchData();
-    } catch (err) {
-      setError('Ошибка при изменении группы');
-      console.error('Ошибка:', err);
-    }
-  };
+    const updateStatus = async (id, status) => {
+      try {
+        await API.patch(`/admin/orders/${id}/status`, { status }, { withCredentials: true });
+
+        setOrders(prev =>
+          prev.map(o => (o.id === id ? { ...o, status } : o))
+        );
+      } catch (err) {
+        setError('Ошибка при изменении статуса');
+      }
+    };
 
     const getOrderById = async (id) => {
     try {
       const response = await API.get(`/admin/orders/${id}`, { withCredentials: true });
       setShowModal(true);
       setItemModal(response.data);
-      console.log(response.data);
     } catch (err) {
       setError('Ошибка при получении данных о заказе');
       console.error('Ошибка:', err);
     }
   };
 
-  const adminUpdateStatus = async(e) => {
-    e.stopPropagation();
-    const status = e.target.value;
-    updateStatus(itemModal.id, status);
-    let new_item = itemModal;
-    new_item.status = status;
-    setItemModal(new_item);
-  }
+    const adminUpdateStatus = async (e) => {
+      e.stopPropagation();
+      const status = e.target.value;
+
+      await updateStatus(itemModal.id, status);
+
+      setItemModal(prev => ({ ...prev, status }));
+    };
   if (error) return <div className="error-style">{error}</div>;
   if (loading) return <h2 className="loading-text">Загрузка...</h2>;
 
@@ -254,7 +255,7 @@ export default function OrderManagement() {
         </select>
         <div className="order-managment-card-container">
           {orders.map(item => (
-            <div className="order-managment-main-container">
+            <div className="order-managment-main-container" key={item.id}>
               <div
                 className="order-managment-header-container"
                 style={{ backgroundColor: info[item.status].color }}
@@ -331,7 +332,7 @@ export default function OrderManagement() {
 
               <div className="order-managment-card-container">
                 {orders.map(item => (
-                  <div className="order-managment-main-container">
+                  <div className="order-managment-main-container" key={item.id}>
                     <div
                       className="order-managment-header-container"
                       style={{ backgroundColor: info[item.status].color }}
