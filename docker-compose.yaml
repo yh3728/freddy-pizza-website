@@ -18,7 +18,7 @@ services:
       JWT_KEY: ${JWT_KEY}
       JWT_ACCESS_TOKEN: ${JWT_ACCESS_TOKEN}
       JWT_REFRESH_TOKEN: ${JWT_REFRESH_TOKEN}
-      FRONTEND_URL: http://localhost:${FRONTEND_PORT}
+      FRONTEND_URL: http://${HOST_URL}:${FRONTEND_PORT}
   frontend:
     image: frontend
     env_file:
@@ -29,7 +29,7 @@ services:
     ports:
       - 8081:80
     environment:
-      REACT_APP_API_BASE_URL: http://localhost:${FRONTEND_PORT}
+      REACT_APP_API_BASE_URL: http://${HOST_URL}:${FRONTEND_PORT}
     depends_on:
         - backend
         - db
